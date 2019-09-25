@@ -1,0 +1,17 @@
+{
+  "hrm": "Quản lý nhân sự",
+  "seeder": {
+    "create": "Thêm mới",
+    "read": "Xem",
+    "update": "Chỉnh sửa",
+    "delete": "Xóa",
+    "users": "người dùng",
+    "dashboard": "bảng điều khiển",
+    "workers": "người lao động",
+    "contracts": "hợp đồng lao động",
+    "decisions": "quyết định",
+    "departments": "phòng ban",
+    "roles": "quyền người dùng",
+    "profile": "thông tin cá nhân"
+  }
+}
