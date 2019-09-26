@@ -1,5 +1,10 @@
 {
-  "hrm": "Quản lý nhân sự",
+  "system": {
+    "app": "Ứng dụng",
+    "hrm": "Quản lý nhân sự",
+    "ver": "Bản demo",
+    "author": "Nguyễn Hồng Dững"
+  },
   "seeder": {
     "create": "Thêm mới",
     "read": "Xem",
@@ -13,5 +18,77 @@
     "departments": "phòng ban",
     "roles": "quyền người dùng",
     "profile": "thông tin cá nhân"
+  },
+  "action": {
+    "create": "Thêm mới",
+    "read": "Danh sách",
+    "update": "Cập nhật",
+    "delete": "Xóa",
+    "save": "Lưu",
+    "back": "Quay lại",
+    "close": "Đóng",
+    "ok": "Đồng ý",
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất"
+  },
+  "th": {
+    "index": "STT",
+    "action": "Xử lý",
+    "status": "Trạng thái"
+  },
+  "status": {
+    "active": "Kích hoạt",
+    "inactive": "Chưa kích hoạt"
+  },
+  "boolean": {
+    "true": "Có",
+    "false": "Không"
+  },
+  "validate": {
+    "required": "không được để trống",
+    "invalid": "không hợp lệ",
+    "unique": "đã tồn tại"
+  },
+  "mail": {
+    "hello": "Xin chào",
+    "desc": "Thông tin đăng nhập của bạn là: ",
+    "email": "Email",
+    "password": "Password"
+  },
+  "modal": {
+    "title": "Xóa đối tượng",
+    "warning": "Đối tượng này sẽ bị xóa vĩnh viễn!",
+    "question": "Bạn có chắc chắn muốn xóa?"
+  },
+  "profile": {
+    "info": "Thông tin cá nhân",
+    "change_password": "Đổi mật khẩu",
+    "account": "Tài khoản"
+  },
+  "user": {
+    "title": "Quản lý người dùng",
+    "list": "Danh sách người dùng",
+    "create": "Thêm mới người dùng",
+    "update": "Cập nhật người dùng",
+    "name": "Họ và tên",
+    "email": "Địa chỉ email",
+    "role": "Vai trò",
+    "password": "Mật khẩu",
+    "confirm_password": "Xác nhận mật khẩu",
+    "status": "Trạng thái",
+    "message": {
+      "create": "Thêm mới người dùng thành công",
+      "update": "Cập nhật người dùng thành công",
+      "delete": "Xóa người dùng thành công"
+    }
+  },
+  "login": {
+    "email": "Địa chỉ email",
+    "password": "Mật khẩu",
+    "remember_me": "Ghi nhớ mật khẩu",
+    "forgot_password": "Quên mật khẩu",
+    "success": "Đăng nhập thành công",
+    "error": "Địa chỉ email hoặc mật khẩu không đúng",
+    "warning": "Vui lòng đăng nhập trước khi truy cập vào hệ thống"
   }
 }

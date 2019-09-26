@@ -1,1 +1,2 @@
-require('./bootstrap');
+import './common';
+import './user';

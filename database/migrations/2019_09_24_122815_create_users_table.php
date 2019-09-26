@@ -13,13 +13,11 @@ class CreateUsersTable extends Migration
       $table->unsignedInteger('role_id');
       $table->string('name', 100);
       $table->string('email', 100)->unique();
-      $table->string('phone', 20);
       $table->string('password', 100);
-      $table->string('avatar', 100)->default('default-user.jpg');
+      $table->string('avatar', 100)->default('avatar6.png');
       $table->boolean('status')->default(true)->comment('0: inactive, 1: active');
       $table->rememberToken();
       $table->timestamps();
-
       $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
     });
   }

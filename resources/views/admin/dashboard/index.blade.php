@@ -82,4 +82,5 @@
     </div>
   </div>
 </div>
+@include('admin.shared._notify')
 @endsection

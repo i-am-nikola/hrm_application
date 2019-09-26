@@ -25,7 +25,6 @@ class UsersTableSeeder extends Seeder
         'role_id'   => $role_id,
         'name'      => ucwords($key),
         'email'     => $key . '@gmail.com',
-        'phone'     => '0905246357',
         'password'  => bcrypt('123123')
       ]);
 
