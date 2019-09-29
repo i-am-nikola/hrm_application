@@ -15,9 +15,14 @@ class User extends Model
     return $this->belongsTo(Role::class);
   }
 
-  public function getDataUser($request, $password)
+  public function workers()
   {
-    $data = [
+    return $this->hasMany(Worker::class);
+  }
+
+  public function getInputUser($request, $password)
+  {
+    $input = [
       'name'            => $request->name,
       'email'           => $request->email,
       'role_id'         => $request->role_id,
@@ -25,6 +30,6 @@ class User extends Model
       'status'          => $request->status,
       'remember_token'  => $request->_token
     ];
-    return $data;
+    return $input;
   }
 }

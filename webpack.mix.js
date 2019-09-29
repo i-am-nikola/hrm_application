@@ -18,6 +18,8 @@ mix.js('resources/js/app.js', 'public/assets/js')
     'public/adminlte/dist/css/adminlte.min.css',
     'public/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css',
     'public/adminlte/plugins/toastr/toastr.min.css',
+    'public/adminlte/plugins/daterangepicker/daterangepicker.css',
+    'public/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css'
   ], 'public/assets/css/vendor.css')
   .scripts([
     'public/adminlte/plugins/jquery/jquery.min.js',
@@ -29,6 +31,10 @@ mix.js('resources/js/app.js', 'public/assets/js')
     'public/adminlte/dist/js/demo.js',
     'public/adminlte/dist/js/pages/dashboard3.js',
     'public/adminlte/plugins/toastr/toastr.min.js',
+    'public/adminlte/plugins/moment/moment.min.js',
+    'public/adminlte/plugins/inputmask/jquery.inputmask.bundle.js',
+    'public/adminlte/plugins/daterangepicker/daterangepicker.js',
+    'public/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js'
   ], 'public/assets/js/vendor.js')
   .copyDirectory('public/adminlte/dist/img', 'public/assets/img')
   .copyDirectory('public/adminlte/plugins/fontawesome-free/webfonts', 'public/assets/webfonts')

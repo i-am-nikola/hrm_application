@@ -99,6 +99,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_common__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user */ "./resources/js/user.js");
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_user__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _worker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./worker */ "./resources/js/worker.js");
+/* harmony import */ var _worker__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_worker__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
@@ -111,8 +114,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+// customize datatable
 $(document).ready(function () {
-  $("#data-table").DataTable({
+  $(".data-table").DataTable({
     "language": {
       "lengthMenu": "Hiển thị _MENU_ bảng ghi/trang",
       "zeroRecords": "Không tìm thấy dữ liệu",
@@ -128,7 +132,20 @@ $(document).ready(function () {
       }
     }
   });
-  $('#data-table').wrap('<div class="dataTables_scroll" />');
+  $('.data-table').wrap('<div class="dataTables_scroll" />');
+}); //customize date input
+
+$(document).ready(function () {
+  $('.reservation').daterangepicker({
+    singleDatePicker: true,
+    showDropdowns: true,
+    autoUpdateInput: true,
+    locale: {
+      format: 'DD/MM/YYYY'
+    }
+  }); // if (window.location.href.indexOf('create') > -1) {
+  //   $('.js-clear').val('');
+  // };
 });
 
 /***/ }),
@@ -140,26 +157,57 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+// delete single user
 $(document).ready(function () {
   $('#modal-confirm-delete').on('show.bs.modal', function (e) {
-    var id = $(e.relatedTarget).data('id');
     var url = $(e.relatedTarget).data('url');
     $('#confirm-delete').on('click', function () {
-      $.ajax({
-        type: 'DELETE',
-        url: url,
-        data: {
-          id: id
-        },
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
-        },
-        success: function success(data) {
-          $('button[data-id=' + data.id + ']').parents('tr').fadeOut();
-          $('#modal-confirm-delete').modal('hide');
-          toastr.success('Xóa người dùng thành công');
-        }
-      });
+      if (window.location.href.indexOf('users') > -1) {
+        $.ajax({
+          type: 'DELETE',
+          url: url,
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
+          },
+          success: function success(data) {
+            $('button[data-id=' + data.id + ']').parents('tr').fadeOut();
+            $('#modal-confirm-delete').modal('hide');
+            toastr.success(data.flash_message);
+          }
+        });
+      }
+    });
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/worker.js":
+/*!********************************!*\
+  !*** ./resources/js/worker.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// delete single worker
+$(document).ready(function () {
+  $('#modal-confirm-delete').on('show.bs.modal', function (e) {
+    var url = $(e.relatedTarget).data('url');
+    $('#confirm-delete').on('click', function () {
+      if (window.location.href.indexOf('workers') > -1) {
+        $.ajax({
+          type: 'DELETE',
+          url: url,
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
+          },
+          success: function success(data) {
+            $('button[data-id=' + data.id + ']').parents('tr').fadeOut();
+            $('#modal-confirm-delete').modal('hide');
+            toastr.success(data.flash_message);
+          }
+        });
+      }
     });
   });
 });

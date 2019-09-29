@@ -6,5 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Education extends Model
 {
-    //
+  protected $table = 'educations';
+  protected $fillable = ['name', 'slug'];
+
+  public function workers()
+  {
+    return $this->hasMany(Worker::class);
+  }
+
+  public static function getListEducation()
+  {
+    return self::orderBy('id', 'asc')
+      ->pluck('name', 'id')
+      ->prepend(t('education.default'), 1);
+  }
 }

@@ -21,7 +21,7 @@ class CreateContractsTable extends Migration
       $table->boolean('status')->default(true)->comment('0: chưa ký, 1: đã ký');
       $table->timestamps();
       $table->foreign('contract_type_id')->references('id')->on('contract_types');
-      $table->foreign('worker_id')->references('id')->on('workers');
+      $table->foreign('worker_id')->references('id')->on('workers')->onDelete('cascade')->onUpdate('cascade');
       $table->foreign('user_id')->references('id')->on('users');
     });
   }

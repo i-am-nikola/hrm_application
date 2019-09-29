@@ -13,7 +13,7 @@
           <h3 class="card-title">{{ t('user.list') }}</h3>
         </div>
         <div class="card-body">
-          <table id="data-table" class="table table-bordered table-striped">
+          <table class="table table-bordered table-striped data-table">
             <thead>
               <tr>
                 <th>{{ t('th.index') }}</th>

@@ -19,7 +19,7 @@ class LoginController extends Controller
   public function authenticate(LoginRequest $request)
   {
     $remember = $request->has('remember') ? true : false;
-    if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
+    if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 1], $remember)) {
       return redirect()->route('dashboard')
         ->with(['flash_level' => 'success', 'flash_message' => t('login.success')]);
     } else {

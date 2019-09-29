@@ -40,6 +40,10 @@
     "active": "Kích hoạt",
     "inactive": "Chưa kích hoạt"
   },
+  "gender": {
+    "female": "Nữ",
+    "male": "Nam"
+  },
   "boolean": {
     "true": "Có",
     "false": "Không"
@@ -47,7 +51,8 @@
   "validate": {
     "required": "không được để trống",
     "invalid": "không hợp lệ",
-    "unique": "đã tồn tại"
+    "unique": "đã tồn tại",
+    "exists": " đã tạm khóa. Liên hệ quản trị viên để biết thêm chi tiết"
   },
   "mail": {
     "hello": "Xin chào",
@@ -79,7 +84,8 @@
     "message": {
       "create": "Thêm mới người dùng thành công",
       "update": "Cập nhật người dùng thành công",
-      "delete": "Xóa người dùng thành công"
+      "delete": "Xóa người dùng thành công",
+      "error": "Có lỗi xảy ra! Xin vui lòng thử lại"
     }
   },
   "login": {
@@ -90,5 +96,96 @@
     "success": "Đăng nhập thành công",
     "error": "Địa chỉ email hoặc mật khẩu không đúng",
     "warning": "Vui lòng đăng nhập trước khi truy cập vào hệ thống"
+  },
+  "department": {
+    "default": "--Chọn phòng ban--",
+    "title": "Quản lý phòng ban",
+    "list": "Danh sách phòng ban",
+    "create": "Thêm mới phòng ban",
+    "update": "Cập nhật phòng ban",
+    "name": "Tên phòng ban",
+    "parent": "Phòng ban trực thuộc"
+  },
+  "worker": {
+    "personnel": "Nhân sự",
+    "title": "Quản lý nhân sự",
+    "list": "Danh sách nhân sự",
+    "create": "Thêm mới nhân sự",
+    "update": "Cập nhật nhân sự",
+    "department": "Phòng ban",
+    "education": "Trình độ",
+    "position": "Chức vụ",
+    "record": "Hồ sơ",
+    "code": "Mã nhân viên",
+    "name": "Họ và tên",
+    "birthday": "Ngày sinh",
+    "gender": "Giới tính",
+    "id_no": "Số CMND",
+    "issued_on": "Ngày cấp",
+    "issued_by": "Nơi cấp",
+    "email": "Email",
+    "phone": "Số điện thoại",
+    "permanent_address": "Địa chỉ thường trú",
+    "temporary_address": "Địa chỉ tạm trú",
+    "graduate_school": "Trường tốt nghiệp",
+    "graduate_year": "Năm tốt nghiệp",
+    "certificate": "Bằng cấp, chứng chỉ",
+    "skill": "Kỹ năng chuyên môn",
+    "staring_date": "Ngày vào làm",
+    "leaving_date": "Ngày thôi việc",
+    "status": "Trạng thái",
+    "official": "Chính thức",
+    "probationary": "Thử việc",
+    "off": "Nghỉ việc",
+    "info": "Thông tin",
+    "contract": "Hợp đồng lao động",
+    "decision": "Quyết định",
+    "message": {
+      "create": "Thêm mới nhân sự thành công",
+      "update": "Cập nhật nhân sự thành công",
+      "delete": "Xóa nhân sự thành công",
+      "error": "Có lỗi xảy ra! Xin vui lòng thử lại"
+    }
+  },
+  "contract": {
+    "type": "Loại HĐ",
+    "code": "Mã HĐ",
+    "effective_date": "Ngày hiệu lực",
+    "expiry_date": "Ngày hết hiệu lực",
+    "sign_date": "Ngày ký",
+    "delay": "Còn lại",
+    "status": "Trạng thái",
+    "create": "Tạo HĐLĐ",
+    "update": "Sửa HĐLĐ",
+    "delete": "Xóa HĐLĐ",
+    "message": {
+      "create": "Thêm mới hợp đồng lao động thành công",
+      "update": "Cập nhật hợp đồng lao động thành công",
+      "delete": "Xóa hợp đồng lao động thành công",
+      "error": "Có lỗi xảy ra! Xin vui lòng thử lại"
+    }
+  },
+  "decision": {
+    "type": "Loại quyết định",
+    "code": "Mã quyết định",
+    "reason": "Lý do",
+    "old_department": "Phòng ban cũ",
+    "new_department": "Phòng ban mới",
+    "old_position": "Chức vụ cũ",
+    "new_position": "Chức vụ mới",
+    "old_salary": "Mức lương cũ",
+    "new_salary": "Mức lương mới",
+    "effective_date": "Ngày hiệu lực",
+    "sign_date": "Ngày ký",
+    "status": "Trạng thái",
+    "message": {
+      "create": "Thêm mới quyết định thành công",
+      "update": "Cập nhật quyết định thành công",
+      "delete": "Xóa quyết định thành công",
+      "error": "Có lỗi xảy ra! Xin vui lòng thử lại"
+    }
+  },
+  "education": {
+    "default": "--Chọn trình độ--"
   }
 }

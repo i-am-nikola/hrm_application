@@ -10,7 +10,6 @@ class DatabaseSeeder extends Seeder
       UsersTableSeeder::class,
       DepartmentsTableSeeder::class,
       EducationsTableSeeder::class,
-      PositionsTableSeeder::class,
       RecordsTableSeeder::class,
       WorkersTableSeeder::class,
       ContractsTableSeeder::class,

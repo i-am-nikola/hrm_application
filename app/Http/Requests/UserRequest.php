@@ -14,7 +14,7 @@ class UserRequest extends FormRequest
   public function rules($update = false, $id = null)
   {
     $commun = [
-      'name' => 'required',
+      'name'  => 'required',
       'email' => 'required|email|unique:users,email,' . $id,
     ];
 
@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
   public function attributes()
   {
     return [
-      'name' => t('user.name'),
+      'name'  => t('user.name'),
       'email' => t('user.email'),
     ];
   }
@@ -35,9 +35,9 @@ class UserRequest extends FormRequest
   public function messages()
   {
     return [
-      '*.required' => ':attribute ' . t('validate.required'),
-      'email.email' => ':attribute ' . t('validate.invalid'),
-      'email.unique' => ':attribute ' . t('validate.unique'),
+      '*.required'    => ':attribute ' . t('validate.required'),
+      'email.email'   => ':attribute ' . t('validate.invalid'),
+      'email.unique'  => ':attribute ' . t('validate.unique'),
     ];
   }
 }

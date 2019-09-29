@@ -25,7 +25,7 @@ class CreateDecisionsTable extends Migration
       $table->date('sign_date')->nullable();
       $table->boolean('status')->default(true)->comment('0: chưa ký, 1: đã ký');
       $table->foreign('decision_type_id')->references('id')->on('decision_types');
-      $table->foreign('worker_id')->references('id')->on('workers');
+      $table->foreign('worker_id')->references('id')->on('workers')->onDelete('cascade')->onUpdate('cascade');
       $table->foreign('user_id')->references('id')->on('users');
       $table->timestamps();
     });

@@ -18,7 +18,7 @@ class RedirectIfAuthenticated
   public function handle($request, Closure $next, $guard = null)
   {
     if (!Auth::guard($guard)->check()) {
-      return redirect()->route('login')
+      return redirect()->back()
         ->with(['flash_level' => 'warning', 'flash_message' => t('login.warning')]);;
     }
     return $next($request);

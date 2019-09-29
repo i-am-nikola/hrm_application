@@ -26,15 +26,18 @@ class UserController extends Controller
 
   public function store(UserRequest $request)
   {
-    //create user
     $password = Str::random(8);
     $user = new User;
-    $data = $user->getDataUser($request, $password);
-    $user->create($data);
+    $input = $user->getInputUser($request, $password);
 
-    $this->sendInfoLoginToEmail($request, $password);
-    return redirect()->route('users.index')
-      ->with(['flash_level' => 'success', 'flash_message' => t('user.message.create')]);
+    if ($user->create($input)) {
+      $this->sendInfoLoginToEmail($request, $password);
+      return redirect()->route('users.index')
+        ->with(['flash_level' => 'success', 'flash_message' => t('user.message.create')]);
+    } else {
+      return redirect()->back()
+        ->with(['flash_level' => 'error', 'flash_message' => t('user.message.error')]);
+    }
   }
 
   private function sendInfoLoginToEmail($request, $password)
@@ -70,17 +73,24 @@ class UserController extends Controller
       $userRequest->attributes()
     );
     $user = User::find($id);
-    $user->update($request->all());
-    return redirect()->route('users.index')
-      ->with(['flash_level' => 'success', 'flash_message' => t('user.message.update')]);
+    if ($user->update($request->all())) {
+      return redirect()->route('users.index')
+        ->with(['flash_level' => 'success', 'flash_message' => t('user.message.update')]);
+    } else {
+      return redirect()->back()
+        ->with(['flash_level' => 'error', 'flash_message' => t('user.message.error')]);
+    }
   }
 
   public function destroy(Request $request, $id)
   {
     if ($request->ajax()) {
-      $user = User::find($request->id);
-      $user->delete();
-      return response(['id' => $request->id]);
+      $user = User::find($id);
+      if ($user->delete()) {
+        return response(['id' => $id, 'flash_message' => t('user.message.delete')]);
+      } else {
+        return response(['flash_message' => t('Bạn không thể xóa đối tượng này')]);
+      }
     }
   }
 }
