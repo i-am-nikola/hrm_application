@@ -1,4 +1,4 @@
-// customize datatable
+// customize datatable plugin
 $(document).ready(() => {
   $(".data-table").DataTable({
     "language": {
@@ -19,18 +19,25 @@ $(document).ready(() => {
   $('.data-table').wrap('<div class="dataTables_scroll" />');
 })
 
-//customize date input
+//customize daterangepicker, format date to dd/mm/yyy
 $(document).ready(function () {
   $('.reservation').daterangepicker({
     singleDatePicker: true,
     showDropdowns: true,
-    autoUpdateInput: true,
+    autoUpdateInput: false,
+    setDate: "",
     locale: {
       format: 'DD/MM/YYYY',
     }
   })
-  // if (window.location.href.indexOf('create') > -1) {
-  //   $('.js-clear').val('');
-  // };
+
+  $('.reservation').on('apply.daterangepicker', function (ev, picker) {
+    $(this).val(picker.startDate.format('DD/MM/YYYY'));
+  });
+
+  $('.reservation').on('cancel.daterangepicker', function (ev, picker) {
+    $(this).val('');
+  });
+
 });
 

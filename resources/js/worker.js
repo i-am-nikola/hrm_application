@@ -2,8 +2,8 @@
 $(document).ready(() => {
   $('#modal-confirm-delete').on('show.bs.modal', e => {
     var url = $(e.relatedTarget).data('url');
-    $('#confirm-delete').on('click', () => {
-      if (window.location.href.indexOf('workers') > -1) {
+    if (url.indexOf('workers') > -1) {
+      $('#confirm-delete').on('click', e => {
         $.ajax({
           type: 'DELETE',
           url: url,
@@ -16,7 +16,7 @@ $(document).ready(() => {
             toastr.success(data.flash_message);
           },
         });
-      }
-    })
+      })
+    }
   });
 });

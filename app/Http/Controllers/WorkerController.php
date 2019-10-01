@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\WorkerRequest;
+use App\Models\ContractType;
 use App\Models\Department;
 use App\Models\Education;
 use App\Models\Record;
@@ -13,7 +14,7 @@ class WorkerController extends Controller
 {
   public function index()
   {
-    $workers = Worker::all();
+    $workers = Worker::orderBy('id', 'desc')->get();
     return view('admin.workers.index', compact('workers'));
   }
 
@@ -42,7 +43,8 @@ class WorkerController extends Controller
   {
     $worker = Worker::findOrFail($id);
     $records = Record::all();
-    return view('admin.workers.show', compact('worker', 'records'));
+    $contractTypes = ContractType::orderBy('id', 'asc')->pluck('name', 'id')->prepend(t('contract.default'), null);
+    return view('admin.workers.show', compact('worker', 'records', 'contractTypes'));
   }
 
   public function edit($id)

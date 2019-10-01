@@ -12,7 +12,7 @@ return [
     t('boolean.true')
   ],
 
-  'workstatus' => [
+  'worker_status' => [
     -1 => t('worker.off'),
     0 => t('worker.probationary'),
     1 => t('worker.official')
@@ -21,6 +21,11 @@ return [
   'gender' => [
     t('gender.female'),
     t('gender.male')
+  ],
+
+  'contract_status' => [
+    t('contract.not_signed'),
+    t('contract.signed')
   ]
 
 ];

@@ -101,6 +101,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_user__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _worker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./worker */ "./resources/js/worker.js");
 /* harmony import */ var _worker__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_worker__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _contract__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./contract */ "./resources/js/contract.js");
+/* harmony import */ var _contract__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_contract__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -114,7 +117,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// customize datatable
+// customize datatable plugin
 $(document).ready(function () {
   $(".data-table").DataTable({
     "language": {
@@ -133,19 +136,168 @@ $(document).ready(function () {
     }
   });
   $('.data-table').wrap('<div class="dataTables_scroll" />');
-}); //customize date input
+}); //customize daterangepicker, format date to dd/mm/yyy
 
 $(document).ready(function () {
   $('.reservation').daterangepicker({
     singleDatePicker: true,
     showDropdowns: true,
-    autoUpdateInput: true,
+    autoUpdateInput: false,
+    setDate: "",
     locale: {
       format: 'DD/MM/YYYY'
     }
-  }); // if (window.location.href.indexOf('create') > -1) {
-  //   $('.js-clear').val('');
-  // };
+  });
+  $('.reservation').on('apply.daterangepicker', function (ev, picker) {
+    $(this).val(picker.startDate.format('DD/MM/YYYY'));
+  });
+  $('.reservation').on('cancel.daterangepicker', function (ev, picker) {
+    $(this).val('');
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/contract.js":
+/*!**********************************!*\
+  !*** ./resources/js/contract.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  // Nếu người dùng chọn Hợp đồng không xác định thời hạn thì ẩn form Ngày hết hiệu lực
+  $('.contract-form select[name="contract_type_id"]').on('change', function () {
+    var value = $(this).children("option:selected").val();
+
+    if (value == 1) {
+      $('.contract-form input[name="expiry_date"]').val('');
+      $('.contract-form input[name="expiry_date"]').parent('.form-group').css('display', 'none');
+    } else {
+      $('.contract-form input[name="expiry_date"]').parent('.form-group').removeAttr('style');
+    }
+  }); // Request input contract to ContractController@store using ajax
+
+  $('#modal-create-contract').on('show.bs.modal', function (e) {
+    $('#js-contract-form')[0].reset();
+    var url = $(e.relatedTarget).data('url');
+    $(document).on('submit', '#js-contract-form', function (e) {
+      var data = $(e.target).serialize();
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        dataType: "json",
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
+        },
+        success: function success(response) {
+          if (response.status === 'success') {
+            $('#modal-create-contract').modal('hide');
+            $('#js-contract-form')[0].reset();
+            $('.message-error').remove();
+            toastr.success(response.flash_message);
+            reloadData();
+          } else {
+            showErrorMessage(response.errors);
+          }
+        }
+      });
+    });
+  }); // Request input contract to ContractController@update using ajax
+
+  $('#js-contract-update').on('submit', function (e) {
+    e.preventDefault();
+    var url = $(event.target).attr('action');
+    var data = $(event.target).serialize();
+    $.ajax({
+      method: "PUT",
+      url: url,
+      data: data,
+      dataType: "json",
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
+      },
+      success: function success(response) {
+        if (response.status === 'success') {
+          $('#modal-edit-contract').modal('hide');
+          $('#js-contract-update')[0].reset();
+          $('.message-error').remove();
+          toastr.success(response.flash_message);
+          reloadData();
+        } else {
+          showErrorMessage(response.errors);
+        }
+      }
+    });
+  }); // show error message
+
+  function showErrorMessage(data) {
+    $.each(data, function (key, value) {
+      var message = '<p class="message-error text-danger mt-1">' + value + '</p>';
+      $('.contract-form input[name="' + key + '"]').next().remove();
+      $('.contract-form select[name="' + key + '"]').next().remove();
+      $('.contract-form input[name="' + key + '"]').after(message);
+      $('.contract-form select[name="' + key + '"]').after(message);
+    });
+  } // get data contracts ajax
+
+
+  function reloadData() {
+    $.ajax({
+      type: "GET",
+      url: $('#contract').data('url'),
+      dataType: "html",
+      success: function success(response) {
+        $('.js-contract-table tbody').html(response);
+      }
+    });
+  }
+
+  reloadData();
+}); // delete single contract
+
+$(document).ready(function () {
+  $('#modal-confirm-delete').on('show.bs.modal', function (e) {
+    var url = $(e.relatedTarget).data('url');
+
+    if (url.indexOf('contracts') > -1) {
+      $('#confirm-delete').off('click').on('click', function (e) {
+        $.ajax({
+          type: 'DELETE',
+          url: url,
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
+          },
+          success: function success(data) {
+            $('button[data-id=' + data.id + ']').parents('tr').remove();
+            $('#modal-confirm-delete').modal('hide');
+            toastr.success(data.flash_message);
+          }
+        });
+      });
+    }
+  });
+}); // get data edit
+
+$(document).ready(function () {
+  $('#modal-edit-contract').on('show.bs.modal', function (e) {
+    $('.contract-form input[name="expiry_date"]').parent('.form-group').removeAttr('style');
+    var url = $(e.relatedTarget).data('url');
+    $.ajax({
+      type: "GET",
+      url: url,
+      dataType: "json",
+      success: function success(response) {
+        $.each(response, function (key, value) {
+          $('#js-contract-update input[name="' + key + '"]').val(value);
+          $('#js-contract-update select[name="' + key + '"]').val(value);
+        });
+      }
+    });
+  });
 });
 
 /***/ }),
@@ -193,8 +345,9 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('#modal-confirm-delete').on('show.bs.modal', function (e) {
     var url = $(e.relatedTarget).data('url');
-    $('#confirm-delete').on('click', function () {
-      if (window.location.href.indexOf('workers') > -1) {
+
+    if (url.indexOf('workers') > -1) {
+      $('#confirm-delete').on('click', function (e) {
         $.ajax({
           type: 'DELETE',
           url: url,
@@ -207,8 +360,8 @@ $(document).ready(function () {
             toastr.success(data.flash_message);
           }
         });
-      }
-    });
+      });
+    }
   });
 });
 

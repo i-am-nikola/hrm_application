@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-  return redirect()->route('dashboard');
+  return redirect()->route('login');
 });
 
 // logout
@@ -33,4 +33,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'guest'], function () {
 
   // workers
   Route::resource('workers', 'WorkerController');
+
+  //conotract
+  // Route::resource('contracts', 'ContractController');
+  Route::group(['prefix' => 'contracts', 'as' => 'contracts.'], function () {
+    Route::get('/', 'ContractController@index')->name('index');
+    Route::post('/', 'ContractController@store')->name('store');
+    Route::get('/{id}/edit', 'ContractController@edit')->name('edit');
+    Route::put('/update', 'ContractController@update')->name('update');
+    Route::delete('/{id}', 'ContractController@destroy')->name('destroy');
+    Route::get('/reload/{id}', 'ContractController@reloadData')->name('reload');
+  });
 });

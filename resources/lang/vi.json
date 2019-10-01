@@ -148,13 +148,17 @@
     }
   },
   "contract": {
+    "default": "--Chọn loại hợp đồng--",
     "type": "Loại HĐ",
     "code": "Mã HĐ",
     "effective_date": "Ngày hiệu lực",
     "expiry_date": "Ngày hết hiệu lực",
+    "salary": "Mức lương căn bản",
     "sign_date": "Ngày ký",
     "delay": "Còn lại",
     "status": "Trạng thái",
+    "signed": "Đã ký",
+    "not_signed": "Chưa ký",
     "create": "Tạo HĐLĐ",
     "update": "Sửa HĐLĐ",
     "delete": "Xóa HĐLĐ",
@@ -163,7 +167,8 @@
       "update": "Cập nhật hợp đồng lao động thành công",
       "delete": "Xóa hợp đồng lao động thành công",
       "error": "Có lỗi xảy ra! Xin vui lòng thử lại"
-    }
+    },
+    "no_contract": "Nhận sự này chưa có hợp đồng!"
   },
   "decision": {
     "type": "Loại quyết định",

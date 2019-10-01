@@ -1,7 +1,8 @@
 @php
 $code = $name = $idNo = $phone = $email = $issuedBy = $birthday= $issuedOn
-= $staringDate = $permanentAddress = $temporaryAddress = '';
+ = $permanentAddress = $temporaryAddress = '';
 $status = $checked = 0;
+$staringDate = date('d/m/Y');
 @endphp
 
 @if (isset($worker))
@@ -94,7 +95,7 @@ $temporaryAddress = $worker->temporary_address;
           </div>
           <div class="form-group">
             {!! Form::label('status', t('worker.status')) !!}
-            {!! Form::select('status', config('enum.workstatus'), $status, ['class' => 'form-control']) !!}
+            {!! Form::select('status', config('enum.worker_status'), $status, ['class' => 'form-control']) !!}
           </div>
         </div>
       </div>
