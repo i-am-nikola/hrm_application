@@ -18,31 +18,31 @@ $issuedOn = $worker->issued_on !== null ? $worker->issued_on->format('d/m/Y') : 
   <div class="row">
     <div class="col-12">
       <ul class="ml-4 mb-0 fa-ul text-muted worker-info">
-        <li class="small">
+        <li>
           <span class="fa-li"><i class="fas fa-lg fa-transgender"></i></span>
           {{ t('worker.gender') . ': ' . ($gender ? t('gender.male') : t('gender.female')) }}
         </li>
-        <li class="small">
+        <li>
           <span class="fa-li"><i class="fas fa-lg fa-birthday-cake"></i></span>
           {{ t('worker.birthday') . ': ' . $birthday}}
         </li>
-        <li class="small">
+        <li>
           <span class="fa-li"><i class="fas fa-md fa-id-card"></i></span>
           {{ t('worker.id_no') . ': ' . $idNo }}
         </li>
-        <li class="small">
+        <li>
           <span class="fa-li"><i class="fas fa-lg fa-calendar-alt"></i></span>
           {{ t('worker.issued_on') . ': ' . $issuedOn }}
         </li>
-        <li class="small">
+        <li>
           <span class="fa-li"><i class="fas fa-lg fa-paper-plane"></i></span>
           {{ t('worker.issued_by') . ': ' . $issuedBy }}
         </li>
-        <li class="small">
+        <li>
           <span class="fa-li"><i class="fas fa-lg fa-home"></i></span>
           {{ t('worker.permanent_address') . ': ' . $permanentAddress }}
         </li>
-        <li class="small">
+        <li>
           <span class="fa-li"><i class="fas fa-lg fa-house-damage"></i></span>
           {{ t('worker.temporary_address') . ': ' . $temporaryAddress }}
         </li>

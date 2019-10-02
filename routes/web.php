@@ -34,14 +34,22 @@ Route::group(['prefix' => 'admin', 'middleware' => 'guest'], function () {
   // workers
   Route::resource('workers', 'WorkerController');
 
-  //conotract
-  // Route::resource('contracts', 'ContractController');
+  //contract
   Route::group(['prefix' => 'contracts', 'as' => 'contracts.'], function () {
-    Route::get('/', 'ContractController@index')->name('index');
     Route::post('/', 'ContractController@store')->name('store');
     Route::get('/{id}/edit', 'ContractController@edit')->name('edit');
     Route::put('/update', 'ContractController@update')->name('update');
     Route::delete('/{id}', 'ContractController@destroy')->name('destroy');
-    Route::get('/reload/{id}', 'ContractController@reloadData')->name('reload');
+    Route::get('/reload/{id}', 'ContractController@reloadData')->name('reload');;
+  });
+
+  //decision
+  Route::group(['prefix' => 'decisions', 'as' => 'decisions.'], function () {
+    Route::get('/', 'DecisionController@create')->name('create');
+    Route::post('/', 'DecisionController@store')->name('store');
+    Route::get('/{id}/edit', 'DecisionController@edit')->name('edit');
+    Route::put('/update', 'DecisionController@update')->name('update');
+    Route::delete('/{id}', 'DecisionController@destroy')->name('destroy');
+    Route::get('/reload/{id}', 'DecisionController@reloadData')->name('reload');;
   });
 });

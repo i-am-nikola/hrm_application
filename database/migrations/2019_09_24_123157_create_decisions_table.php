@@ -15,14 +15,16 @@ class CreateDecisionsTable extends Migration
       $table->unsignedInteger('user_id');
       $table->string('code', 50)->unique();
       $table->string('reason')->nullable();
+      $table->string('formality')->nullable();
       $table->integer('old_department')->nullable();
       $table->integer('new_department')->nullable();
-      $table->integer('old_position')->nullable();
-      $table->integer('new_position')->nullable();
+      $table->string('old_position', 100)->nullable();
+      $table->string('new_position', 100)->nullable();
       $table->string('old_salary', 20)->nullable();
       $table->string('new_salary', 20)->nullable();
       $table->date('effective_date')->nullable();
       $table->date('sign_date')->nullable();
+      $table->date('leaving_date')->nullable();
       $table->boolean('status')->default(true)->comment('0: chưa ký, 1: đã ký');
       $table->foreign('decision_type_id')->references('id')->on('decision_types');
       $table->foreign('worker_id')->references('id')->on('workers')->onDelete('cascade')->onUpdate('cascade');

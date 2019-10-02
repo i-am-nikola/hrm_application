@@ -171,24 +171,34 @@
     "no_contract": "Nhận sự này chưa có hợp đồng!"
   },
   "decision": {
+    "default": "--Chọn loại quyết định",
     "type": "Loại quyết định",
     "code": "Mã quyết định",
     "reason": "Lý do",
-    "old_department": "Phòng ban cũ",
+    "formality": "Hình thức khen thưởng - kỷ luật",
+    "old_department": "Phòng ban hiện tại",
     "new_department": "Phòng ban mới",
-    "old_position": "Chức vụ cũ",
+    "old_position": "Chức vụ hiện tại",
     "new_position": "Chức vụ mới",
-    "old_salary": "Mức lương cũ",
+    "old_salary": "Mức lương hiện tại",
     "new_salary": "Mức lương mới",
     "effective_date": "Ngày hiệu lực",
     "sign_date": "Ngày ký",
+    "leaving_date": "Ngày thôi việc",
     "status": "Trạng thái",
+    "signed": "Đã ký",
+    "not_signed": "Chưa ký",
+    "create": "Tạo quyết định",
+    "update": "Sửa quyết định",
+    "delete": "Xóa quyết định",
+    "number": "Số",
     "message": {
       "create": "Thêm mới quyết định thành công",
       "update": "Cập nhật quyết định thành công",
       "delete": "Xóa quyết định thành công",
       "error": "Có lỗi xảy ra! Xin vui lòng thử lại"
-    }
+    },
+    "no_decision": "Nhân sự này chưa có quyết định!"
   },
   "education": {
     "default": "--Chọn trình độ--"

@@ -11,13 +11,7 @@ class Department extends Model
 
   public function workers()
   {
-    $this->hasMany(Worker::class);
+    return $this->hasMany(Worker::class);
   }
 
-  public static function getListDepartment()
-  {
-    return self::orderBy('id', 'asc')
-      ->pluck('name', 'id')->forget(1)
-      ->prepend(t('department.default'), 1);
-  }
 }

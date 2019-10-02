@@ -103,6 +103,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _worker__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_worker__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _contract__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./contract */ "./resources/js/contract.js");
 /* harmony import */ var _contract__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_contract__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _decision__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./decision */ "./resources/js/decision.js");
+/* harmony import */ var _decision__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_decision__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -119,19 +122,19 @@ __webpack_require__.r(__webpack_exports__);
 
 // customize datatable plugin
 $(document).ready(function () {
-  $(".data-table").DataTable({
-    "language": {
-      "lengthMenu": "Hiển thị _MENU_ bảng ghi/trang",
-      "zeroRecords": "Không tìm thấy dữ liệu",
-      "info": "Trang hiển thị _PAGE_ / _PAGES_",
-      "infoEmpty": "Không có dữ liệu",
-      "infoFiltered": "(lọc từ _MAX_ bảng ghi)",
-      "search": "Tìm kiếm",
-      "paginate": {
-        "first": "Đầu tiên",
-        "last": "Cuối cùng",
-        "next": "Sau",
-        "previous": "Trước"
+  $('.data-table').DataTable({
+    language: {
+      lengthMenu: 'Hiển thị _MENU_ bảng ghi/trang',
+      zeroRecords: 'Không tìm thấy dữ liệu',
+      info: 'Trang hiển thị _PAGE_ / _PAGES_',
+      infoEmpty: 'Không có dữ liệu',
+      infoFiltered: '(lọc từ _MAX_ bảng ghi)',
+      search: 'Tìm kiếm',
+      paginate: {
+        first: 'Đầu tiên',
+        last: 'Cuối cùng',
+        next: 'Sau',
+        previous: 'Trước'
       }
     }
   });
@@ -166,7 +169,13 @@ $(document).ready(function () {
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
-  // Nếu người dùng chọn Hợp đồng không xác định thời hạn thì ẩn form Ngày hết hiệu lực
+  $('.js-contract-table').DataTable({
+    searching: false,
+    bPaginate: false,
+    bInfo: false,
+    ordering: false
+  }); // Nếu người dùng chọn Hợp đồng không xác định thời hạn thì ẩn form Ngày hết hiệu lực
+
   $('.contract-form select[name="contract_type_id"]').on('change', function () {
     var value = $(this).children("option:selected").val();
 
@@ -298,6 +307,162 @@ $(document).ready(function () {
       }
     });
   });
+});
+
+/***/ }),
+
+/***/ "./resources/js/decision.js":
+/*!**********************************!*\
+  !*** ./resources/js/decision.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  // create decision
+  $('#js-decision-create').on('submit', function (e) {
+    e.preventDefault();
+    var url = $(e.target).attr('action');
+    var data = $(e.target).serialize();
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: data,
+      dataType: "json",
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
+      },
+      success: function success(response) {
+        console.log(response);
+      }
+    });
+  }); // get data decision ajax
+
+  function reloadDecisionData() {
+    $.ajax({
+      type: "GET",
+      url: $('#decision').data('url'),
+      dataType: "html",
+      success: function success(response) {
+        $('#decision').html(response);
+      }
+    });
+  }
+
+  reloadDecisionData();
+}); // get old_department, old_position fill in form create decision
+
+$(document).ready(function () {
+  var oldPositionElemt = $('.decision-form input[name="old_position"]');
+  var oldDepartmentElemt = $('.decision-form select[name="old_department"]');
+  var decisionTypeIdElemt = $('.decision-form select[name="decision_type_id"]');
+  var workerIdElemt = $('#js-decision-create input[name="worker_id"]');
+  $('#modal-create-decision').on('show.bs.modal', function (e) {
+    var url = $(e.relatedTarget).data('url');
+    var worker_id = workerIdElemt.val();
+    $.ajax({
+      type: "GET",
+      url: url,
+      data: {
+        id: worker_id
+      },
+      dataType: "json",
+      success: function success(response) {
+        decisionTypeIdElemt.on('change', function (e) {
+          var value = $(e.target).val();
+
+          if (value == 1 || value == 4 || value == 5) {
+            oldPositionElemt.val('');
+            oldDepartmentElemt.val(1);
+          }
+
+          if (value == 2) {
+            oldPositionElemt.val(response.position);
+            oldDepartmentElemt.val(response.department_id);
+          }
+
+          if (value == 3) {
+            oldPositionElemt.val(response.position);
+            oldDepartmentElemt.val(1);
+          }
+        });
+      }
+    });
+  });
+}); //  hide and show input forms when changing decision type
+
+$(document).ready(function () {
+  var oldPositionElemt = $('.decision-form input[name="old_position"]');
+  var newPositionElemt = $('.decision-form input[name="new_position"]');
+  var oldSalaryElemt = $('.decision-form input[name="old_salary"]');
+  var newSalaryElemt = $('.decision-form input[name="new_salary"]');
+  var formalityElemt = $('.decision-form input[name="formality"]');
+  var reasonElemt = $('.decision-form input[name="reason"]');
+  var leavingDateElemt = $('.decision-form input[name="leaving_date"]');
+  var oldDepartmentElemt = $('.decision-form select[name="old_department"]');
+  var newDepartmentElemt = $('.decision-form select[name="new_department"]');
+  var selectedValue = $('.decision-form select[name="decision_type_id"] option:selected').val();
+  $('.change-form').css('display', 'none');
+
+  if (selectedValue == 1) {
+    showElemt(oldSalaryElemt, newSalaryElemt);
+    oldPositionElemt.val('');
+    oldDepartmentElemt.val(1);
+  }
+
+  $('.decision-form select[name="decision_type_id"]').on('change', function (e) {
+    var value = $(e.target).val();
+
+    if (value == 1) {
+      showElemt(oldSalaryElemt, newSalaryElemt);
+      hideElemt(oldDepartmentElemt, newDepartmentElemt);
+      hideElemt(oldPositionElemt, newPositionElemt);
+      hideElemt(leavingDateElemt, reasonElemt);
+      formalityElemt.parent('.form-group').css('display', 'none');
+    }
+
+    if (value == 2) {
+      hideElemt(oldSalaryElemt, newSalaryElemt);
+      showElemt(oldDepartmentElemt, newDepartmentElemt);
+      showElemt(oldPositionElemt, newPositionElemt);
+      hideElemt(leavingDateElemt, reasonElemt);
+      formalityElemt.parent('.form-group').css('display', 'none');
+    }
+
+    if (value == 3) {
+      showElemt(oldPositionElemt, newPositionElemt);
+      hideElemt(oldSalaryElemt, newSalaryElemt);
+      hideElemt(oldDepartmentElemt, newDepartmentElemt);
+      hideElemt(leavingDateElemt, reasonElemt);
+      formalityElemt.parent('.form-group').css('display', 'none');
+    }
+
+    if (value == 4) {
+      showElemt(leavingDateElemt, reasonElemt);
+      hideElemt(oldPositionElemt, newPositionElemt);
+      hideElemt(oldSalaryElemt, newSalaryElemt);
+      hideElemt(oldDepartmentElemt, newDepartmentElemt);
+      formalityElemt.parent('.form-group').css('display', 'none');
+    }
+
+    if (value == 5) {
+      showElemt(formalityElemt, reasonElemt);
+      hideElemt(oldSalaryElemt, newSalaryElemt);
+      hideElemt(oldDepartmentElemt, newDepartmentElemt);
+      hideElemt(oldPositionElemt, newPositionElemt);
+      leavingDateElemt.parent('.form-group').css('display', 'none');
+    }
+  });
+
+  function showElemt(elemtOne, elemtTwo) {
+    elemtOne.parent('.form-group').css('display', 'block');
+    elemtTwo.parent('.form-group').css('display', 'block');
+  }
+
+  function hideElemt(elemtOne, elemtTwo) {
+    elemtOne.parent('.form-group').css('display', 'none');
+    elemtTwo.parent('.form-group').css('display', 'none');
+  }
 });
 
 /***/ }),

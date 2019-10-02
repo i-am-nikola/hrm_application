@@ -22,6 +22,11 @@ class Worker extends Model
     return $this->belongsTo(Department::class);
   }
 
+  public function decisions()
+  {
+    return $this->hasMany(Decision::class);
+  }
+
   public function education()
   {
     return $this->belongsTo(Education::class);
@@ -35,11 +40,6 @@ class Worker extends Model
   public function contracts()
   {
     return $this->hasMany(Contract::class);
-  }
-
-  public function decisions()
-  {
-    return $this->hasMany(Decision::class);
   }
 
   public function getInputWorker($request)

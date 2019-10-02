@@ -1,4 +1,12 @@
 $(document).ready(() => {
+
+  $('.js-contract-table').DataTable({
+    searching: false,
+    bPaginate: false,
+    bInfo: false,
+    ordering: false,
+  })
+
   // Nếu người dùng chọn Hợp đồng không xác định thời hạn thì ẩn form Ngày hết hiệu lực
   $('.contract-form select[name="contract_type_id"]').on('change', function () {
     let value = $(this).children("option:selected").val();
@@ -68,11 +76,9 @@ $(document).ready(() => {
     });
   })
 
-  
-
   // show error message
   function showErrorMessage(data) {
-    $.each(data, function (key, value) {
+    $.each(data, (key, value) => {
       let message = '<p class="message-error text-danger mt-1">' + value + '</p>'
       $('.contract-form input[name="' + key + '"]').next().remove();
       $('.contract-form select[name="' + key + '"]').next().remove();
@@ -136,12 +142,4 @@ $(document).ready(() => {
     });
   })
 })
-
-
-
-
-
-
-
-
 

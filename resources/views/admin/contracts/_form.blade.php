@@ -5,12 +5,12 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              {!! Form::label('code', t('contract.code')) !!}
+              {!! Form::label('code', t('contract.code'), ['class' => 'required']) !!}
               {!! Form::text('code', '', ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-              {!! Form::label('contract_type', t('contract.type')) !!}
-              {!! Form::select('contract_type_id', $contractTypes, 0, ['class' => 'form-control']) !!}
+              {!! Form::label('contract_type', t('contract.type'), ['class' => 'required']) !!}
+              {!! Form::select('contract_type_id', getListContractTypes(), 0, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
               {!! Form::label('salary', t('contract.salary')) !!}

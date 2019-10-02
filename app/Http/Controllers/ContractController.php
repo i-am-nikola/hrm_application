@@ -20,23 +20,18 @@ class ContractController extends Controller
       $contractRequest->attributes()
     );
 
-    $contract = new Contract;
-    $input = $contract->getInputContract($request);
-
     if ($request->ajax()) {
       if ($validator->fails()) {
         return response()->json(['status' => 'fails', 'errors' => $validator->errors()]);
-      }
-      $newContract = $contract->create($input);
-      if ($newContract) {
-        return response()->json(['status' => 'success', 'flash_message' => t('contract.message.create')]);
+      } else {
+        $contract = new Contract;
+        $input = $contract->getInputContract($request);
+        $newContract = $contract->create($input);
+        if ($newContract) {
+          return response()->json(['status' => 'success', 'flash_message' => t('contract.message.create')]);
+        }
       }
     }
-  }
-
-  public function show($id)
-  {
-    //
   }
 
   public function edit($id)
@@ -66,15 +61,16 @@ class ContractController extends Controller
       $contractRequest->attributes()
     );
 
-    $contract = Contract::findOrFail($request->id);
-    $input = $contract->getInputContract($request);
     if ($request->ajax()) {
       if ($validator->fails()) {
         return response()->json(['status' => 'fails', 'errors' => $validator->errors()]);
-      }
-      $updateContract = $contract->update($input);
-      if ($updateContract) {
-        return response()->json(['status' => 'success', 'flash_message' => t('contract.message.update')]);
+      } else {
+        $contract = Contract::findOrFail($request->id);
+        $input = $contract->getInputContract($request);
+        $updateContract = $contract->update($input);
+        if ($updateContract) {
+          return response()->json(['status' => 'success', 'flash_message' => t('contract.message.update')]);
+        }
       }
     }
   }
@@ -91,7 +87,7 @@ class ContractController extends Controller
   // reload after request ajax (post, update) success
   public function reloadData($id)
   {
-    $worker = Worker::findOrFail($id);
+    // $worker = Worker::findOrFail($id);
     $contracts = Contract::where('worker_id', $id)->orderBy('id', 'desc')->get();
     return view('admin.contracts.reload', compact('contracts'));
   }

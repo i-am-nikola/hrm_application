@@ -22,3 +22,14 @@ ul.worker-info {
     font-size: 14px;
   }
 }
+
+.collapse-decision {
+  .col-6 {
+    p {
+      margin-bottom: 8px !important;
+    }
+    p:last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+}

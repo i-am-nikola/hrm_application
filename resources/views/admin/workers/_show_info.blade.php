@@ -34,24 +34,24 @@ $status = t('worker.off');
         <h2 class="lead"><b>{{ $name }}</b></h2>
         <p class="text-muted text-md">{{ $department . ' - ' . $position }}</p>
         <ul class="ml-4 mb-0 fa-ul text-muted worker-info">
-          <li class="small">
+          <li>
             <span class="fa-li"><i class="fas fa-lg fa-envelope"></i></i></span>
             {{ t('worker.email') . ': ' . $email }}
           </li>
-          <li class="small">
+          <li>
             <span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
             {{ t('worker.phone') . ': ' . $phone }}
           </li>
-          <li class="small">
+          <li>
             <span class="fa-li"><i class="fas fa-lg fa-play"></i></span>
             {{ t('worker.status') . ': ' . $status }}
           </li>
-          <li class="small">
+          <li>
             <span class="fa-li"><i class="fas fa-lg fa-calendar-alt"></i></span>
             {{ t('worker.staring_date') . ': ' . $staringDate }}
           </li>
           @if ($leavingDate !== '')
-          <li class="small">
+          <li>
             <span class="fa-li"><i class="fas fa-lg fa-calendar-alt"></i></span>
             {{ t('worker.leaving_date') . ': ' . $leavingDate }}
           </li>

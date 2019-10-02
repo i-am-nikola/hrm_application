@@ -17,3 +17,11 @@ ul.worker-info li {
   font-size: 14px;
 }
 
+.collapse-decision .col-6 p {
+  margin-bottom: 8px !important;
+}
+
+.collapse-decision .col-6 p:last-child {
+  margin-bottom: 0 !important;
+}
+

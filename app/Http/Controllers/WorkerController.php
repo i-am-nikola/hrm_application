@@ -20,10 +20,8 @@ class WorkerController extends Controller
 
   public function create()
   {
-    $educations = Education::getListEducation();
-    $departments = Department::getListDepartment();
     $records = Record::all();
-    return view('admin.workers.create', compact('educations', 'departments', 'records'));
+    return view('admin.workers.create', compact('records'));
   }
 
   public function store(WorkerRequest $request)
@@ -43,17 +41,14 @@ class WorkerController extends Controller
   {
     $worker = Worker::findOrFail($id);
     $records = Record::all();
-    $contractTypes = ContractType::orderBy('id', 'asc')->pluck('name', 'id')->prepend(t('contract.default'), null);
     return view('admin.workers.show', compact('worker', 'records', 'contractTypes'));
   }
 
   public function edit($id)
   {
     $worker = Worker::findOrFail($id);
-    $educations = Education::getListEducation();
-    $departments = Department::getListDepartment();
     $records = Record::all();
-    return view('admin.workers.edit', compact('worker', 'educations', 'departments', 'records'));
+    return view('admin.workers.edit', compact('worker', 'records'));
   }
 
   public function update(Request $request, $id)

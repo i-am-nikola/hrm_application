@@ -10,19 +10,19 @@ $skill = $worker->skill;
   <div class="row">
     <div class="col-12">
       <ul class="ml-4 mb-0 fa-ul text-muted worker-info">
-        <li class="small">
+        <li>
           <span class="fa-li"><i class="fas fa-lg fa-graduation-cap"></i></span>
           {{ t('worker.education') . ': ' . $education }}
         </li>
-        <li class="small">
+        <li>
           <span class="fa-li"><i class="fas fa-lg fa-university"></i></span>
           {{ t('worker.graduate_school') . ': ' . $graduateSchool }}
         </li>
-        <li class="small">
+        <li>
           <span class="fa-li"><i class="fas fa-lg fa-certificate"></i></span>
           {{ t('worker.certificate') . ': ' . $certificate }}
         </li>
-        <li class="small">
+        <li>
           <span class="fa-li"><i class="fas fa-lg fa-atom"></i></span>
           {{ t('worker.skill') . ': ' . $skill }}
         </li>
