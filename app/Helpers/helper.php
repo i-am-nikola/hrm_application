@@ -8,7 +8,7 @@ use App\Models\Education;
 
 function formatDateToYmd($dateValue)
 {
-  return ($dateValue !== null) ? Carbon::createFromFormat('d/m/Y', $dateValue)->format('Y-m-d') : null;
+  return $dateValue ? Carbon::createFromFormat('d/m/Y', $dateValue)->format('Y-m-d') : null;
 }
 
 function getDepartmentNameById($id)
@@ -37,9 +37,10 @@ function getListDecisionTypes()
 function getListDepartments()
 {
   $departments = Department::orderBy('id', 'asc')
-    ->pluck('name', 'id')->forget(1)
+    ->pluck('name', 'id')
     ->prepend(t('department.default'), null);
-  return !empty($departments) ? $departments : [];
+  return $departments;
+
 }
 
 function getListEducations()

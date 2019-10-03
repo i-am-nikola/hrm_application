@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContractRequest;
 use App\Models\Contract;
-use App\Models\Worker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -39,7 +38,6 @@ class ContractController extends Controller
     $contract = Contract::findOrFail($id);
     return response()->json([
       'id'                => $contract->id !== null ? $contract->id : 1,
-      'user_id'           => $contract->user_id !== null ? $contract->user_id : 1,
       'worker_id'         => $contract->worker_id !== null ? $contract->worker_id : 1,
       'code'              => $contract->code !== null ? $contract->code : '',
       'contract_type_id'  => $contract->contract_type_id !== null ? $contract->contract_type_id : 0,

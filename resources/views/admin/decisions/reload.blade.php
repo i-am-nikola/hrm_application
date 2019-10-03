@@ -23,8 +23,8 @@
   $class = $decision->status ? 'info' : 'secondary';
   $reason = isset($decision->reason) ? $decision->reason : '';
   $formality = isset($decision->formality) ? $decision->formality : '';
-  $old_department = isset($decision->old_department) ? $decision->old_department : null;
-  $new_department = isset($decision->new_department) ? $decision->new_department : null;
+  $oldDepartment = isset($decision->old_department) ? $decision->old_department : null;
+  $newDepartment = isset($decision->new_department) ? $decision->new_department : null;
   @endphp
   <div class="card card-{{ $class }}">
     <div class="card-header p-1">
@@ -40,42 +40,47 @@
         <div class="row">
           <div class="col-6">
             <p class="text-muted">{{ t('decision.number') . ': ' . $code }}</p>
-            @if ($oldSalary !== '' || $newSalary !== '')
+            @if ($oldSalary && $newSalary)
             <p class="text-muted">{{ t('decision.old_salary') . ': ' . $oldSalary }}</p>
             <p class="text-muted">{{ t('decision.new_salary') . ': ' . $newSalary }}</p>
             @endif
-            @if ($old_department !== null || $new_department !== null)
-            <p class="text-muted">{{ t('decision.old_department') . ': ' . getDepartmentNameById($old_department) }}</p>
-            <p class="text-muted">{{ t('decision.new_department') . ': ' . getDepartmentNameById($new_department) }}</p>
+            @if ($oldDepartment && $newDepartment)
+            <p class="text-muted">{{ t('decision.old_department') . ': ' . getDepartmentNameById($oldDepartment) }}</p>
+            <p class="text-muted">{{ t('decision.new_department') . ': ' . getDepartmentNameById($newDepartment) }}</p>
             @endif
-            @if ($oldPosition !== '' || $newPosition !== '')
+            @if ($oldPosition && $newPosition)
             <p class="text-muted">{{ t('decision.old_position') . ': ' . $oldPosition }}</p>
             <p class="text-muted">{{ t('decision.new_position') . ': ' . $newPosition }}</p>
             @endif
-            @if ($leavingDate !== '')
+            @if ($leavingDate)
             <p class="text-muted">{{ t('decision.leaving_date') . ': ' . $leavingDate }}</p>
             @endif
-            @if ($reason !== '')
+            @if ($reason)
             <p class="text-muted">{{ t('decision.reason') . ': ' . $reason }}</p>
             @endif
-            @if ($formality !== '')
+            @if ($formality)
             <p class="text-muted">{{ t('decision.formality') . ': ' . $formality }}</p>
             @endif
           </div>
           <div class="col-6">
             <p class="text-muted">{{ t('decision.status') . ': ' . $status }}</p>
-            <p class="text-muted">{{ t('decision.effective_date') . ': ' . $effectiveDate }}</p>
             <p class="text-muted">{{ t('decision.sign_date') . ': ' . $signedDate }}</p>
+            @if ($effectiveDate)
+            <p class="text-muted">{{ t('decision.effective_date') . ': ' . $effectiveDate }}</p>
+            @else
+            <p class="text-muted">{{ t('decision.effective_date') . ': ' . 'Kể từ ngày ký' }}</p>
+            @endif
+
           </div>
         </div>
       </div>
 
       <div class="card-footer">
         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#"><i class="fas fa-print"></i></button>
-        <button class="btn btn-warning btn-sm" id="js-contract-edit" data-toggle="modal" data-target="#"
-          data-url='"#"'><i class="fas fa-pencil-alt"></i></button>
-        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-confirm-delete" data-id="#"
-          data-url="#" }}>
+        <button class="btn btn-warning btn-sm" id="js-contract-edit" data-toggle="modal" data-target="#modal-edit-decision"
+          data-url={{ route('decisions.edit', $decision->id) }}><i class="fas fa-pencil-alt"></i></button>
+        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-confirm-delete"
+          data-url={{ route('decisions.destroy', $decision->id) }} }}>
           <i class="fas fa-trash"></i>
         </button>
       </div>

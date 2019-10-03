@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\WorkerRequest;
-use App\Models\ContractType;
-use App\Models\Department;
-use App\Models\Education;
 use App\Models\Record;
 use App\Models\Worker;
 use Illuminate\Http\Request;

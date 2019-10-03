@@ -58,4 +58,5 @@
 @include('admin.contracts.create')
 @include('admin.contracts.edit')
 @include('admin.decisions.create')
+@include('admin.decisions.edit')
 @endsection

@@ -7,6 +7,12 @@ $(document).ready(() => {
     ordering: false,
   })
 
+  // reset when close from
+  $('#modal-edit-contract, #modal-create-contract').on('hide.bs.modal', e => {
+    $('.decision-form')[0].reset();
+    $('.message-error').remove();
+  })
+
   // Nếu người dùng chọn Hợp đồng không xác định thời hạn thì ẩn form Ngày hết hiệu lực
   $('.contract-form select[name="contract_type_id"]').on('change', function () {
     let value = $(this).children("option:selected").val();
@@ -42,6 +48,7 @@ $(document).ready(() => {
             toastr.success(response.flash_message);
             reloadData();
           } else {
+            $('.message-error').remove();
             showErrorMessage(response.errors);
           }
         }
@@ -70,6 +77,7 @@ $(document).ready(() => {
           toastr.success(response.flash_message);
           reloadData()
         } else {
+          $('.message-error').remove();
           showErrorMessage(response.errors);
         }
       }
