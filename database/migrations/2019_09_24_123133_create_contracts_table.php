@@ -9,7 +9,7 @@ class CreateContractsTable extends Migration
   public function up()
   {
     Schema::create('contracts', function (Blueprint $table) {
-      $table->increments('id')->autoIncrement();
+      $table->increments('id');
       $table->unsignedInteger('contract_type_id');
       $table->unsignedInteger('worker_id');
       $table->unsignedInteger('user_id');

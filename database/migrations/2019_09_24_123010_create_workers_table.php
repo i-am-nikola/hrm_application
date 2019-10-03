@@ -9,7 +9,7 @@ class CreateWorkersTable extends Migration
   public function up()
   {
     Schema::create('workers', function (Blueprint $table) {
-      $table->increments('id')->autoIncrement();
+      $table->increments('id');
       $table->unsignedInteger('user_id')->default(1);
       $table->unsignedInteger('department_id')->default(1);
       $table->unsignedInteger('education_id')->default(1);
@@ -37,6 +37,8 @@ class CreateWorkersTable extends Migration
       $table->foreign('department_id')->references('id')->on('departments');
       $table->foreign('education_id')->references('id')->on('educations');
     });
+    $statement = "ALTER TABLE workers AUTO_INCREMENT = 111111;";
+    DB::unprepared($statement);
   }
 
   public function down()
