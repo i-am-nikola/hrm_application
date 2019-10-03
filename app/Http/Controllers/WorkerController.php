@@ -38,7 +38,7 @@ class WorkerController extends Controller
   {
     $worker = Worker::findOrFail($id);
     $records = Record::all();
-    return view('admin.workers.show', compact('worker', 'records', 'contractTypes'));
+    return view('admin.workers.show', compact('worker', 'records'));
   }
 
   public function edit($id)
