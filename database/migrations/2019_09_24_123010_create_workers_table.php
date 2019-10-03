@@ -9,7 +9,7 @@ class CreateWorkersTable extends Migration
   public function up()
   {
     Schema::create('workers', function (Blueprint $table) {
-      $table->increments('id');
+      $table->increments('id')->autoIncrement();
       $table->unsignedInteger('user_id')->default(1);
       $table->unsignedInteger('department_id')->default(1);
       $table->unsignedInteger('education_id')->default(1);

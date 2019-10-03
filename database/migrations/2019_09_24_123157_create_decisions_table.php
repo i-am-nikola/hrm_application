@@ -9,7 +9,7 @@ class CreateDecisionsTable extends Migration
   public function up()
   {
     Schema::create('decisions', function (Blueprint $table) {
-      $table->increments('id');
+      $table->increments('id')->autoIncrement();
       $table->unsignedInteger('decision_type_id');
       $table->unsignedInteger('worker_id');
       $table->unsignedInteger('user_id');
