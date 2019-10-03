@@ -85,7 +85,6 @@ class ContractController extends Controller
   // reload after request ajax (post, update) success
   public function reloadData($id)
   {
-    // $worker = Worker::findOrFail($id);
     $contracts = Contract::where('worker_id', $id)->orderBy('id', 'desc')->get();
     return view('admin.contracts.reload', compact('contracts'));
   }
