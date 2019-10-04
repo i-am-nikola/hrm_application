@@ -37,7 +37,6 @@ class CreateWorkersTable extends Migration
       $table->foreign('department_id')->references('id')->on('departments');
       $table->foreign('education_id')->references('id')->on('educations');
     });
-    DB::update("ALTER TABLE users AUTO_INCREMENT = 1000;");
   }
 
   public function down()

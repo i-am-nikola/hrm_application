@@ -88,6 +88,14 @@
       "error": "Có lỗi xảy ra! Xin vui lòng thử lại"
     }
   },
+  "permission": {
+    "title": "Phân quyền người dùng",
+    "name": "Tên quyền",
+    "message": {
+      "create": "Bạn vừa thêm quyền :permission cho :role",
+      "delete": "Bạn vừa hủy bỏ quyền :permission cho :role"
+    }
+  },
   "login": {
     "email": "Địa chỉ email",
     "password": "Mật khẩu",

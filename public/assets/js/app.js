@@ -105,6 +105,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _contract__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_contract__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _decision__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./decision */ "./resources/js/decision.js");
 /* harmony import */ var _decision__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_decision__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _permission__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./permission */ "./resources/js/permission.js");
+/* harmony import */ var _permission__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_permission__WEBPACK_IMPORTED_MODULE_5__);
+
 
 
 
@@ -564,6 +567,38 @@ $(document).ready(function () {
       leavingDateElemt.parent('.form-group').css('display', 'none');
     }
   }
+});
+
+/***/ }),
+
+/***/ "./resources/js/permission.js":
+/*!************************************!*\
+  !*** ./resources/js/permission.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $('.js-switch-role-permisison input').on('change', function (e) {
+    var role_id = $(e.target).val();
+    var checked = $(e.target).prop('checked');
+    var url = $(e.target).data('url');
+    $.ajax({
+      type: 'POST',
+      url: url,
+      data: {
+        role_id: role_id,
+        checked: checked
+      },
+      dataType: 'json',
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
+      },
+      success: function success(response) {
+        toastr.success(response.flash_message);
+      }
+    });
+  });
 });
 
 /***/ }),

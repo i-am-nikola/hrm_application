@@ -31,6 +31,22 @@ Route::group(['prefix' => 'admin', 'middleware' => 'guest'], function () {
   // users
   Route::resource('users', 'UserController');
 
+  // roles
+  Route::group(['prefix' => 'roles', 'as' => 'roles.'], function () {
+    Route::get('/', 'RoleController@index')->name('index');
+    Route::get('/create', 'RoleController@create')->name('create');
+    Route::post('/', 'RoleController@store')->name('store');
+    Route::get('/{id}/edit', 'RoleController@edit')->name('edit');
+    Route::put('/{id}', 'RoleController@update')->name('update');
+    Route::delete('/{id}', 'RoleController@destroy')->name('destroy');
+  });
+
+  // permission
+  Route::group(['prefix' => 'permissions', 'as' => 'permissions.'], function () {
+    Route::get('/', 'PermissionController@index')->name('index');
+    Route::post('/{id}', 'PermissionController@saveRolePermission')->name('save');
+  });
+
   // workers
   Route::resource('workers', 'WorkerController');
 
