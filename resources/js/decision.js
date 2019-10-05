@@ -58,8 +58,7 @@ $(document).ready(() => {
   // delete single decision
   $(document).ready(() => {
     $('#modal-confirm-delete').on('show.bs.modal', e => {
-      var url = $(e.relatedTarget).data('url');
-
+      let url = $(e.relatedTarget).data('url');
       if (url.indexOf('decisions') > -1) {
         $('#confirm-delete').off('click').on('click', e => {
           $.ajax({

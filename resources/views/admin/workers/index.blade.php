@@ -21,6 +21,8 @@
                 <th>{{ t('worker.name') }}</th>
                 <th>{{ t('worker.phone') }}</th>
                 <th>{{ t('worker.staring_date') }}</th>
+                <th>{{ t('worker.department') }}</th>
+                <th>{{ t('worker.position') }}</th>
                 <th>{{ t('th.status') }}</th>
                 <th>{{ t('th.action') }}</th>
               </tr>

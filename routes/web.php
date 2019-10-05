@@ -24,7 +24,7 @@ Route::group(['prefix' => 'login'], function () {
   Route::post('/', 'LoginController@authenticate')->name('authenticate');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => 'guest'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['guest', 'active-user']], function () {
   // dashboard
   Route::get('/', 'DashboardController@index')->name('dashboard');
 
@@ -45,6 +45,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'guest'], function () {
   Route::group(['prefix' => 'permissions', 'as' => 'permissions.'], function () {
     Route::get('/', 'PermissionController@index')->name('index');
     Route::post('/{id}', 'PermissionController@saveRolePermission')->name('save');
+  });
+
+  // departments
+  Route::group(['prefix' => 'departments', 'as' => 'departments.'], function () {
+    Route::get('/', 'DepartmentController@index')->name('index');
+    Route::get('/create', 'DepartmentController@create')->name('create');
+    Route::post('/', 'DepartmentController@store')->name('store');
+    Route::get('/{id}/edit', 'DepartmentController@edit')->name('edit');
+    Route::put('/{id}', 'DepartmentController@update')->name('update');
+    Route::delete('/{id}', 'DepartmentController@destroy')->name('destroy');
   });
 
   // workers

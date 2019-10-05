@@ -5,6 +5,7 @@ use App\Models\DecisionType;
 use Carbon\Carbon;
 use App\Models\Department;
 use App\Models\Education;
+use App\Models\User;
 
 function formatDateToYmd($dateValue)
 {
@@ -40,7 +41,6 @@ function getListDepartments()
     ->pluck('name', 'id')
     ->prepend(t('department.default'), null);
   return $departments;
-
 }
 
 function getListEducations()
@@ -49,4 +49,13 @@ function getListEducations()
     ->pluck('name', 'id')
     ->prepend(t('education.default'), null);
   return !empty($educations) ? $educations : [];
+}
+
+function countUsersByRole($roleId)
+{
+  $count = 0;
+  if (isset($roleId) && $roleId > 0) {
+    $count =  User::where('role_id', $roleId)->count();
+  }
+  return $count;
 }

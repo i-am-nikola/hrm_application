@@ -29,7 +29,7 @@
           </div>
           <div class="card-body">
             <div class="tab-content">
-              <div class="tab-pane" id="identity">
+              <div class="active tab-pane" id="identity">
                 @include('admin.workers._show_identity')
               </div>
               <div class="tab-pane" id="education">
@@ -38,7 +38,7 @@
               <div class="tab-pane" id="record">
                 @include('admin.workers._show_record')
               </div>
-              <div class="active tab-pane" id="contract" data-url={{ route('contracts.reload', isset($worker) ? $worker->id : '') }}>
+              <div class="tab-pane" id="contract" data-url={{ route('contracts.reload', isset($worker) ? $worker->id : '') }}>
                 @include('admin.workers._show_contract')
               </div>
               <div class="tab-pane" id="decision" data-url={{ route('decisions.reload', isset($worker) ? $worker->id : '') }}>

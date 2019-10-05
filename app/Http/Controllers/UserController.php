@@ -31,7 +31,7 @@ class UserController extends Controller
     $input = $user->getInputUser($request, $password);
 
     if ($user->create($input)) {
-      $this->sendInfoLoginToEmail($request, $password);
+      // $this->sendInfoLoginToEmail($request, $password);
       return redirect()->route('users.index')
         ->with(['flash_level' => 'success', 'flash_message' => t('user.message.create')]);
     } else {
@@ -85,11 +85,11 @@ class UserController extends Controller
   public function destroy(Request $request, $id)
   {
     if ($request->ajax()) {
-      $user = User::find($id);
+      $user = User::findOrFail($id);
       if ($user->delete()) {
-        return response(['id' => $id, 'flash_message' => t('user.message.delete')]);
+        return response()->json(['id' => $id, 'flash_message' => t('user.message.delete')]);
       } else {
-        return response(['flash_message' => t('Bạn không thể xóa đối tượng này')]);
+        return response()->json(['flash_message' => t('role.message.no_delete')]);
       }
     }
   }

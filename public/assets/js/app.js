@@ -107,6 +107,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _decision__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_decision__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _permission__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./permission */ "./resources/js/permission.js");
 /* harmony import */ var _permission__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_permission__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _role__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./role */ "./resources/js/role.js");
+/* harmony import */ var _role__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_role__WEBPACK_IMPORTED_MODULE_6__);
+
 
 
 
@@ -159,6 +162,34 @@ $(document).ready(function () {
   });
   $('.reservation').on('cancel.daterangepicker', function (ev, picker) {
     $(this).val('');
+  });
+}); // convert name to slug
+
+$(document).ready(function () {
+  function convertSlug(element) {
+    var slug = element.toLowerCase();
+    slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+    slug = slug.replace(/đ/gi, 'd');
+    slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+    slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+    slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+    slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+    slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+    slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+    slug = slug.replace(/ /gi, '-');
+    slug = slug.replace(/\-\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-/gi, '-');
+    slug = '@' + slug + '@';
+    slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+    return slug;
+  }
+
+  ;
+  $('.role-form input[name="name"]').on('keyup', function (e) {
+    var element = $(e.target).val();
+    $('input[name="slug"]').val(convertSlug(element));
   });
 });
 
@@ -283,7 +314,7 @@ $(document).ready(function () {
     var url = $(e.relatedTarget).data('url');
 
     if (url.indexOf('contracts') > -1) {
-      $('#confirm-delete').off('click').on('click', function (e) {
+      $('#confirm-delete').one('click', function (e) {
         $.ajax({
           type: 'DELETE',
           url: url,
@@ -603,6 +634,38 @@ $(document).ready(function () {
 
 /***/ }),
 
+/***/ "./resources/js/role.js":
+/*!******************************!*\
+  !*** ./resources/js/role.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// delete single role
+$(document).ready(function () {
+  $('#modal-confirm-delete').on('show.bs.modal', function (e) {
+    var url = $(e.relatedTarget).data('url');
+    $('#confirm-delete').one('click', function () {
+      if (url.indexOf('roles') > -1) {
+        $.ajax({
+          type: 'DELETE',
+          url: url,
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
+          },
+          success: function success(data) {
+            $('button[data-id=' + data.id + ']').parents('tr').fadeOut();
+            $('#modal-confirm-delete').modal('hide');
+            toastr.success(data.flash_message);
+          }
+        });
+      }
+    });
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/js/user.js":
 /*!******************************!*\
   !*** ./resources/js/user.js ***!
@@ -614,8 +677,8 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('#modal-confirm-delete').on('show.bs.modal', function (e) {
     var url = $(e.relatedTarget).data('url');
-    $('#confirm-delete').on('click', function () {
-      if (window.location.href.indexOf('users') > -1) {
+    $('#confirm-delete').one('click', function (e) {
+      if (url.indexOf('users') > -1) {
         $.ajax({
           type: 'DELETE',
           url: url,
@@ -648,7 +711,7 @@ $(document).ready(function () {
     var url = $(e.relatedTarget).data('url');
 
     if (url.indexOf('workers') > -1) {
-      $('#confirm-delete').on('click', function (e) {
+      $('#confirm-delete').one('click', function (e) {
         $.ajax({
           type: 'DELETE',
           url: url,

@@ -85,7 +85,22 @@
       "create": "Thêm mới người dùng thành công",
       "update": "Cập nhật người dùng thành công",
       "delete": "Xóa người dùng thành công",
-      "error": "Có lỗi xảy ra! Xin vui lòng thử lại"
+      "error": "Có lỗi xảy ra! Xin vui lòng thử lại",
+      "no_delete": "Bạn không thể xóa đối tượng này"
+    }
+  },
+  "role": {
+    "list": "Danh sách vai trò người dùng",
+    "name": "Vai trò người dùng",
+    "count": "Số lượng người dùng",
+    "create": "Thêm mới vai trò người dùng",
+    "update": "Cập nhật vai trò người dùng",
+    "message": {
+      "create": "Thêm mới vai trò người dùng thành công",
+      "update": "Cập nhật vai trò người dùng thành công",
+      "delete": "Xóa vai trò người dùng thành công",
+      "error": "Có lỗi xảy ra! Xin vui lòng thử lại",
+      "no_delete": "Bạn không thể xóa đối tượng này"
     }
   },
   "permission": {
@@ -103,7 +118,8 @@
     "forgot_password": "Quên mật khẩu",
     "success": "Đăng nhập thành công",
     "error": "Địa chỉ email hoặc mật khẩu không đúng",
-    "warning": "Vui lòng đăng nhập trước khi truy cập vào hệ thống"
+    "warning": "Vui lòng đăng nhập trước khi truy cập vào hệ thống",
+    "inactive": "Tài khoản của bạn chưa được kích hoạt! Liện hệ người quản lý hệ thống để biết thêm chi tiết!"
   },
   "department": {
     "default": "--Chọn phòng ban--",

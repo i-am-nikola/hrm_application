@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder
         }
       }
       // role-permission seeder
-      $roles->permissons()->attach($permissions);
+      $roles->permissions()->attach($permissions);
       $role_id++;
     }
   }

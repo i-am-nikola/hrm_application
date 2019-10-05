@@ -1,9 +1,10 @@
-// delete single user
+
+// delete single role
 $(document).ready(() => {
   $('#modal-confirm-delete').on('show.bs.modal', e => {
     let url = $(e.relatedTarget).data('url');
-    $('#confirm-delete').one('click', e => {
-      if (url.indexOf('users') > -1) {
+    $('#confirm-delete').one('click', () => {
+      if (url.indexOf('roles') > -1) {
         $.ajax({
           type: 'DELETE',
           url: url,
@@ -20,4 +21,3 @@ $(document).ready(() => {
     })
   });
 });
-

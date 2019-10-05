@@ -15,9 +15,11 @@ $class = $worker->status ? 'success' : 'warning';
   <td>{{ $worker->name }}</td>
   <td>{{ $worker->phone }}</td>
   <td>{{ $worker->staring_date !== null ? $worker->staring_date->format('d/m/Y') : '' }}</td>
-  <th class="text-center">
+  <td>{{ $worker->department->name }}</td>
+  <td>{{ $worker->position }}</td>
+  <td class="text-center">
     <span class="badge badge-{{ $class }}">{{ $status }}</span>
-  </th>
+  </td>
   <td class="text-center">
     <a class="btn btn-info btn-sm" href={{ route('workers.show', $worker->id) }}><i class="fas fa-eye"></i></a>
     <a class="btn btn-warning btn-sm" href={{ route('workers.edit', $worker->id) }}>

@@ -24,7 +24,7 @@ $(document).ready(() => {
     }
   })
 
-  // Request input contract to ContractController@store using ajax
+  // create decision
   $('#modal-create-contract').on('show.bs.modal', e => {
     $('#js-contract-form')[0].reset();
     let url = $(e.relatedTarget).data('url');
@@ -56,7 +56,7 @@ $(document).ready(() => {
     })
   })
 
-  // Request input contract to ContractController@update using ajax
+  // update dicision
   $('#js-contract-update').on('submit', e => {
     e.preventDefault();
     let url = $(event.target).attr('action');
@@ -112,9 +112,9 @@ $(document).ready(() => {
 // delete single contract
 $(document).ready(() => {
   $('#modal-confirm-delete').on('show.bs.modal', e => {
-    var url = $(e.relatedTarget).data('url');
+    let url = $(e.relatedTarget).data('url');
     if (url.indexOf('contracts') > -1) {
-      $('#confirm-delete').off('click').on('click', e => {
+      $('#confirm-delete').one('click', e => {
         $.ajax({
           type: 'DELETE',
           url: url,

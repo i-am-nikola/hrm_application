@@ -12,11 +12,10 @@ $name = (Auth::user()) ? Auth::user()->name : '';
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>HRM</title>
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700">
   <link rel="stylesheet" href="{{ mix('assets/css/vendor.css') }}">
   <link rel="stylesheet" href="{{ mix('assets/css/app.css') }}">
-  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script src="{{ mix('assets/js/vendor.js') }}"></script>
   <script src="{{ mix('assets/js/app.js') }}"></script>
 </head>
@@ -33,8 +32,6 @@ $name = (Auth::user()) ? Auth::user()->name : '';
       @yield('content')
 
     </div>
-
-    <aside class="control-sidebar control-sidebar-dark"></aside>
 
     @include('admin.layouts.footer')
   </div>

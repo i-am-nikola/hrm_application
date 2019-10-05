@@ -3,7 +3,7 @@ $(document).ready(() => {
   $('#modal-confirm-delete').on('show.bs.modal', e => {
     var url = $(e.relatedTarget).data('url');
     if (url.indexOf('workers') > -1) {
-      $('#confirm-delete').on('click', e => {
+      $('#confirm-delete').one('click', e => {
         $.ajax({
           type: 'DELETE',
           url: url,
