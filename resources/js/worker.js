@@ -11,9 +11,13 @@ $(document).ready(() => {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
           },
           success: data => {
-            $('button[data-id=' + data.id + ']').parents('tr').fadeOut();
             $('#modal-confirm-delete').modal('hide');
-            toastr.success(data.flash_message);
+            if (data.status === 'success') {
+              $('button[data-id=' + data.id + ']').parents('tr').fadeOut();
+              toastr.success(data.flash_message);
+            } else {
+              toastr.warning(data.flash_message);
+            }
           },
         });
       })

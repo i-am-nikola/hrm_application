@@ -3,33 +3,31 @@
 return [
   'roles_structure' => [
     'superadministrator' => [
-      'users' => 'c,r,u,d',
+      'user' => 'c,r,u,d',
       'dashboard' => 'r',
-      'workers' => 'c,r,u,d',
-      'contracts' => 'c,r,u,d',
-      'decisions' => 'c,r,u,d',
-      'departments' => 'c,r,u,d',
-      'roles' => 'c,r,u,d',
-      'profile' => 'r,u'
+      'worker' => 'c,r,u,d',
+      'contract' => 'c,r,u,d',
+      'decision' => 'c,r,u,d',
+      'department' => 'c,r,u,d',
+      'role' => 'c,r,u,d',
+      'permission' => 'r,u'
     ],
     'administrator' => [
       'dashboard' => 'r',
-      'workers' => 'c,r,u',
-      'contracts' => 'c,r,u,d',
-      'decisions' => 'c,r,u,d',
-      'departments' => 'c,r,u,d',
-      'profile' => 'r,u'
+      'worker' => 'c,r,u,d',
+      'contract' => 'c,r,u,d',
+      'decision' => 'c,r,u,d',
+      'department' => 'c,r,u,d',
     ],
     'user' => [
       'dashboard' => 'r',
-      'workers' => 'r',
-      'contracts' => 'r',
-      'decisions' => 'r',
-      'departments' => 'r',
-      'profile' => 'r,u'
+      'worker' => 'r',
+      'contract' => 'r',
+      'decision' => 'r',
+      'department' => 'r',
     ]
   ],
-  
+
   'permission_map' => [
     'c' => 'create',
     'r' => 'read',

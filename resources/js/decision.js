@@ -15,13 +15,14 @@ $(document).ready(() => {
       success: function (response) {
         if (response.status === 'success') {
           $('#modal-create-decision').modal('hide');
-          $('#js-decision-create')[0].reset();
-          $('.message-error').remove();
           toastr.success(response.flash_message);
           reloadDecisionData();
-        } else {
+        } else if (response.status === 'error') {
           $('.message-error').remove();
           showErrorMessage(response.errors);
+        } else {
+          toastr.warning(response.flash_message);
+          $('#modal-create-decision').modal('hide');
         }
       }
     });
@@ -43,13 +44,14 @@ $(document).ready(() => {
       success: function (response) {
         if (response.status === 'success') {
           $('#modal-edit-decision').modal('hide');
-          $('#js-decision-update')[0].reset();
-          $('.message-error').remove();
           toastr.success(response.flash_message);
           reloadDecisionData();
-        } else {
+        } else if (response.status === 'error') {
           $('.message-error').remove();
           showErrorMessage(response.errors);
+        } else {
+          $('#modal-edit-decision').modal('hide');
+          toastr.warning(response.flash_message);
         }
       }
     });
@@ -69,8 +71,12 @@ $(document).ready(() => {
             },
             success: data => {
               $('#modal-confirm-delete').modal('hide');
-              toastr.success(data.flash_message);
-              reloadDecisionData();
+              if (data.status === 'success') {
+                toastr.success(data.flash_message);
+                reloadDecisionData();
+              } else {
+                toastr.warning(data.flash_message);
+              }
             },
           });
         })
@@ -118,7 +124,8 @@ $(document).ready(() => {
 
   // reset when form is closed
   $('#modal-edit-decision, #modal-create-decision').on('hide.bs.modal', e => {
-    $('.decision-form')[0].reset();
+    $('#js-decision-create')[0].reset();
+    $('#js-decision-update')[0].reset();
     $('.message-error').remove();
   })
 

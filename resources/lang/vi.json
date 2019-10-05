@@ -10,13 +10,14 @@
     "read": "Xem",
     "update": "Chỉnh sửa",
     "delete": "Xóa",
-    "users": "người dùng",
+    "user": "người dùng",
     "dashboard": "bảng điều khiển",
-    "workers": "người lao động",
-    "contracts": "hợp đồng lao động",
-    "decisions": "quyết định",
-    "departments": "phòng ban",
-    "roles": "quyền người dùng",
+    "worker": "người lao động",
+    "contract": "hợp đồng lao động",
+    "decision": "quyết định",
+    "department": "phòng ban",
+    "role": "vai trò người dùng",
+    "permission": "quyền người dùng",
     "profile": "thông tin cá nhân"
   },
   "action": {
@@ -108,7 +109,8 @@
     "name": "Tên quyền",
     "message": {
       "create": "Bạn vừa thêm quyền :permission cho :role",
-      "delete": "Bạn vừa hủy bỏ quyền :permission cho :role"
+      "delete": "Bạn vừa hủy bỏ quyền :permission cho :role",
+      "no_permission": "Tài khoản của bạn không được quyền truy cập chức năng này!"
     }
   },
   "login": {
@@ -226,5 +228,15 @@
   },
   "education": {
     "default": "--Chọn trình độ--"
+  },
+  "401": {
+    "header": "Bạn không có quyền truy cập vào trang này!",
+    "body": "Liên hệ người quản trị ứng dụng để biết thêm chi tiết!",
+    "footer": "Quay về "
+  },
+  "404": {
+    "header": "Không tìm thấy trang!",
+    "body": "Bạn có thể nhập sai đường dẫn hoặc trang đã được thay đổi!",
+    "footer": "Quay về "
   }
 }

@@ -21,7 +21,7 @@ class ContractController extends Controller
 
     if ($request->ajax()) {
       if ($validator->fails()) {
-        return response()->json(['status' => 'fails', 'errors' => $validator->errors()]);
+        return response()->json(['status' => 'error', 'errors' => $validator->errors()]);
       } else {
         $contract = new Contract;
         $input = $contract->getInputContract($request);
@@ -61,7 +61,7 @@ class ContractController extends Controller
 
     if ($request->ajax()) {
       if ($validator->fails()) {
-        return response()->json(['status' => 'fails', 'errors' => $validator->errors()]);
+        return response()->json(['status' => 'error', 'errors' => $validator->errors()]);
       } else {
         $contract = Contract::findOrFail($request->id);
         $input = $contract->getInputContract($request);
@@ -77,8 +77,9 @@ class ContractController extends Controller
   {
     $contract = Contract::findOrFail($id);
     if ($request->ajax()) {
-      $contract->delete();
-      return response(['id' => $id, 'flash_message' => t('contract.message.delete')]);
+      if ($contract->delete()) {
+        return response(['id' => $id, 'status' => 'success', 'flash_message' => t('contract.message.delete')]);
+      }
     }
   }
 

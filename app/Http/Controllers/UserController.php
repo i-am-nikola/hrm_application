@@ -87,9 +87,9 @@ class UserController extends Controller
     if ($request->ajax()) {
       $user = User::findOrFail($id);
       if ($user->delete()) {
-        return response()->json(['id' => $id, 'flash_message' => t('user.message.delete')]);
+        return response()->json(['id' => $id, 'status' => 'success', 'flash_message' => t('user.message.delete')]);
       } else {
-        return response()->json(['flash_message' => t('role.message.no_delete')]);
+        return response()->json(['success' => 'fails', 'flash_message' => t('role.message.no_delete')]);
       }
     }
   }

@@ -210,8 +210,9 @@ $(document).ready(function () {
     ordering: false
   }); // reset when close from
 
-  $('#modal-edit-contract, #modal-create-contract').on('hide.bs.modal', function (e) {
-    $('.decision-form')[0].reset();
+  $('#modal-edit-contract, #modal-create-contract').on('hide.bs.modal', function () {
+    $('#js-contract-form')[0].reset();
+    $('#js-contract-update')[0].reset();
     $('.message-error').remove();
   }); // Nếu người dùng chọn Hợp đồng không xác định thời hạn thì ẩn form Ngày hết hiệu lực
 
@@ -224,7 +225,7 @@ $(document).ready(function () {
     } else {
       $('.contract-form input[name="expiry_date"]').parent('.form-group').removeAttr('style');
     }
-  }); // Request input contract to ContractController@store using ajax
+  }); // create decision
 
   $('#modal-create-contract').on('show.bs.modal', function (e) {
     $('#js-contract-form')[0].reset();
@@ -242,20 +243,25 @@ $(document).ready(function () {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
         },
         success: function success(response) {
+          console.log(response);
+
           if (response.status === 'success') {
             $('#modal-create-contract').modal('hide');
             $('#js-contract-form')[0].reset();
             $('.message-error').remove();
             toastr.success(response.flash_message);
             reloadData();
-          } else {
+          } else if (response.status === 'error') {
             $('.message-error').remove();
             showErrorMessage(response.errors);
+          } else {
+            $('#modal-create-contract').modal('hide');
+            toastr.warning(response.flash_message);
           }
         }
       });
     });
-  }); // Request input contract to ContractController@update using ajax
+  }); // update dicision
 
   $('#js-contract-update').on('submit', function (e) {
     e.preventDefault();
@@ -276,9 +282,12 @@ $(document).ready(function () {
           $('.message-error').remove();
           toastr.success(response.flash_message);
           reloadData();
-        } else {
+        } else if (response.status === 'error') {
           $('.message-error').remove();
           showErrorMessage(response.errors);
+        } else {
+          $('#modal-edit-contract').modal('hide');
+          toastr.warning(response.flash_message);
         }
       }
     });
@@ -322,9 +331,14 @@ $(document).ready(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
           },
           success: function success(data) {
-            $('button[data-id=' + data.id + ']').parents('tr').remove();
             $('#modal-confirm-delete').modal('hide');
-            toastr.success(data.flash_message);
+
+            if (data.status === 'success') {
+              $('button[data-id=' + data.id + ']').parents('tr').remove();
+              toastr.success(data.flash_message);
+            } else {
+              toastr.warning(data.flash_message);
+            }
           }
         });
       });
@@ -376,13 +390,14 @@ $(document).ready(function () {
       success: function success(response) {
         if (response.status === 'success') {
           $('#modal-create-decision').modal('hide');
-          $('#js-decision-create')[0].reset();
-          $('.message-error').remove();
           toastr.success(response.flash_message);
           reloadDecisionData();
-        } else {
+        } else if (response.status === 'error') {
           $('.message-error').remove();
           showErrorMessage(response.errors);
+        } else {
+          toastr.warning(response.flash_message);
+          $('#modal-create-decision').modal('hide');
         }
       }
     });
@@ -403,13 +418,14 @@ $(document).ready(function () {
       success: function success(response) {
         if (response.status === 'success') {
           $('#modal-edit-decision').modal('hide');
-          $('#js-decision-update')[0].reset();
-          $('.message-error').remove();
           toastr.success(response.flash_message);
           reloadDecisionData();
-        } else {
+        } else if (response.status === 'error') {
           $('.message-error').remove();
           showErrorMessage(response.errors);
+        } else {
+          $('#modal-edit-decision').modal('hide');
+          toastr.warning(response.flash_message);
         }
       }
     });
@@ -429,8 +445,13 @@ $(document).ready(function () {
             },
             success: function success(data) {
               $('#modal-confirm-delete').modal('hide');
-              toastr.success(data.flash_message);
-              reloadDecisionData();
+
+              if (data.status === 'success') {
+                toastr.success(data.flash_message);
+                reloadDecisionData();
+              } else {
+                toastr.warning(data.flash_message);
+              }
             }
           });
         });
@@ -477,7 +498,8 @@ $(document).ready(function () {
   var selectedValue = $('.decision-form select[name="decision_type_id"] option:selected').val(); // reset when form is closed
 
   $('#modal-edit-decision, #modal-create-decision').on('hide.bs.modal', function (e) {
-    $('.decision-form')[0].reset();
+    $('#js-decision-create')[0].reset();
+    $('#js-decision-update')[0].reset();
     $('.message-error').remove();
   }); // onChange decision type
 
@@ -686,9 +708,12 @@ $(document).ready(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
           },
           success: function success(data) {
-            $('button[data-id=' + data.id + ']').parents('tr').fadeOut();
             $('#modal-confirm-delete').modal('hide');
-            toastr.success(data.flash_message);
+
+            if (data.status === 'success') {
+              $('button[data-id=' + data.id + ']').parents('tr').fadeOut();
+              toastr.success(data.flash_message);
+            }
           }
         });
       }
@@ -719,9 +744,14 @@ $(document).ready(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
           },
           success: function success(data) {
-            $('button[data-id=' + data.id + ']').parents('tr').fadeOut();
             $('#modal-confirm-delete').modal('hide');
-            toastr.success(data.flash_message);
+
+            if (data.status === 'success') {
+              $('button[data-id=' + data.id + ']').parents('tr').fadeOut();
+              toastr.success(data.flash_message);
+            } else {
+              toastr.warning(data.flash_message);
+            }
           }
         });
       });

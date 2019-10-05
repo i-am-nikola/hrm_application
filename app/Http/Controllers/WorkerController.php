@@ -73,8 +73,9 @@ class WorkerController extends Controller
   {
     if ($request->ajax()) {
       $worker = Worker::findOrFail($id);
-      $worker->delete();
-      return response(['id' => $id, 'flash_message' => t('worker.message.delete')]);
+      if ($worker->delete()) {
+        return response(['id' => $id, 'status' => 'success', 'flash_message' => t('worker.message.delete')]);
+      }
     }
   }
 }

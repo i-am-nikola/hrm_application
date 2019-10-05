@@ -34,7 +34,7 @@ class DecisionController extends Controller
 
     if ($request->ajax()) {
       if ($validator->fails()) {
-        return response()->json(['status' => 'fails', 'errors' => $validator->errors()]);
+        return response()->json(['status' => 'error', 'errors' => $validator->errors()]);
       } else {
         $decisions = new Decision;
         $input = $decisions->getInputDecision($request);
@@ -80,7 +80,7 @@ class DecisionController extends Controller
 
     if ($request->ajax()) {
       if ($validator->fails()) {
-        return response()->json(['status' => 'fails', 'errors' => $validator->errors()]);
+        return response()->json(['status' => 'error', 'errors' => $validator->errors()]);
       } else {
         $decision = Decision::findOrFail($request->id);
         $input = $decision->getInputDecision($request);
@@ -95,8 +95,9 @@ class DecisionController extends Controller
   {
     $decision = Decision::findOrFail($id);
     if ($request->ajax()) {
-      $decision->delete();
-      return response(['id' => $id, 'flash_message' => t('decision.message.delete')]);
+      if ($decision->delete()) {
+        return response(['id' => $id, 'status' => 'success', 'flash_message' => t('decision.message.delete')]);
+      }
     }
   }
 }
