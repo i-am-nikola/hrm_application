@@ -6,6 +6,7 @@ use App\Models\Contract;
 use App\Models\ContractType;
 use App\Models\Decision;
 use App\Models\DecisionType;
+use App\Models\Department;
 use App\Models\Worker;
 use Illuminate\Http\Request;
 
@@ -29,13 +30,49 @@ class DashboardController extends Controller
     $countLeaving   = $this->countWorkersLeavingByMonth($year);
     $countContracts = $this->countContracts($month, $year);
     $countDecisions = $this->countDecisions($month, $year);
+    $departments = Department::all()->pluck('name');
+    $countWorkerStaringByDepartments = $this->countWorkerStaringByDepartment($month, $year);
+    $countWorkerLeavingByDepartments = $this->countWorkerLeavingByDepartment($month, $year);
 
     return response()->json([
       'countStaring'   => $countStaring,
       'countLeaving'   => $countLeaving,
       'countContracts' => $countContracts,
-      'countDecisions' => $countDecisions
+      'countDecisions' => $countDecisions,
+      'departments'    => $departments,
+      'countWorkerStaringByDepartments' =>  $countWorkerStaringByDepartments,
+      'countWorkerLeavingByDepartments' =>  $countWorkerLeavingByDepartments
     ]);
+  }
+
+  private function countWorkerLeavingByDepartment($month, $year)
+  {
+    $departments = Department::all();
+    foreach ($departments as $department) {
+      if ($month) {
+        $count[] = Worker::where('department_id', $department->id)
+          ->whereMonth('leaving_date', $month)->whereYear('leaving_date', $year)->count();
+      } else {
+        $count[] = Worker::where('department_id', $department->id)
+          ->whereYear('leaving_date', $year)->count();
+      }
+    }
+    return $count;
+  }
+
+  private function countWorkerStaringByDepartment($month, $year)
+  {
+    $departments = Department::all();
+    foreach ($departments as $department) {
+      if ($month) {
+        $count[] = Worker::where('department_id', $department->id)
+          ->whereMonth('staring_date', $month)->whereYear('staring_date', $year)->count();
+      } else {
+        $count[] = Worker::where('department_id', $department->id)
+          ->whereYear('staring_date', $year)->count();
+      }
+    }
+    return $count;
   }
 
   private function countDecisions($month, $year)

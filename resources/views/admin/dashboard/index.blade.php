@@ -11,7 +11,7 @@
       </div>
     </div>
     @include('admin.dashboard._count')
-    <div id="dashboard-reload" data-url={{ route('dashboard.reload') }}>
+    <div id="dashboard-reload">
       <div class="row">
         <div class="col-md-12">
           <div class="card">
@@ -35,7 +35,7 @@
                   <canvas id="js-time-chart" style="height:230px; min-height:230px"></canvas>
                 </div>
                 <div class="chart tab-pane" id="department-chart" style="position: relative; height: 300px;">
-                  <canvas id="js-department-chart" height="300" style="height: 300px;"></canvas>
+                  <canvas id="js-department-chart" height="230" style="height: 230px;"></canvas>
                 </div>
               </div>
             </div>
@@ -46,7 +46,7 @@
         <div class="col-6">
           <div class="card card-info">
             <div class="card-header">
-              <h3 class="card-title">{{ t('contract.total') }}</h3>
+              <h3 class="card-title">{{ t('dashboard.contracts.statistical') }}</h3>
             </div>
             <div class="card-body">
               <table class="table table-bordered table-striped" id="dashboard-contract">
@@ -54,7 +54,7 @@
                   <tr>
                     <th class="text-center">{{ t('th.index') }}</th>
                     <th class="text-center">{{ t('contract.type') }}</th>
-                    <th class="text-center">{{ t('contract.quantity') }}</th>
+                    <th class="text-center">{{ t('dashboard.contracts.quantity') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -75,7 +75,7 @@
         <div class="col-6">
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">{{ t('decision.total') }}</h3>
+              <h3 class="card-title">{{ t('dashboard.decisions.statistical') }}</h3>
             </div>
             <div class="card-body">
               <table class="table table-bordered table-striped">
@@ -83,7 +83,7 @@
                   <tr>
                     <th class="text-center">{{ t('th.index') }}</th>
                     <th class="text-center">{{ t('decision.type') }}</th>
-                    <th class="text-center">{{ t('decision.quantity') }}</th>
+                    <th class="text-center">{{ t('dashboard.decisions.quantity') }}</th>
                   </tr>
                 </thead>
                 <tbody>

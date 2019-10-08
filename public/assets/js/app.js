@@ -419,31 +419,19 @@ $(document).ready(function () {
     var url = $(e.target).data('url');
     var month = $(e.target).val();
     var year = $('.year-control').val();
-    $.ajax({
-      type: "GET",
-      url: url,
-      data: {
-        month: month,
-        year: year
-      },
-      dataType: "json",
-      success: function success(response) {
-        var countContracts = response.countContracts;
-        var countDecisions = response.countDecisions;
-        $.each(countContracts, function (key, value) {
-          $('#contract_type_' + key).html(value);
-        });
-        $.each(countDecisions, function (key, value) {
-          $('#decision_type_' + key).html(value);
-        });
-        timeChart(response.countStaring, response.countLeaving);
-      }
-    });
+    dashboardAjax(url, month, year);
   });
   $('.year-control').on('change', function (e) {
     var url = $(e.target).data('url');
     var year = $(e.target).val();
     var month = $('.month-control').val();
+    dashboardAjax(url, month, year);
+  });
+  var url = $('.year-control').data('url');
+  var year = new Date().getFullYear();
+  dashboardAjax(url, 0, year); // request to DashboardController@dashboard ajax
+
+  function dashboardAjax(url, month, year) {
     $.ajax({
       type: "GET",
       url: url,
@@ -453,18 +441,21 @@ $(document).ready(function () {
       },
       dataType: "json",
       success: function success(response) {
-        var countContracts = response.countContracts;
-        var countDecisions = response.countDecisions;
-        $.each(countContracts, function (key, value) {
+        $.each(response.countContracts, function (key, value) {
           $('#contract_type_' + key).html(value);
         });
-        $.each(countDecisions, function (key, value) {
+        $.each(response.countDecisions, function (key, value) {
           $('#decision_type_' + key).html(value);
         });
         timeChart(response.countStaring, response.countLeaving);
+        departmentChart(response.departments, response.countWorkerStaringByDepartments, response.countWorkerLeavingByDepartments);
       }
     });
-  });
+    $('#js-time-chart').remove();
+    $('#time-chart').append('<canvas id="js-time-chart" style="height:230px; min-height:230px"></canvas>');
+    $('#js-department-chart').remove();
+    $('#department-chart').append('<canvas id="js-department-chart" style="height:230px; min-height:230px"></canvas>');
+  }
 
   function timeChart(countStaring, countLeaving) {
     var month = new Array();
@@ -512,6 +503,49 @@ $(document).ready(function () {
       type: 'bar',
       data: timeChartData,
       options: timeChartOptions
+    });
+  }
+
+  function departmentChart(departments, countStaring, countLeaving) {
+    var departmentChartData = {
+      labels: departments,
+      datasets: [{
+        label: 'Tiếp nhận',
+        backgroundColor: 'rgba(60,141,188,0.9)',
+        borderColor: 'rgba(60,141,188,0.8)',
+        pointRadius: false,
+        pointColor: '#3b8bba',
+        pointStrokeColor: 'rgba(60,141,188,1)',
+        pointHighlightFill: '#fff',
+        pointHighlightStroke: 'rgba(60,141,188,1)',
+        data: countStaring
+      }, {
+        label: 'Thôi việc',
+        backgroundColor: 'rgba(210, 214, 222, 1)',
+        borderColor: 'rgba(210, 214, 222, 1)',
+        pointRadius: false,
+        pointColor: 'rgba(210, 214, 222, 1)',
+        pointStrokeColor: '#c1c7d1',
+        pointHighlightFill: '#fff',
+        pointHighlightStroke: 'rgba(220,220,220,1)',
+        data: countLeaving
+      }]
+    };
+    var departmentChartCanvas = $('#js-department-chart').get(0).getContext('2d');
+    var departmentChartData = jQuery.extend(true, {}, departmentChartData);
+    var temp0 = departmentChartData.datasets[0];
+    var temp1 = departmentChartData.datasets[1];
+    departmentChartData.datasets[0] = temp1;
+    departmentChartData.datasets[1] = temp0;
+    var departmentChartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      datasetFill: false
+    };
+    var departmentChart = new Chart(departmentChartCanvas, {
+      type: 'bar',
+      data: departmentChartData,
+      options: departmentChartOptions
     });
   }
 });

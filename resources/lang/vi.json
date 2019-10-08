@@ -257,12 +257,16 @@
     "contracts": {
       "count": "Tổng HĐLĐ",
       "count_signed": "Đã ký",
-      "count_unsigned": "Chưa ký"
+      "count_unsigned": "Chưa ký",
+      "quantity": "Số lượng hợp đồng",
+      "statistical": "Thống kê hợp đồng"
     },
     "decisions": {
       "count": "Tổng quyết định",
       "count_signed": "Đã ký",
-      "count_unsigned": "Chưa ký"
+      "count_unsigned": "Chưa ký",
+      "quantity": "Số lượng quyết định",
+      "statistical": "Thống kê quyết định"
     },
     "month": "Tháng",
     "year": "Năm",
