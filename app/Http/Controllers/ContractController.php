@@ -37,15 +37,15 @@ class ContractController extends Controller
   {
     $contract = Contract::findOrFail($id);
     return response()->json([
-      'id'                => $contract->id !== null ? $contract->id : 1,
-      'worker_id'         => $contract->worker_id !== null ? $contract->worker_id : 1,
-      'code'              => $contract->code !== null ? $contract->code : '',
-      'contract_type_id'  => $contract->contract_type_id !== null ? $contract->contract_type_id : 0,
-      'salary'            => $contract->salary !== null ? $contract->salary : '',
-      'status'            => $contract->status ? $contract->status : 1,
-      'effective_date'    => $contract->effective_date !== null ? $contract->effective_date->format('d/m/Y') : '',
-      'expiry_date'       => $contract->expiry_date !== null ? $contract->expiry_date->format('d/m/Y') : '',
-      'sign_date'         => $contract->sign_date !== null ? $contract->sign_date->format('d/m/Y') : '',
+      'id'                => $contract->id,
+      'worker_id'         => $contract->worker_id,
+      'code'              => $contract->code ? $contract->code : '',
+      'contract_type_id'  => $contract->contract_type_id,
+      'salary'            => $contract->salary ? $contract->salary : '',
+      'status'            => $contract->status,
+      'effective_date'    => $contract->effective_date ? $contract->effective_date->format('d/m/Y') : '',
+      'expiry_date'       => $contract->expiry_date ? $contract->expiry_date->format('d/m/Y') : '',
+      'sign_date'         => $contract->sign_date ? $contract->sign_date->format('d/m/Y') : '',
     ]);
   }
 

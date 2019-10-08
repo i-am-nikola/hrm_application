@@ -125,7 +125,6 @@ $(document).ready(() => {
   });
 
   // get data contracts ajax
-
   function reloadData() {
     let url = $('#contract').data('url');
     $.ajax({
@@ -160,6 +159,8 @@ $(document).ready(() => {
       url: url,
       dataType: "json",
       success: response => {
+        console.log(response);
+
         $.each(response, (key, value) => {
           $('#js-contract-update input[name="' + key + '"]').val(value);
           $('#js-contract-update select[name="' + key + '"]').val(value);

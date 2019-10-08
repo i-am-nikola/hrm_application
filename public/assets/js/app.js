@@ -382,6 +382,7 @@ $(document).ready(function () {
       url: url,
       dataType: "json",
       success: function success(response) {
+        console.log(response);
         $.each(response, function (key, value) {
           $('#js-contract-update input[name="' + key + '"]').val(value);
           $('#js-contract-update select[name="' + key + '"]').val(value);

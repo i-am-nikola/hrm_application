@@ -50,14 +50,14 @@ class DecisionController extends Controller
   {
     $decision = Decision::findOrFail($id);
     return response()->json([
-      'id'                => $decision->id ? $decision->id : 1,
-      'worker_id'         => $decision->worker_id ? $decision->worker_id : 1,
+      'id'                => $decision->id,
+      'worker_id'         => $decision->worker_id,
       'code'              => $decision->code ? $decision->code : '',
-      'decision_type_id'  => $decision->decision_type_id ? $decision->decision_type_id : 0,
+      'decision_type_id'  => $decision->decision_type_id,
       'reason'            => $decision->reason ? $decision->reason : '',
       'formality'         => $decision->formality ? $decision->formality : '',
-      'old_department'    => $decision->old_department ? $decision->old_department : 0,
-      'new_department'    => $decision->new_department ? $decision->new_department : 0,
+      'old_department'    => $decision->old_department !== null ? $decision->old_department : 0,
+      'new_department'    => $decision->new_department !== null ? $decision->new_department : 0,
       'old_position'      => $decision->old_position ? $decision->old_position : '',
       'new_position'      => $decision->new_position ? $decision->new_position : '',
       'old_salary'        => $decision->old_salary ? $decision->old_salary   : '',
@@ -65,7 +65,7 @@ class DecisionController extends Controller
       'effective_date'    => $decision->effective_date ? $decision->effective_date->format('d/m/Y') : '',
       'sign_date'         => $decision->sign_date ? $decision->sign_date->format('d/m/Y') : '',
       'leaving_date'      => $decision->leaving_date ? $decision->leaving_date->format('d/m/Y') : '',
-      'status'            => $decision->status ? $decision->status : 1
+      'status'            => $decision->status
     ]);
   }
 
