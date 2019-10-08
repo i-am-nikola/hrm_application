@@ -65,7 +65,7 @@ class DecisionController extends Controller
       'effective_date'    => $decision->effective_date ? $decision->effective_date->format('d/m/Y') : '',
       'sign_date'         => $decision->sign_date ? $decision->sign_date->format('d/m/Y') : '',
       'leaving_date'      => $decision->leaving_date ? $decision->leaving_date->format('d/m/Y') : '',
-      'status'            => $decision->status ? $decision->status : 0
+      'status'            => $decision->status ? $decision->status : 1
     ]);
   }
 
