@@ -42,7 +42,7 @@ class ContractController extends Controller
       'code'              => $contract->code ? $contract->code : '',
       'contract_type_id'  => $contract->contract_type_id,
       'salary'            => $contract->salary ? $contract->salary : '',
-      'status'            => $contract->status,
+      'status'            => $contract->status ? 1 : 0,
       'effective_date'    => $contract->effective_date ? $contract->effective_date->format('d/m/Y') : '',
       'expiry_date'       => $contract->expiry_date ? $contract->expiry_date->format('d/m/Y') : '',
       'sign_date'         => $contract->sign_date ? $contract->sign_date->format('d/m/Y') : '',
