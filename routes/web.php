@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\DashboardController;
+
 Route::get('/', function () {
   return redirect()->route('login');
 });
@@ -26,7 +28,10 @@ Route::group(['prefix' => 'login'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['guest', 'active-user']], function () {
   // dashboard
-  Route::get('/', 'DashboardController@index')->middleware('permission:read-dashboard')->name('dashboard');
+  Route::group(['prefix' => '/', 'as' => 'dashboard.'], function () {
+    Route::get('/', 'DashboardController@index')->middleware('permission:read-dashboard')->name('index');
+    Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
+  });
 
   // users
   Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
@@ -82,6 +87,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest', 'active-user']], fu
     Route::put('/update', 'ContractController@update')->middleware('permission:update-contract')->name('update');
     Route::delete('/{id}', 'ContractController@destroy')->middleware('permission:delete-contract')->name('destroy');
     Route::get('/reload/{id}', 'ContractController@reloadData')->middleware('permission:read-contract')->name('reload');;
+    Route::get('/document/{id}', 'ContractController@document')->middleware('permission:read-contract')->name('document');
   });
 
   //decision
@@ -92,5 +98,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest', 'active-user']], fu
     Route::put('/update', 'DecisionController@update')->middleware('permission:update-decision')->name('update');
     Route::delete('/{id}', 'DecisionController@destroy')->middleware('permission:delete-decision')->name('destroy');
     Route::get('/reload/{id}', 'DecisionController@reloadData')->middleware('permission:read-decision')->name('reload');;
+    Route::get('/document/{id}', 'DecisionController@document')->middleware('permission:read-decision')->name('document');
   });
 });

@@ -1,11 +1,14 @@
 <?php
 
+use App\Models\Contract;
 use App\Models\ContractType;
+use App\Models\Decision;
 use App\Models\DecisionType;
 use Carbon\Carbon;
 use App\Models\Department;
 use App\Models\Education;
 use App\Models\User;
+use App\Models\Worker;
 
 function formatDateToYmd($dateValue)
 {
@@ -58,4 +61,82 @@ function countUsersByRole($roleId)
     $count =  User::where('role_id', $roleId)->count();
   }
   return $count;
+}
+
+function countWorkers()
+{
+  return Worker::where('status', '<>', -1)->count();
+}
+
+function countOfficialWorkers()
+{
+  return Worker::where('status', 1)->count();
+}
+
+function countProbationaryWorkers()
+{
+  return Worker::where('status', 0)->count();
+}
+
+function countUsers()
+{
+  return User::count();
+}
+
+function countActiveUsers()
+{
+  return User::where('status', 1)->count();
+}
+
+function countInactiveUsers()
+{
+  return User::where('status', 0)->count();
+}
+
+function countContracts()
+{
+  return Contract::count();
+}
+
+function countSignedContracts()
+{
+  return Contract::where('status', 1)->count();
+}
+
+function countUnsignedContracts()
+{
+  return Contract::where('status', 0)->count();
+}
+
+function countDecisions()
+{
+  return Decision::count();
+}
+
+function countSignedDecisions()
+{
+  return Decision::where('status', 1)->count();
+}
+
+function countUnsignedDecisions()
+{
+  return Decision::where('status', 0)->count();
+}
+
+function months()
+{
+  $month[] = '-- ' . t('dashboard.month') . ' --';
+  for ($i = 1; $i <= 12; $i++) {
+    $month[$i] = t('dashboard.month') . ' ' . $i;
+  }
+  return $month;
+}
+
+function years()
+{
+  $year = [];
+  for ($j = 2010; $j <= now()->year; $j++) {
+    $year[$j] = $j;
+  }
+  return $year;
 }

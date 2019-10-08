@@ -69,3 +69,25 @@ $(document).ready(() => {
   })
 })
 
+// print contract & decision
+$(document).ready(() => {
+  $("#btn-print-contract").on('click', () => {
+    printElement($('#contract-content'));
+  })
+
+  $("#btn-print-decision").on('click', () => {
+    printElement($('#decision-content'));
+  })
+
+  function printElement(elemt) {
+    var printContents = elemt.html();
+    var originalContents = $('body').html();
+    $('body').html(printContents);
+    window.print();
+    $('body').html(originalContents);
+    setTimeout(() => {
+      location.reload();
+    }, 1000);
+  }
+});
+

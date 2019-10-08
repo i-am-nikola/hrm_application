@@ -13,6 +13,8 @@ $(document).ready(() => {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
       },
       success: function (response) {
+        console.log(response);
+
         if (response.status === 'success') {
           $('#modal-create-decision').modal('hide');
           toastr.success(response.flash_message);
@@ -100,12 +102,22 @@ $(document).ready(() => {
       type: "GET",
       url: $('#decision').data('url'),
       dataType: "html",
-      success: function (response) {
-        $('#decision').html(response);
+      success: function (response, status, xhr) {
+        let contentType = xhr.getResponseHeader("content-type") || "";
+        if (contentType.indexOf('html') > -1) {
+          $('#decision').html(response);
+        } else {
+          let xhtml = '<div class="alert alert-warning">' + JSON.parse(response).flash_message + '</div>';
+          $('#decision').html(xhtml);
+        }
       }
     });
   }
-  reloadDecisionData();
+  var url = $('#decision').data('url');
+  if (url && url.indexOf('decisions/reload') > -1) {
+    reloadDecisionData();
+  }
+
 })
 
 $(document).ready(() => {
@@ -241,4 +253,19 @@ $(document).ready(() => {
     }
   }
 
+})
+
+// print decision
+$(document).ready(() => {
+  $('#modal-decision-document').on('show.bs.modal', e => {
+    let url = $(e.relatedTarget).data('url');
+    $.ajax({
+      type: "GET",
+      url: url,
+      dataType: "html",
+      success: response => {
+        $('#decision-content').html(response);
+      }
+    });
+  })
 })

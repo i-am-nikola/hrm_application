@@ -14,7 +14,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href={{ route('dashboard') }} class="nav-link">
+      <a href={{ route('dashboard.index') }} class="nav-link">
         <i class="nav-icon fas fa-calendar-alt"></i>
         <p>Thống kê, báo cáo</p>
       </a>

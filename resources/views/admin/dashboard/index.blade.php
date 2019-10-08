@@ -1,86 +1,109 @@
 @extends('admin.layouts.master')
 @section('content')
-<div class="content">
+<section class="content js-dashboard" data-url={{ route('dashboard.index') }}>
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="card">
-          <div class="card-header border-0">
-            <div class="d-flex justify-content-between">
-              <h3 class="card-title">Online Store Visitors</h3>
-              <a href="javascript:void(0);">View Report</a>
+    <div class="row mb-3">
+      <div class="col-md-3">
+        {!!Form::select('month', months(), '', ['class' => 'form-control month-control', 'data-url' => route('dashboard.dashboard')]) !!}
+      </div>
+      <div class="col-md-3">
+        {!! Form::select('year', years(), now()->year, ['class' => 'form-control year-control', 'data-url' => route('dashboard.dashboard')]) !!}
+      </div>
+    </div>
+    @include('admin.dashboard._count')
+    <div id="dashboard-reload" data-url={{ route('dashboard.reload') }}>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header d-flex p-0">
+              <h3 class="card-title p-3">
+                <i class="fas fa-chart-pie mr-1"></i>
+                {{ t('dashboard.chart') }}
+              </h3>
+              <ul class="nav nav-pills ml-auto p-2">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#time-chart" data-toggle="tab">{{ t('dashboard.time') }}</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#department-chart" data-toggle="tab">{{ t('dashboard.department') }}</a>
+                </li>
+              </ul>
             </div>
-          </div>
-          <div class="card-body">
-            <div class="d-flex">
-              <p class="d-flex flex-column">
-                <span class="text-bold text-lg">820</span>
-                <span>Visitors Over Time</span>
-              </p>
-              <p class="ml-auto d-flex flex-column text-right">
-                <span class="text-success">
-                  <i class="fas fa-arrow-up"></i> 12.5%
-                </span>
-                <span class="text-muted">Since last week</span>
-              </p>
-            </div>
-
-            <div class="position-relative mb-4">
-              <canvas id="visitors-chart" height="200"></canvas>
-            </div>
-
-            <div class="d-flex flex-row justify-content-end">
-              <span class="mr-2">
-                <i class="fas fa-square text-primary"></i> This Week
-              </span>
-
-              <span>
-                <i class="fas fa-square text-gray"></i> Last Week
-              </span>
+            <div class="card-body">
+              <div class="tab-content p-0">
+                <div class="chart tab-pane active" id="time-chart" style="position: relative; height: 300px;">
+                  <canvas id="js-time-chart" style="height:230px; min-height:230px"></canvas>
+                </div>
+                <div class="chart tab-pane" id="department-chart" style="position: relative; height: 300px;">
+                  <canvas id="js-department-chart" height="300" style="height: 300px;"></canvas>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
-        <div class="card">
-          <div class="card-header border-0">
-            <div class="d-flex justify-content-between">
-              <h3 class="card-title">Sales</h3>
-              <a href="javascript:void(0);">View Report</a>
+      <div class="row">
+        <div class="col-6">
+          <div class="card card-info">
+            <div class="card-header">
+              <h3 class="card-title">{{ t('contract.total') }}</h3>
+            </div>
+            <div class="card-body">
+              <table class="table table-bordered table-striped" id="dashboard-contract">
+                <thead>
+                  <tr>
+                    <th class="text-center">{{ t('th.index') }}</th>
+                    <th class="text-center">{{ t('contract.type') }}</th>
+                    <th class="text-center">{{ t('contract.quantity') }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @if ($contractTypes->isNotEmpty())
+                  @foreach ($contractTypes as $key => $contractType)
+                  <tr>
+                    <td class="text-center">{{ $key + 1 }}</td>
+                    <td>{{ $contractType->name }}</td>
+                    <td class="text-center" id="contract_type_{{ $contractType->id }}">text</td>
+                  </tr>
+                  @endforeach
+                  @endif
+                </tbody>
+              </table>
             </div>
           </div>
-          <div class="card-body">
-            <div class="d-flex">
-              <p class="d-flex flex-column">
-                <span class="text-bold text-lg">$18,230.00</span>
-                <span>Sales Over Time</span>
-              </p>
-              <p class="ml-auto d-flex flex-column text-right">
-                <span class="text-success">
-                  <i class="fas fa-arrow-up"></i> 33.1%
-                </span>
-                <span class="text-muted">Since last month</span>
-              </p>
+        </div>
+        <div class="col-6">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">{{ t('decision.total') }}</h3>
             </div>
-
-            <div class="position-relative mb-4">
-              <canvas id="sales-chart" height="200"></canvas>
-            </div>
-
-            <div class="d-flex flex-row justify-content-end">
-              <span class="mr-2">
-                <i class="fas fa-square text-primary"></i> This year
-              </span>
-
-              <span>
-                <i class="fas fa-square text-gray"></i> Last year
-              </span>
+            <div class="card-body">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th class="text-center">{{ t('th.index') }}</th>
+                    <th class="text-center">{{ t('decision.type') }}</th>
+                    <th class="text-center">{{ t('decision.quantity') }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @if ($decisionTypes->isNotEmpty())
+                  @foreach ($decisionTypes as $key => $decisionType)
+                  <tr>
+                    <td class="text-center">{{ $key + 1 }}</td>
+                    <td>{{ $decisionType->name }}</td>
+                    <td class="text-center" id="decision_type_{{ $decisionType->id }}">text</td>
+                  </tr>
+                  @endforeach
+                  @endif
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 @include('admin.shared._notify')
 @endsection

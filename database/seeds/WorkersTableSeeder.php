@@ -10,7 +10,7 @@ class WorkersTableSeeder extends Seeder
     $LeThanhHung = [
       'id'                => 1,
       'user_id'           => 1,
-      'department_id'     => 5,
+      'department_id'     => 2,
       'education_id'      => 4,
       'record_ids'         => '1,2,3,4,5,6',
       'code'              => 'KT0001',

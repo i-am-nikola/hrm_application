@@ -109,6 +109,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _permission__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_permission__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _role__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./role */ "./resources/js/role.js");
 /* harmony import */ var _role__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_role__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _dashboard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./dashboard */ "./resources/js/dashboard.js");
+/* harmony import */ var _dashboard__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_dashboard__WEBPACK_IMPORTED_MODULE_7__);
+
 
 
 
@@ -191,6 +194,26 @@ $(document).ready(function () {
     var element = $(e.target).val();
     $('input[name="slug"]').val(convertSlug(element));
   });
+}); // print contract & decision
+
+$(document).ready(function () {
+  $("#btn-print-contract").on('click', function () {
+    printElement($('#contract-content'));
+  });
+  $("#btn-print-decision").on('click', function () {
+    printElement($('#decision-content'));
+  });
+
+  function printElement(elemt) {
+    var printContents = elemt.html();
+    var originalContents = $('body').html();
+    $('body').html(printContents);
+    window.print();
+    $('body').html(originalContents);
+    setTimeout(function () {
+      location.reload();
+    }, 1000);
+  }
 });
 
 /***/ }),
@@ -243,12 +266,8 @@ $(document).ready(function () {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
         },
         success: function success(response) {
-          console.log(response);
-
           if (response.status === 'success') {
             $('#modal-create-contract').modal('hide');
-            $('#js-contract-form')[0].reset();
-            $('.message-error').remove();
             toastr.success(response.flash_message);
             reloadData();
           } else if (response.status === 'error') {
@@ -278,8 +297,6 @@ $(document).ready(function () {
       success: function success(response) {
         if (response.status === 'success') {
           $('#modal-edit-contract').modal('hide');
-          $('#js-contract-update')[0].reset();
-          $('.message-error').remove();
           toastr.success(response.flash_message);
           reloadData();
         } else if (response.status === 'error') {
@@ -301,24 +318,9 @@ $(document).ready(function () {
       $('.contract-form input[name="' + key + '"]').after(message);
       $('.contract-form select[name="' + key + '"]').after(message);
     });
-  } // get data contracts ajax
+  } // delete single contract
 
 
-  function reloadData() {
-    $.ajax({
-      type: "GET",
-      url: $('#contract').data('url'),
-      dataType: "html",
-      success: function success(response) {
-        $('.js-contract-table tbody').html(response);
-      }
-    });
-  }
-
-  reloadData();
-}); // delete single contract
-
-$(document).ready(function () {
   $('#modal-confirm-delete').on('show.bs.modal', function (e) {
     var url = $(e.relatedTarget).data('url');
 
@@ -334,7 +336,7 @@ $(document).ready(function () {
             $('#modal-confirm-delete').modal('hide');
 
             if (data.status === 'success') {
-              $('button[data-id=' + data.id + ']').parents('tr').remove();
+              reloadData();
               toastr.success(data.flash_message);
             } else {
               toastr.warning(data.flash_message);
@@ -343,7 +345,32 @@ $(document).ready(function () {
         });
       });
     }
-  });
+  }); // get data contracts ajax
+
+  function reloadData() {
+    var url = $('#contract').data('url');
+    $.ajax({
+      type: "GET",
+      url: url,
+      dataType: "html",
+      success: function success(response, status, xhr) {
+        var contentType = xhr.getResponseHeader("content-type") || "";
+
+        if (contentType.indexOf('html') > -1) {
+          $('#contract').html(response);
+        } else {
+          var xhtml = '<div class="alert alert-warning">' + JSON.parse(response).flash_message + '</div>';
+          $('#contract').html(xhtml);
+        }
+      }
+    });
+  }
+
+  var url = $('#contract').data('url');
+
+  if (url && url.indexOf('contracts/reload')) {
+    reloadData();
+  }
 }); // get data edit
 
 $(document).ready(function () {
@@ -362,6 +389,131 @@ $(document).ready(function () {
       }
     });
   });
+}); // print contract
+
+$(document).ready(function () {
+  $('#modal-contract-document').on('show.bs.modal', function (e) {
+    var url = $(e.relatedTarget).data('url');
+    $.ajax({
+      type: "GET",
+      url: url,
+      dataType: "html",
+      success: function success(response) {
+        $('#contract-content').html(response);
+      }
+    });
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/dashboard.js":
+/*!***********************************!*\
+  !*** ./resources/js/dashboard.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $('.month-control').on('change', function (e) {
+    var url = $(e.target).data('url');
+    var month = $(e.target).val();
+    var year = $('.year-control').val();
+    $.ajax({
+      type: "GET",
+      url: url,
+      data: {
+        month: month,
+        year: year
+      },
+      dataType: "json",
+      success: function success(response) {
+        var countContracts = response.countContracts;
+        var countDecisions = response.countDecisions;
+        $.each(countContracts, function (key, value) {
+          $('#contract_type_' + key).html(value);
+        });
+        $.each(countDecisions, function (key, value) {
+          $('#decision_type_' + key).html(value);
+        });
+        timeChart(response.countStaring, response.countLeaving);
+      }
+    });
+  });
+  $('.year-control').on('change', function (e) {
+    var url = $(e.target).data('url');
+    var year = $(e.target).val();
+    var month = $('.month-control').val();
+    $.ajax({
+      type: "GET",
+      url: url,
+      data: {
+        month: month,
+        year: year
+      },
+      dataType: "json",
+      success: function success(response) {
+        var countContracts = response.countContracts;
+        var countDecisions = response.countDecisions;
+        $.each(countContracts, function (key, value) {
+          $('#contract_type_' + key).html(value);
+        });
+        $.each(countDecisions, function (key, value) {
+          $('#decision_type_' + key).html(value);
+        });
+        timeChart(response.countStaring, response.countLeaving);
+      }
+    });
+  });
+
+  function timeChart(countStaring, countLeaving) {
+    var month = new Array();
+
+    for (var i = 1; i <= 12; i++) {
+      month.push('Tháng' + ' ' + i);
+    }
+
+    var timeChartData = {
+      labels: month,
+      datasets: [{
+        label: 'Tiếp nhận',
+        backgroundColor: 'rgba(60,141,188,0.9)',
+        borderColor: 'rgba(60,141,188,0.8)',
+        pointRadius: false,
+        pointColor: '#3b8bba',
+        pointStrokeColor: 'rgba(60,141,188,1)',
+        pointHighlightFill: '#fff',
+        pointHighlightStroke: 'rgba(60,141,188,1)',
+        data: countStaring
+      }, {
+        label: 'Thôi việc',
+        backgroundColor: 'rgba(210, 214, 222, 1)',
+        borderColor: 'rgba(210, 214, 222, 1)',
+        pointRadius: false,
+        pointColor: 'rgba(210, 214, 222, 1)',
+        pointStrokeColor: '#c1c7d1',
+        pointHighlightFill: '#fff',
+        pointHighlightStroke: 'rgba(220,220,220,1)',
+        data: countLeaving
+      }]
+    };
+    var timeChartCanvas = $('#js-time-chart').get(0).getContext('2d');
+    var timeChartData = jQuery.extend(true, {}, timeChartData);
+    var temp0 = timeChartData.datasets[0];
+    var temp1 = timeChartData.datasets[1];
+    timeChartData.datasets[0] = temp1;
+    timeChartData.datasets[1] = temp0;
+    var timeChartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      datasetFill: false
+    };
+    var timeChart = new Chart(timeChartCanvas, {
+      type: 'bar',
+      data: timeChartData,
+      options: timeChartOptions
+    });
+  }
 });
 
 /***/ }),
@@ -388,6 +540,8 @@ $(document).ready(function () {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
       },
       success: function success(response) {
+        console.log(response);
+
         if (response.status === 'success') {
           $('#modal-create-decision').modal('hide');
           toastr.success(response.flash_message);
@@ -475,13 +629,24 @@ $(document).ready(function () {
       type: "GET",
       url: $('#decision').data('url'),
       dataType: "html",
-      success: function success(response) {
-        $('#decision').html(response);
+      success: function success(response, status, xhr) {
+        var contentType = xhr.getResponseHeader("content-type") || "";
+
+        if (contentType.indexOf('html') > -1) {
+          $('#decision').html(response);
+        } else {
+          var xhtml = '<div class="alert alert-warning">' + JSON.parse(response).flash_message + '</div>';
+          $('#decision').html(xhtml);
+        }
       }
     });
   }
 
-  reloadDecisionData();
+  var url = $('#decision').data('url');
+
+  if (url && url.indexOf('decisions/reload') > -1) {
+    reloadDecisionData();
+  }
 });
 $(document).ready(function () {
   var oldSalaryElemt = $('.decision-form input[name="old_salary"]');
@@ -620,6 +785,20 @@ $(document).ready(function () {
       leavingDateElemt.parent('.form-group').css('display', 'none');
     }
   }
+}); // print decision
+
+$(document).ready(function () {
+  $('#modal-decision-document').on('show.bs.modal', function (e) {
+    var url = $(e.relatedTarget).data('url');
+    $.ajax({
+      type: "GET",
+      url: url,
+      dataType: "html",
+      success: function success(response) {
+        $('#decision-content').html(response);
+      }
+    });
+  });
 });
 
 /***/ }),

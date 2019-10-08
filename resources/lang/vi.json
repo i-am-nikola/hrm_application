@@ -30,7 +30,8 @@
     "close": "Đóng",
     "ok": "Đồng ý",
     "login": "Đăng nhập",
-    "logout": "Đăng xuất"
+    "logout": "Đăng xuất",
+    "print": "In"
   },
   "th": {
     "index": "STT",
@@ -175,7 +176,7 @@
   },
   "contract": {
     "default": "--Chọn loại hợp đồng--",
-    "type": "Loại HĐ",
+    "type": "Loại HĐLĐ",
     "code": "Mã HĐ",
     "effective_date": "Ngày hiệu lực",
     "expiry_date": "Ngày hết hiệu lực",
@@ -194,14 +195,15 @@
       "delete": "Xóa hợp đồng lao động thành công",
       "error": "Có lỗi xảy ra! Xin vui lòng thử lại"
     },
-    "no_contract": "Nhận sự này chưa có hợp đồng!"
+    "no_contract": "Nhận sự này chưa có hợp đồng!",
+    "document": "Xem hợp đồng lao động"
   },
   "decision": {
     "default": "--Chọn loại quyết định",
     "type": "Loại quyết định",
     "code": "Mã quyết định",
     "reason": "Lý do",
-    "formality": "Hình thức khen thưởng - kỷ luật",
+    "formality": "Hình thức kỷ luật",
     "old_department": "Phòng ban hiện tại",
     "new_department": "Phòng ban mới",
     "old_position": "Chức vụ hiện tại",
@@ -224,7 +226,8 @@
       "delete": "Xóa quyết định thành công",
       "error": "Có lỗi xảy ra! Xin vui lòng thử lại"
     },
-    "no_decision": "Nhân sự này chưa có quyết định!"
+    "no_decision": "Nhân sự này chưa có quyết định!",
+    "document": "Xem quyết định"
   },
   "education": {
     "default": "--Chọn trình độ--"
@@ -238,5 +241,35 @@
     "header": "Không tìm thấy trang!",
     "body": "Bạn có thể nhập sai đường dẫn hoặc trang đã được thay đổi!",
     "footer": "Quay về "
+  },
+  "dashboard": {
+    "users": {
+      "count": "Tổng người dùng",
+      "count_active": "Đã kích hoạt",
+      "count_inactive": "Chưa kích hoạt"
+    },
+    "workers": {
+      "count": "Tổng nhân sự: ",
+      "count_official": "Chính thức: ",
+      "count_probationary": "Thử việc: ",
+      "count_off": "Nghỉ việc: "
+    },
+    "contracts": {
+      "count": "Tổng HĐLĐ",
+      "count_signed": "Đã ký",
+      "count_unsigned": "Chưa ký"
+    },
+    "decisions": {
+      "count": "Tổng quyết định",
+      "count_signed": "Đã ký",
+      "count_unsigned": "Chưa ký"
+    },
+    "month": "Tháng",
+    "year": "Năm",
+    "in": "Tiếp nhận",
+    "out": "Thôi việc",
+    "chart": "Biểu đồ thống kê nhân sự",
+    "time": "Theo thời gian",
+    "department": "Theo phòng ban"
   }
 }

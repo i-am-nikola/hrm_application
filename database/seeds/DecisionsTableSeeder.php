@@ -10,9 +10,9 @@ class DecisionsTableSeeder extends Seeder
     $decisionTypes = [
       ['id' => 1, 'name' => 'Điều chỉnh lương', 'slug' => 'dieu-chinh-luong'],
       ['id' => 2, 'name' => 'Điều chuyển nhân sự', 'slug' => 'dieu-chuyen-nhan-su'],
-      ['id' => 3, 'name' => 'Bổ nhiệm', 'slug' => 'bo-nhiem'],
+      ['id' => 3, 'name' => 'Bổ nhiệm nhận sự', 'slug' => 'bo-nhiem-nhan-su'],
       ['id' => 4, 'name' => 'Chấm dứt hợp đồng lao động', 'slug' => 'cham-dut-hop-dong-lao-dong'],
-      ['id' => 5, 'name' => 'Khen thưởng - kỷ luật', 'slug' => 'khen-thuong-ky-luat']
+      ['id' => 5, 'name' => 'Kỷ luật nhân sự', 'slug' => 'ky-luat-nhan-su']
     ];
     DB::table('decision_types')->insert($decisionTypes);
 
@@ -52,7 +52,7 @@ class DecisionsTableSeeder extends Seeder
         'old_salary'        => '',
         'new_salary'        => '',
         'effective_date'    => '2018-12-1',
-        'sign_date'         => null,
+        'sign_date'         => '2018-1-1',
         'leaving_date'      => null,
         'status'            => 0
       ],

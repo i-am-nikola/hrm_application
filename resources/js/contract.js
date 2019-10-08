@@ -43,17 +43,14 @@ $(document).ready(() => {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
         },
         success: response => {
-          console.log(response);
           if (response.status === 'success') {
             $('#modal-create-contract').modal('hide');
-            $('#js-contract-form')[0].reset();
-            $('.message-error').remove();
             toastr.success(response.flash_message);
             reloadData();
-          } else if(response.status === 'error') {
+          } else if (response.status === 'error') {
             $('.message-error').remove();
             showErrorMessage(response.errors);
-          }else{
+          } else {
             $('#modal-create-contract').modal('hide');
             toastr.warning(response.flash_message);
           }
@@ -78,14 +75,12 @@ $(document).ready(() => {
       success: function (response) {
         if (response.status === 'success') {
           $('#modal-edit-contract').modal('hide');
-          $('#js-contract-update')[0].reset();
-          $('.message-error').remove();
           toastr.success(response.flash_message);
           reloadData()
         } else if (response.status === 'error') {
           $('.message-error').remove();
           showErrorMessage(response.errors);
-        }else{
+        } else {
           $('#modal-edit-contract').modal('hide');
           toastr.warning(response.flash_message);
         }
@@ -104,22 +99,7 @@ $(document).ready(() => {
     });
   }
 
-  // get data contracts ajax
-  function reloadData() {
-    $.ajax({
-      type: "GET",
-      url: $('#contract').data('url'),
-      dataType: "html",
-      success: function (response) {
-        $('.js-contract-table tbody').html(response);
-      }
-    });
-  }
-  reloadData();
-})
-
-// delete single contract
-$(document).ready(() => {
+  // delete single contract
   $('#modal-confirm-delete').on('show.bs.modal', e => {
     let url = $(e.relatedTarget).data('url');
     if (url.indexOf('contracts') > -1) {
@@ -133,7 +113,7 @@ $(document).ready(() => {
           success: data => {
             $('#modal-confirm-delete').modal('hide');
             if (data.status === 'success') {
-              $('button[data-id=' + data.id + ']').parents('tr').remove();
+              reloadData();
               toastr.success(data.flash_message);
             } else {
               toastr.warning(data.flash_message);
@@ -143,7 +123,32 @@ $(document).ready(() => {
       })
     }
   });
-});
+
+  // get data contracts ajax
+
+  function reloadData() {
+    let url = $('#contract').data('url');
+    $.ajax({
+      type: "GET",
+      url: url,
+      dataType: "html",
+      success: function (response, status, xhr) {
+        let contentType = xhr.getResponseHeader("content-type") || "";
+        if (contentType.indexOf('html') > -1) {
+          $('#contract').html(response);
+        } else {
+          let xhtml = '<div class="alert alert-warning">' + JSON.parse(response).flash_message + '</div>';
+          $('#contract').html(xhtml);
+        }
+      }
+    });
+  }
+
+  let url = $('#contract').data('url');
+  if (url && url.indexOf('contracts/reload')) {
+    reloadData();
+  }
+})
 
 // get data edit
 $(document).ready(() => {
@@ -164,3 +169,17 @@ $(document).ready(() => {
   })
 })
 
+// print contract
+$(document).ready(() => {
+  $('#modal-contract-document').on('show.bs.modal', e => {
+    let url = $(e.relatedTarget).data('url');
+    $.ajax({
+      type: "GET",
+      url: url,
+      dataType: "html",
+      success: response => {
+        $('#contract-content').html(response);
+      }
+    });
+  })
+})

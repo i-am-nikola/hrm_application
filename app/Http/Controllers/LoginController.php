@@ -10,7 +10,7 @@ class LoginController extends Controller
   public function index()
   {
     if (Auth::check()) {
-      return redirect()->route('dashboard');
+      return redirect()->route('dashboard.index');
     }
     return view('admin.login.index');
   }
@@ -19,7 +19,7 @@ class LoginController extends Controller
   {
     $remember = $request->has('remember') ? true : false;
     if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
-      return redirect()->route('dashboard')
+      return redirect()->route('dashboard.index')
         ->with(['flash_level' => 'success', 'flash_message' => t('login.success')]);
     } else {
       return redirect()->back()

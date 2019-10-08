@@ -1,0 +1,100 @@
+.page {
+  background-color: #fafafa;
+  font-size: 13pt;
+  font-family: "Tohoma";
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  overflow: hidden;
+  padding: 1.5cm 1.5cm 1.5cm 2.5cm;
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  .subpage {
+    padding: 1cm;
+    border: 5px red solid;
+    height: 237mm;
+    outline: 2cm #ffeaea solid;
+  }
+
+  button {
+    width: 100px;
+    height: 24px;
+  }
+
+  .header {
+    overflow: hidden;
+  }
+
+  .logo {
+    text-align: center;
+    background-color: #ffffff;
+    float: left;
+  }
+
+  .quochieu {
+    text-align: center;
+    background-color: #ffffff;
+    float: right;
+  }
+
+  .number_day {
+    margin-top: 5px;
+  }
+
+  .number {
+    float: left;
+  }
+
+  .day {
+    float: right;
+  }
+
+  .title {
+    text-align: center;
+    position: relative;
+    font-size: 24px;
+    top: 1px;
+  }
+
+  .TableData {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+  }
+
+  .TableData th {
+    background: rgba(0, 0, 255, 0.1);
+    text-align: center;
+    font-weight: bold;
+    color: #000;
+
+    height: 24px;
+  }
+
+  .TableData tr {
+    height: 23px;
+  }
+
+  .sign {
+    height: 75px;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  .page {
+    margin: 0;
+    border: initial;
+    border-radius: initial;
+    width: initial;
+    min-height: initial;
+    box-shadow: initial;
+    background: initial;
+    page-break-after: always;
+  }
+}

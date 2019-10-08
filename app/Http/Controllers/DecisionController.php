@@ -39,6 +39,7 @@ class DecisionController extends Controller
         $decisions = new Decision;
         $input = $decisions->getInputDecision($request);
         if ($decisions->create($input)) {
+          $this->updateLeavingDate($request->worker_id, $request->leaving_date);
           return response()->json(['status' => 'success', 'flash_message' => t('decision.message.create')]);
         }
       }
@@ -85,10 +86,18 @@ class DecisionController extends Controller
         $decision = Decision::findOrFail($request->id);
         $input = $decision->getInputDecision($request);
         if ($decision->update($input)) {
+          $this->updateLeavingDate($request->worker_id, $request->leaving_date);
           return response()->json(['status' => 'success', 'flash_message' => t('decision.message.update')]);
         }
       }
     }
+  }
+
+  private function updateLeavingDate($workerId, $leavingDate)
+  {
+    $workers = Worker::findOrFail($workerId);
+    $workers->leaving_date = formatDateToYmd($leavingDate);
+    $workers->save();
   }
 
   public function destroy(Request $request, $id)
@@ -99,5 +108,11 @@ class DecisionController extends Controller
         return response(['id' => $id, 'status' => 'success', 'flash_message' => t('decision.message.delete')]);
       }
     }
+  }
+
+  public function document($id)
+  {
+    $decision = Decision::findOrFail($id);
+    return view('admin.decisions.content_document', compact('decision'));
   }
 }

@@ -5,3 +5,4 @@ import './contract';
 import './decision';
 import './permission';
 import './role';
+import './dashboard';

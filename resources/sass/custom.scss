@@ -2,14 +2,6 @@
   overflow: auto;
 }
 
-table {
-  td {
-    i {
-      font-size: 11px !important;
-    }
-  }
-}
-
 .required:after {
   content: "*";
   color: #dc3545;
@@ -32,4 +24,17 @@ ul.worker-info {
       margin-bottom: 0 !important;
     }
   }
+}
+
+.workers-table {
+  font-size: 15px;
+  width: 1200px !important;
+  th:last-child {
+    width: 90px !important;
+  }
+}
+
+.js-contract-table {
+  width: 1050px !important;
+  font-size: 14px;
 }

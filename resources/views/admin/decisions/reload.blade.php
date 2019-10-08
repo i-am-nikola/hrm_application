@@ -1,6 +1,5 @@
 <div class="mb-2">
-  <button class=" btn btn-primary" data-toggle="modal" data-target="#modal-create-decision"
-    data-url={{ route('decisions.create') }}>
+  <button class=" btn btn-primary" data-toggle="modal" data-target="#modal-create-decision" data-url={{ route('decisions.create') }}>
     <i class="fa fa-plus"></i> {{ t('decision.create') }}
   </button>
 </div>
@@ -29,8 +28,7 @@
   <div class="card card-{{ $class }}">
     <div class="card-header p-1">
       <h4 class="card-title">
-        <button class="btn text-white" data-toggle="collapse" data-target="#collapse-{{ $key }}" aria-expanded="true"
-          aria-controls="collapse{{ $key }}">
+        <button class="btn text-white" data-toggle="collapse" data-target="#collapse-{{ $key }}" aria-expanded="true" aria-controls="collapse{{ $key }}">
           V/v: {{ $decision->decisionType->name }} <span class="small">({{ $status }})</span>
         </button>
       </h4>
@@ -76,11 +74,13 @@
       </div>
 
       <div class="card-footer">
-        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#"><i class="fas fa-print"></i></button>
-        <button class="btn btn-warning btn-sm" id="js-contract-edit" data-toggle="modal" data-target="#modal-edit-decision"
-          data-url={{ route('decisions.edit', $decision->id) }}><i class="fas fa-pencil-alt"></i></button>
-        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-confirm-delete"
-          data-url={{ route('decisions.destroy', $decision->id) }} }}>
+        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-decision-document" data-url={{ route('decisions.document', $decision->id) }}>
+          <i class="fas fa-print"></i>
+        </button>
+        <button class="btn btn-warning btn-sm" id="js-contract-edit" data-toggle="modal" data-target="#modal-edit-decision" data-url={{ route('decisions.edit', $decision->id) }}>
+          <i class="fas fa-pencil-alt"></i>
+        </button>
+        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-confirm-delete" data-url={{ route('decisions.destroy', $decision->id) }} }}>
           <i class="fas fa-trash"></i>
         </button>
       </div>

@@ -13,18 +13,18 @@
           <h3 class="card-title">{{ t('worker.list') }}</h3>
         </div>
         <div class="card-body">
-          <table class="table table-bordered table-striped data-table">
+          <table class="table table-bordered table-striped data-table workers-table">
             <thead>
               <tr>
-                <th>{{ t('th.index') }}</th>
-                <th>{{ t('worker.code') }}</th>
-                <th>{{ t('worker.name') }}</th>
-                <th>{{ t('worker.phone') }}</th>
-                <th>{{ t('worker.staring_date') }}</th>
-                <th>{{ t('worker.department') }}</th>
-                <th>{{ t('worker.position') }}</th>
-                <th>{{ t('th.status') }}</th>
-                <th>{{ t('th.action') }}</th>
+                <th class="text-center">{{ t('th.index') }}</th>
+                <th class="text-center">{{ t('worker.code') }}</th>
+                <th class="text-center">{{ t('worker.name') }}</th>
+                <th class="text-center">{{ t('worker.phone') }}</th>
+                <th class="text-center">{{ t('worker.staring_date') }}</th>
+                <th class="text-center">{{ t('worker.department') }}</th>
+                <th class="text-center">{{ t('worker.position') }}</th>
+                <th class="text-center">{{ t('th.status') }}</th>
+                <th class="text-center">{{ t('th.action') }}</th>
               </tr>
             </thead>
             <tbody>

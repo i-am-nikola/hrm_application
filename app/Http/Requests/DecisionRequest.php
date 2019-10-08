@@ -16,9 +16,9 @@ class DecisionRequest extends FormRequest
     $commun = [
       'code'             => 'required|unique:decisions,code,' . $id,
       'decision_type_id' => 'required|not_in:0',
-      'effective_date'   => 'nullable|date',
-      'sign_date'        => 'nullable|date',
-      'leaving_date'     => 'nullable|date',
+      'effective_date'   => 'nullable|date_format:"d/m/Y"',
+      'sign_date'        => 'nullable|date_format:"d/m/Y"',
+      'leaving_date'     => 'nullable|date_format:"d/m/Y"',
       'old_salary'       => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/',
       'new_salary'       => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/',
     ];
@@ -46,14 +46,14 @@ class DecisionRequest extends FormRequest
   public function messages()
   {
     return [
-      '*.required'              => ':attribute ' . t('validate.required'),
-      'code.unique'             => ':attribute ' . t('validate.unique'),
-      'decision_type_id.not_in' => ':attribute ' . t('validate.required'),
-      'effective_date.date'     => ':attribute ' . t('validate.invalid'),
-      'sign_date.date'          => ':attribute ' . t('validate.invalid'),
-      'leaving_date.date'       => ':attribute ' . t('validate.invalid'),
-      'old_salary.regex'        => ':attribute ' . t('validate.invalid'),
-      'new_salary.regex'        => ':attribute ' . t('validate.invalid'),
+      '*.required'                 => ':attribute ' . t('validate.required'),
+      'code.unique'                => ':attribute ' . t('validate.unique'),
+      'decision_type_id.not_in'    => ':attribute ' . t('validate.required'),
+      'effective_date.date_format' => ':attribute ' . t('validate.invalid'),
+      'sign_date.date_format'      => ':attribute ' . t('validate.invalid'),
+      'leaving_date.date_format'   => ':attribute ' . t('validate.invalid'),
+      'old_salary.regex'           => ':attribute ' . t('validate.invalid'),
+      'new_salary.regex'           => ':attribute ' . t('validate.invalid'),
     ];
   }
 }

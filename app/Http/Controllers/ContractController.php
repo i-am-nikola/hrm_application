@@ -89,4 +89,10 @@ class ContractController extends Controller
     $contracts = Contract::where('worker_id', $id)->orderBy('id', 'desc')->get();
     return view('admin.contracts.reload', compact('contracts'));
   }
+
+  public function document($id)
+  {
+    $contract = Contract::findOrFail($id);
+    return view('admin.contracts.content_document', compact('contract'));
+  }
 }
