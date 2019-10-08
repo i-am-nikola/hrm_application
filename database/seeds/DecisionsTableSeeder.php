@@ -8,18 +8,17 @@ class DecisionsTableSeeder extends Seeder
   {
     // decision types seeder
     $decisionTypes = [
-      ['id' => 1, 'name' => 'Điều chỉnh lương', 'slug' => 'dieu-chinh-luong'],
-      ['id' => 2, 'name' => 'Điều chuyển nhân sự', 'slug' => 'dieu-chuyen-nhan-su'],
-      ['id' => 3, 'name' => 'Bổ nhiệm nhận sự', 'slug' => 'bo-nhiem-nhan-su'],
-      ['id' => 4, 'name' => 'Chấm dứt hợp đồng lao động', 'slug' => 'cham-dut-hop-dong-lao-dong'],
-      ['id' => 5, 'name' => 'Kỷ luật nhân sự', 'slug' => 'ky-luat-nhan-su']
+      ['name' => 'Điều chỉnh lương', 'slug' => 'dieu-chinh-luong'],
+      ['name' => 'Điều chuyển nhân sự', 'slug' => 'dieu-chuyen-nhan-su'],
+      ['name' => 'Bổ nhiệm nhận sự', 'slug' => 'bo-nhiem-nhan-su'],
+      ['name' => 'Chấm dứt hợp đồng lao động', 'slug' => 'cham-dut-hop-dong-lao-dong'],
+      ['name' => 'Kỷ luật nhân sự', 'slug' => 'ky-luat-nhan-su']
     ];
     DB::table('decision_types')->insert($decisionTypes);
 
     // decisions seeder
     $decisions = [
       [
-        'id'                => 1,
         'decision_type_id'  => 1,
         'worker_id'         => 1,
         'user_id'           => 1,
@@ -38,7 +37,6 @@ class DecisionsTableSeeder extends Seeder
         'status'            => 1
       ],
       [
-        'id'                => 2,
         'decision_type_id'  => 3,
         'worker_id'         => 1,
         'user_id'           => 1,
@@ -57,7 +55,6 @@ class DecisionsTableSeeder extends Seeder
         'status'            => 0
       ],
       [
-        'id'                => 3,
         'decision_type_id'  => 4,
         'worker_id'         => 1,
         'user_id'           => 1,
@@ -76,7 +73,6 @@ class DecisionsTableSeeder extends Seeder
         'status'            => 1
       ],
       [
-        'id'                => 4,
         'decision_type_id'  => 2,
         'worker_id'         => 1,
         'user_id'           => 1,
@@ -95,7 +91,6 @@ class DecisionsTableSeeder extends Seeder
         'status'            => 1
       ],
       [
-        'id'                => 5,
         'decision_type_id'  => 5,
         'worker_id'         => 1,
         'user_id'           => 1,

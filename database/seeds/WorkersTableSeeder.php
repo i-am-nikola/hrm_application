@@ -8,7 +8,6 @@ class WorkersTableSeeder extends Seeder
   public function run()
   {
     $LeThanhHung = [
-      'id'                => 1,
       'user_id'           => 1,
       'department_id'     => 2,
       'education_id'      => 4,
@@ -33,7 +32,6 @@ class WorkersTableSeeder extends Seeder
     ];
 
     $TranKimAnh = [
-      'id'                => 2,
       'user_id'           => 2,
       'department_id'     => 1,
       'education_id'      => 3,
@@ -58,7 +56,6 @@ class WorkersTableSeeder extends Seeder
     ];
 
     $LeTuBinh = [
-      'id'                => 3,
       'user_id'           => 2,
       'department_id'     => 4,
       'education_id'      => 4,
