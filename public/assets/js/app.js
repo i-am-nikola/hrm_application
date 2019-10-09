@@ -111,6 +111,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _role__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_role__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _dashboard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./dashboard */ "./resources/js/dashboard.js");
 /* harmony import */ var _dashboard__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_dashboard__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _profile__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./profile */ "./resources/js/profile.js");
+/* harmony import */ var _profile__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_profile__WEBPACK_IMPORTED_MODULE_8__);
+
 
 
 
@@ -382,7 +385,6 @@ $(document).ready(function () {
       url: url,
       dataType: "json",
       success: function success(response) {
-        console.log(response);
         $.each(response, function (key, value) {
           $('#js-contract-update input[name="' + key + '"]').val(value);
           $('#js-contract-update select[name="' + key + '"]').val(value);
@@ -866,6 +868,81 @@ $(document).ready(function () {
       }
     });
   });
+});
+
+/***/ }),
+
+/***/ "./resources/js/profile.js":
+/*!*********************************!*\
+  !*** ./resources/js/profile.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  // update profile
+  $('#update-profile').on('submit', function (e) {
+    e.preventDefault();
+    var url = $(e.target).attr('action');
+    var data = $(e.target).serialize();
+    $.ajax({
+      type: "PUT",
+      url: url,
+      data: data,
+      dataType: "json",
+      success: function success(response) {
+        if (response.status === 'success') {
+          toastr.success(response.flash_message);
+          setTimeout(function () {
+            location.reload();
+          }, 1000);
+        } else if (response.status === 'error') {
+          $('.message-error').remove();
+          showErrorMessage(response.errors);
+        } else {
+          toastr.warning(response.flash_message);
+        }
+      }
+    });
+  }); //update password
+
+  $('#update-password').on('submit', function (e) {
+    e.preventDefault();
+    var url = $(e.target).attr('action');
+    var data = $(e.target).serialize();
+    $.ajax({
+      type: "PUT",
+      url: url,
+      data: data,
+      dataType: "json",
+      success: function success(response) {
+        $('#update-password')[0].reset();
+
+        if (response.status === 'success') {
+          toastr.success(response.flash_message);
+          $('.message-error').remove();
+        } else if (response.status === 'error') {
+          $('.message-error').remove();
+          showErrorMessage(response.errors);
+        } else if (response.status === 'incorrect') {
+          $('.message-error').remove();
+          $('#update-password input[name="current_password"]').after('<p class="message-error text-danger mt-1">' + response.error + '</p>');
+        } else {
+          toastr.warning(response.flash_message);
+        }
+      }
+    });
+  }); // show error message
+
+  function showErrorMessage(data) {
+    $.each(data, function (key, value) {
+      var message = '<p class="message-error text-danger mt-1">' + value + '</p>';
+      $('#update-profile input[name="' + key + '"]').next().remove();
+      $('#update-profile input[name="' + key + '"]').after(message);
+      $('#update-password input[name="' + key + '"]').next().remove();
+      $('#update-password input[name="' + key + '"]').after(message);
+    });
+  }
 });
 
 /***/ }),

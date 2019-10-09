@@ -6,3 +6,4 @@ import './decision';
 import './permission';
 import './role';
 import './dashboard';
+import './profile';

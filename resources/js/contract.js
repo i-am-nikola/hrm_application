@@ -159,8 +159,6 @@ $(document).ready(() => {
       url: url,
       dataType: "json",
       success: response => {
-        console.log(response);
-
         $.each(response, (key, value) => {
           $('#js-contract-update input[name="' + key + '"]').val(value);
           $('#js-contract-update select[name="' + key + '"]').val(value);

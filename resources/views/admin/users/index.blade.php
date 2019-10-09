@@ -16,12 +16,12 @@
           <table class="table table-bordered table-striped data-table">
             <thead>
               <tr>
-                <th>{{ t('th.index') }}</th>
-                <th>{{ t('user.name') }}</th>
-                <th>{{ t('user.email') }}</th>
-                <th>{{ t('user.role') }}</th>
-                <th>{{ t('th.status') }}</th>
-                <th>{{ t('th.action') }}</th>
+                <th class="text-center">{{ t('th.index') }}</th>
+                <th class="text-center">{{ t('user.name') }}</th>
+                <th class="text-center">{{ t('user.email') }}</th>
+                <th class="text-center">{{ t('user.role') }}</th>
+                <th class="text-center">{{ t('th.status') }}</th>
+                <th class="text-center">{{ t('th.action') }}</th>
               </tr>
             </thead>
             <tbody>

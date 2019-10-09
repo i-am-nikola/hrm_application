@@ -7,6 +7,7 @@ use App\Models\DecisionType;
 use Carbon\Carbon;
 use App\Models\Department;
 use App\Models\Education;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Worker;
 
@@ -139,4 +140,11 @@ function years()
     $year[$j] = $j;
   }
   return $year;
+}
+
+function getListRoles()
+{
+  $roles = [];
+  $roles = Role::all()->pluck('name', 'id');
+  return $roles;
 }

@@ -100,4 +100,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest', 'active-user']], fu
     Route::get('/reload/{id}', 'DecisionController@reloadData')->middleware('permission:read-decision')->name('reload');;
     Route::get('/document/{id}', 'DecisionController@document')->middleware('permission:read-decision')->name('document');
   });
+
+  // profile
+  Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+    Route::get('/', 'ProfileController@index')->name('index');
+    Route::put('/update-profile/{id}', 'ProfileController@updateProfile')->name('updateProfile');
+    Route::put('/update-password/{id}', 'ProfileController@updatePassword')->name('updatePassword');
+  });
 });

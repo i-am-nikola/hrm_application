@@ -12,7 +12,7 @@
         <img src={{ asset('assets/img/' . $avatar) }} class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">{{ $name }}</a>
+        <a href={{ route('profile.index') }} class="d-block">{{ $name }}</a>
       </div>
     </div>
 

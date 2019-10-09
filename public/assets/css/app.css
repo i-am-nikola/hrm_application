@@ -35,6 +35,10 @@ ul.worker-info li {
   font-size: 14px;
 }
 
+.message-error {
+  margin-bottom: 0 !important;
+}
+
 .page {
   background-color: #fafafa;
   font-size: 13pt;
