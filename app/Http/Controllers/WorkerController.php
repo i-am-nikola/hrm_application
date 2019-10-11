@@ -9,9 +9,35 @@ use Illuminate\Http\Request;
 
 class WorkerController extends Controller
 {
-  public function index()
+  public function index(Request $request)
   {
-    $workers = Worker::orderBy('id', 'desc')->get();
+    $departmentId = $request->department_id;
+    $staringFrom  = $request->staring_from ? formatDateToYmd($request->staring_from) : '1971-1-1';
+    $staringTo    = $request->staring_to ? formatDateToYmd($request->staring_to) : now()->format('Y-m-d');
+    $status       = $request->status;
+
+    $workers = new Worker;
+
+    if ($request->filled('department_id') && $request->filled('status') && ($request->filled('staring_from') || $request->filled('staring_to'))) {
+      //
+    } else if ($request->filled('department_id') && $request->filled('status')) {
+      //
+    } else if ($request->filled('status') && ($request->filled('staring_from') || $request->filled('staring_to'))) {
+      //
+    } else if ($request->filled('department_id') && ($request->filled('staring_from') || $request->filled('staring_to'))) {
+      //
+    } else if ($request->filled('staring_from') || $request->filled('staring_to')) {
+      //
+    } else if ($request->filled('department_id')) {
+      //
+    } else if ($request->filled('status')) {
+      //
+    } else {
+
+      $workers = $workers->newQuery()->get();
+    }
+
+
     return view('admin.workers.index', compact('workers'));
   }
 

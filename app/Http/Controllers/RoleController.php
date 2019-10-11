@@ -31,9 +31,6 @@ class RoleController extends Controller
     }
   }
 
-  public function show($id)
-  { }
-
   public function edit($id)
   {
     $role = Role::findOrFail($id);
@@ -42,7 +39,6 @@ class RoleController extends Controller
 
   public function update(Request $request, $id)
   {
-    // dd($request->all());
     $roleRequest = new RoleRequest;
     $this->validate(
       $request,

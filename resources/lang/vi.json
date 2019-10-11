@@ -31,7 +31,8 @@
     "ok": "Đồng ý",
     "login": "Đăng nhập",
     "logout": "Đăng xuất",
-    "print": "In"
+    "print": "In",
+    "filter": "Lọc"
   },
   "th": {
     "index": "STT",
@@ -136,12 +137,20 @@
   },
   "department": {
     "default": "--Chọn phòng ban--",
+    "all": "--Tất cả--",
     "title": "Quản lý phòng ban",
     "list": "Danh sách phòng ban",
     "create": "Thêm mới phòng ban",
     "update": "Cập nhật phòng ban",
     "name": "Tên phòng ban",
-    "parent": "Phòng ban trực thuộc"
+    "parent": "Phòng ban trực thuộc",
+    "count": "Số lượng người lao động",
+    "message": {
+      "create": "Thêm mới phòng ban thành công",
+      "update": "Cập nhật phòng ban thành công",
+      "delete": "Xóa phòng ban thành công",
+      "error": "Có lỗi xảy ra! Xin vui lòng thử lại"
+    }
   },
   "worker": {
     "personnel": "Nhân sự",
@@ -173,6 +182,7 @@
     "status": "Trạng thái",
     "official": "Chính thức",
     "probationary": "Thử việc",
+    "status_all": "--Tất cả--",
     "off": "Nghỉ việc",
     "info": "Thông tin",
     "contract": "Hợp đồng lao động",
@@ -182,7 +192,11 @@
       "update": "Cập nhật nhân sự thành công",
       "delete": "Xóa nhân sự thành công",
       "error": "Có lỗi xảy ra! Xin vui lòng thử lại"
-    }
+    },
+    "staring": "Vào làm",
+    "from": "Từ ngày",
+    "to": "Đến ngày",
+    "in": "Tiếp nhận"
   },
   "contract": {
     "default": "--Chọn loại hợp đồng--",

@@ -7,3 +7,4 @@ import './permission';
 import './role';
 import './dashboard';
 import './profile';
+import './depaerment';

@@ -113,6 +113,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dashboard__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_dashboard__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _profile__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./profile */ "./resources/js/profile.js");
 /* harmony import */ var _profile__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_profile__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _depaerment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./depaerment */ "./resources/js/depaerment.js");
+/* harmony import */ var _depaerment__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_depaerment__WEBPACK_IMPORTED_MODULE_9__);
+
 
 
 
@@ -193,7 +196,7 @@ $(document).ready(function () {
   }
 
   ;
-  $('.role-form input[name="name"]').on('keyup', function (e) {
+  $('.app-form input[name="name"]').on('keyup', function (e) {
     var element = $(e.target).val();
     $('input[name="slug"]').val(convertSlug(element));
   });
@@ -833,6 +836,38 @@ $(document).ready(function () {
       dataType: "html",
       success: function success(response) {
         $('#decision-content').html(response);
+      }
+    });
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/depaerment.js":
+/*!************************************!*\
+  !*** ./resources/js/depaerment.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// delete single role
+$(document).ready(function () {
+  $('#modal-confirm-delete').on('show.bs.modal', function (e) {
+    var url = $(e.relatedTarget).data('url');
+    $('#confirm-delete').one('click', function () {
+      if (url.indexOf('departments') > -1) {
+        $.ajax({
+          type: 'DELETE',
+          url: url,
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
+          },
+          success: function success(data) {
+            $('button[data-id=' + data.id + ']').parents('tr').fadeOut();
+            $('#modal-confirm-delete').modal('hide');
+            toastr.success(data.flash_message);
+          }
+        });
       }
     });
   });

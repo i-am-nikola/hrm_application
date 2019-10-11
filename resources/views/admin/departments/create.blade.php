@@ -6,11 +6,11 @@
       <div class="col-md-9">
         <div class="card card-primary">
           <div class="card-header">
-            <h3 class="card-title">{{ t('role.update') }}</h3>
+            <h3 class="card-title">{{ t('department.create') }}</h3>
           </div>
-          {!! Form::open(['route' => ['roles.update', $role->id], 'method' => 'PUT', 'class' => 'app-form']) !!}
+          {!! Form::open(['route' => 'departments.store', 'method' => 'POST', 'class' => 'app-form']) !!}
 
-          @include('admin.roles._form')
+          @include('admin.departments._form')
 
           {!! Form::close() !!}
         </div>

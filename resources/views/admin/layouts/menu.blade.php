@@ -8,7 +8,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="#" class="nav-link {{ (request()->is('admin/departments*')) ? 'active' : '' }}">
+      <a href={{ route('departments.index') }} class="nav-link {{ (request()->is('admin/departments*')) ? 'active' : '' }}">
         <i class="nav-icon fas fa-calendar-alt"></i>
         <p>Quản lý phòng ban</p>
       </a>

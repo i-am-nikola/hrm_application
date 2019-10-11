@@ -40,7 +40,7 @@ $graduateSchool = $worker->graduate_school;
         <div class="col-sm-6">
           <div class="form-group">
             {!! Form::label('department_id', t('worker.department'), ['class' => 'required']) !!}
-            {!! Form::select('department_id', getListDepartments(), $department, ['class' => 'form-control']) !!}
+            {!! Form::select('department_id', getListDepartments(t('department.default')), $department, ['class' => 'form-control']) !!}
             @include('admin.shared._validate_message', ['fillable' => 'department_id'])
           </div>
           <div class="form-group">

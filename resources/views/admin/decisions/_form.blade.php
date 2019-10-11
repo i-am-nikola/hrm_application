@@ -44,11 +44,11 @@
             </div>
             <div class="form-group change-form">
               {!! Form::label('old_department', t('decision.old_department')) !!}
-              {!! Form::select('old_department', getListDepartments(), 0, ['class' => 'form-control']) !!}
+              {!! Form::select('old_department', getListDepartments(t('department.default')), 0, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group change-form">
               {!! Form::label('new_department', t('decision.new_department')) !!}
-              {!! Form::select('new_department', getListDepartments(), 0, ['class' =>
+              {!! Form::select('new_department', getListDepartments(t('department.default')), 0, ['class' =>
               'form-control']) !!}
             </div>
             <div class="form-group change-form">

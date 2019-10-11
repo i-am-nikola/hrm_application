@@ -8,7 +8,7 @@
           <div class="card-header">
             <h3 class="card-title">{{ t('role.create') }}</h3>
           </div>
-          {!! Form::open(['route' => 'roles.store', 'method' => 'POST', 'class' => 'role-form']) !!}
+          {!! Form::open(['route' => 'roles.store', 'method' => 'POST', 'class' => 'app-form']) !!}
 
           @include('admin.roles._form')
 

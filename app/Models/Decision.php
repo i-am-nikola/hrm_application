@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Decision extends Model
 {
-  protected $table = 'decisions';
-  protected $dates = ['effective_date', 'sign_date', 'leaving_date'];
+  protected $table    = 'decisions';
+  protected $dates    = ['effective_date', 'sign_date', 'leaving_date'];
   protected $fillable = [
     'decision_type_id', 'worker_id', 'user_id', 'code', 'reason', 'formality',
     'old_department', 'new_department', 'old_position', 'new_position', 'old_salary',
@@ -28,8 +28,8 @@ class Decision extends Model
   {
     // format date before insert
     $effectiveDate = formatDateToYmd($request->effective_date);
-    $leavingDate = formatDateToYmd($request->leaving_date);
-    $signDate = formatDateToYmd($request->sign_date);
+    $leavingDate   = formatDateToYmd($request->leaving_date);
+    $signDate      = formatDateToYmd($request->sign_date);
 
     $input = [
       'decision_type_id'  => $request->decision_type_id,

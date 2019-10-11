@@ -10,7 +10,9 @@
               <i class="fa fa-plus"></i> {{ t('action.create') }}
             </a>
           </span>
-          <h3 class="card-title">{{ t('worker.list') }}</h3>
+
+          @include('admin.workers._filter')
+
         </div>
         <div class="card-body">
           <table class="table table-bordered table-striped data-table workers-table">

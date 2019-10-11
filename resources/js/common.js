@@ -63,7 +63,7 @@ $(document).ready(() => {
     return slug;
   };
 
-  $('.role-form input[name="name"]').on('keyup', e => {
+  $('.app-form input[name="name"]').on('keyup', e => {
     let element = $(e.target).val();
     $('input[name="slug"]').val(convertSlug(element));
   })

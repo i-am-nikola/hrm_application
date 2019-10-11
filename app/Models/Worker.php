@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-use App\Http\Requests\WorkerRequest;
 use Illuminate\Database\Eloquent\Model;
 
 class Worker extends Model
 {
-  protected $table = 'workers';
-  protected $dates = ['birthday', 'issued_on', 'staring_date', 'leaving_date'];
-
+  protected $table    = 'workers';
+  protected $dates    = ['birthday', 'issued_on', 'staring_date', 'leaving_date'];
   protected $fillable = [
     'user_id', 'department_id', 'position', 'education_id', 'record_ids',
     'code', 'name', 'birthday', 'gender', 'id_no', 'issued_on', 'issued_by',
@@ -45,8 +43,8 @@ class Worker extends Model
   public function getInputWorker($request)
   {
     // format date before insert
-    $birthday = formatDateToYmd($request->birthday);
-    $issuedOn = formatDateToYmd($request->issued_on);
+    $birthday    = formatDateToYmd($request->birthday);
+    $issuedOn    = formatDateToYmd($request->issued_on);
     $staringDate = formatDateToYmd($request->staring_date);
 
     // convert record_ids from array to string before insert
@@ -76,5 +74,20 @@ class Worker extends Model
       'record_ids'        => $recordIds
     ];
     return $input;
+  }
+
+  public function filterStaring($staringFrom, $staringTo)
+  {
+    // return $this->whereBetween('staring_date', [$staringFrom, $staringTo]);
+  }
+
+  public function filterDepartment($departmentId)
+  {
+    // return $this->where('department_id', $departmentId);
+  }
+
+  public function filterStatus($status)
+  {
+    // return $this->where('status', $status);
   }
 }

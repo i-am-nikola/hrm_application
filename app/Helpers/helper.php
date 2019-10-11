@@ -39,11 +39,17 @@ function getListDecisionTypes()
   return !empty($decisionTypes) ? $decisionTypes : [];
 }
 
-function getListDepartments()
+function getListDepartments($textDefault = null)
 {
-  $departments = Department::orderBy('id', 'asc')
-    ->pluck('name', 'id')
-    ->prepend(t('department.default'), null);
+  if ($textDefault !== null) {
+    $departments = Department::orderBy('id', 'asc')
+      ->pluck('name', 'id')
+      ->prepend($textDefault, null);
+  } else {
+    $departments = Department::orderBy('id', 'asc')
+      ->pluck('name', 'id');
+  }
+
   return $departments;
 }
 
@@ -60,6 +66,15 @@ function countUsersByRole($roleId)
   $count = 0;
   if (isset($roleId) && $roleId > 0) {
     $count =  User::where('role_id', $roleId)->count();
+  }
+  return $count;
+}
+
+function countWorkersByDepartment($departmentId)
+{
+  $count = 0;
+  if (isset($departmentId) && $departmentId > 0) {
+    $count =  Worker::where('department_id', $departmentId)->count();
   }
   return $count;
 }
