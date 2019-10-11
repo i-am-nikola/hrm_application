@@ -11,13 +11,25 @@ class RoleController extends Controller
 {
   public function index()
   {
+    $breadcrumb = [
+      'title' => t('breadcrumb.role'),
+      'home'  => t('breadcrumb.home'),
+      'list'  => t('breadcrumb.list')
+    ];
     $roles = Role::all();
-    return view('admin.roles.index', compact('roles'));
+    return view('admin.roles.index', compact('roles', 'breadcrumb'));
   }
 
   public function create()
   {
-    return view('admin.roles.create');
+    $breadcrumb = [
+      'title' => t('breadcrumb.role'),
+      'home'  => t('breadcrumb.home'),
+      'list'  => t('breadcrumb.list'),
+      'add'   => t('breadcrumb.add'),
+      'route' => route('roles.index')
+    ];
+    return view('admin.roles.create', compact('breadcrumb'));
   }
 
   public function store(RoleRequest $request)
@@ -33,8 +45,15 @@ class RoleController extends Controller
 
   public function edit($id)
   {
+    $breadcrumb = [
+      'title' => t('breadcrumb.role'),
+      'home'  => t('breadcrumb.home'),
+      'list'  => t('breadcrumb.list'),
+      'edit'  => t('breadcrumb.edit'),
+      'route' => route('roles.index')
+    ];
     $role = Role::findOrFail($id);
-    return view('admin.roles.edit', compact('role'));
+    return view('admin.roles.edit', compact('role', 'breadcrumb'));
   }
 
   public function update(Request $request, $id)

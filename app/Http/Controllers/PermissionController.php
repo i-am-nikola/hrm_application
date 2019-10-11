@@ -10,9 +10,14 @@ class PermissionController extends Controller
 {
   public function index()
   {
+    $breadcrumb = [
+      'title' => t('breadcrumb.role'),
+      'home'  => t('breadcrumb.home'),
+      'list'  => t('breadcrumb.permission')
+    ];
     $permissions = Permission::all();
     $roles = Role::all();
-    return view('admin.permissions.index', compact('permissions', 'roles'));
+    return view('admin.permissions.index', compact('permissions', 'roles', 'breadcrumb'));
   }
 
   public function saveRolePermission(Request $request, $id)

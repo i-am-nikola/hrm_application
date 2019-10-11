@@ -42,9 +42,8 @@ function getListDecisionTypes()
 function getListDepartments($textDefault = null)
 {
   if ($textDefault !== null) {
-    $departments = Department::orderBy('id', 'asc')
-      ->pluck('name', 'id')
-      ->prepend($textDefault, null);
+    $departments = Department::orderBy('id', 'asc')->pluck('name', 'id');
+    $departments[0] = $textDefault;
   } else {
     $departments = Department::orderBy('id', 'asc')
       ->pluck('name', 'id');
@@ -55,9 +54,8 @@ function getListDepartments($textDefault = null)
 
 function getListEducations()
 {
-  $educations = Education::orderBy('id', 'asc')
-    ->pluck('name', 'id')
-    ->prepend(t('education.default'), null);
+  $educations = Education::orderBy('id', 'asc')->pluck('name', 'id');
+  $educations[0] = t('education.default');
   return !empty($educations) ? $educations : [];
 }
 

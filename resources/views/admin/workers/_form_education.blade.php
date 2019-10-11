@@ -1,5 +1,5 @@
 @php
-$skill = $position = $certificate = $graduateSchool = '';
+$skill = $position = $certificate = $graduateSchool = null;
 $education = $department = 0;
 @endphp
 

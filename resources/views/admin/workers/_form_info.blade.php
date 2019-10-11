@@ -1,6 +1,6 @@
 @php
 $code = $name = $idNo = $phone = $email = $issuedBy = $birthday= $issuedOn
- = $permanentAddress = $temporaryAddress = '';
+= $permanentAddress = $temporaryAddress = '';
 $status = $checked = 0;
 $staringDate = date('d/m/Y');
 @endphp
@@ -62,13 +62,15 @@ $temporaryAddress = $worker->temporary_address;
           </div>
         </div>
         <div class="col-sm-6">
-          <div class="form-group mb-1">
-            {!! Form::label('gender', t('worker.gender')) !!}
-            <div class="custom-control custom-radio">
+          <div class="form-group row">
+            <div class="col-sm-12">
+                {!! Form::label('gender', t('worker.gender')) !!}
+            </div>
+            <div class="custom-control custom-radio col-sm-4 pl-5 mb-2 pt-1">
               {!! Form::radio('gender', 1, true, ['class' => 'custom-control-input', 'id' => 'male']) !!}
               {!! Form::label('male', t('gender.male'), ['class' => 'custom-control-label']) !!}
             </div>
-            <div class="custom-control custom-radio">
+            <div class="custom-control custom-radio col-sm-4 pl-5 mb-2 pt-1">
               {!! Form::radio('gender', 0, $checked, ['class' => 'custom-control-input', 'id' => 'female']) !!}
               {!! Form::label('female', t('gender.female'), ['class' => 'custom-control-label']) !!}
             </div>

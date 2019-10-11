@@ -10,13 +10,25 @@ class DepartmentController extends Controller
 {
   public function index()
   {
+    $breadcrumb = [
+      'title' => t('breadcrumb.department'),
+      'home'  => t('breadcrumb.home'),
+      'list'  => t('breadcrumb.list')
+    ];
     $departments = Department::all();
-    return view('admin.departments.index', compact('departments'));
+    return view('admin.departments.index', compact('departments', 'breadcrumb'));
   }
 
   public function create()
   {
-    return view('admin.departments.create');
+    $breadcrumb = [
+      'title' => t('breadcrumb.department'),
+      'home'  => t('breadcrumb.home'),
+      'list'  => t('breadcrumb.list'),
+      'add'   => t('breadcrumb.add'),
+      'route' => route('departments.index')
+    ];
+    return view('admin.departments.create', compact('breadcrumb'));
   }
 
   public function store(DepartmentRequest $request)
@@ -32,8 +44,15 @@ class DepartmentController extends Controller
 
   public function edit($id)
   {
+    $breadcrumb = [
+      'title' => t('breadcrumb.department'),
+      'home'  => t('breadcrumb.home'),
+      'list'  => t('breadcrumb.list'),
+      'edit'  => t('breadcrumb.edit'),
+      'route' => route('departments.index')
+    ];
     $department = Department::findOrFail($id);
-    return view('admin.departments.edit', compact('department'));
+    return view('admin.departments.edit', compact('department', 'breadcrumb'));
   }
 
   public function update(Request $request, $id)

@@ -299,5 +299,18 @@
     "chart": "Biểu đồ thống kê nhân sự",
     "time": "Theo thời gian",
     "department": "Theo phòng ban"
+  },
+  "breadcrumb": {
+    "home": "Trang chủ",
+    "dashboard": "Thống kê, báo cáo",
+    "worker": "Quản lý người lao động",
+    "department": "Quản lý phòng ban",
+    "user": "Quản lý người dùng",
+    "role": "Quản lý nhóm, phân quyền",
+    "list": "Danh sách",
+    "add": "Thêm mới",
+    "edit": "Chỉnh sửa",
+    "show": "Chi tiết",
+    "permission": "Phân quyền"
   }
 }

@@ -42,3 +42,14 @@ ul.worker-info {
 .message-error {
   margin-bottom: 0 !important;
 }
+
+.form-group {
+  margin-bottom: 8px;
+  label {
+    font-weight: normal !important;
+    margin-bottom: 2px;
+  }
+  p {
+    margin-bottom: 5px;
+  }
+}

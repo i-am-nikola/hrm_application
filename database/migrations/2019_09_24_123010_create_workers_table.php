@@ -30,7 +30,7 @@ class CreateWorkersTable extends Migration
       $table->string('skill', 100)->nullable();
       $table->date('staring_date')->nullable();
       $table->date('leaving_date')->nullable();
-      $table->string('position', 100)->default('Nhân viên')->nullable();
+      $table->string('position', 100)->nullable()->default('Nhân viên');
       $table->tinyInteger('status')->default(1)->comment('0: thử việc, 1: chính thức, -1: nghỉ việc');
       $table->timestamps();
       $table->foreign('user_id')->references('id')->on('users');

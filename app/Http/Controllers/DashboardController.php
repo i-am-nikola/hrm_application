@@ -14,11 +14,15 @@ class DashboardController extends Controller
 {
   public function index()
   {
+    $breadcrumb = [
+      'title' => t('breadcrumb.dashboard')
+    ];
     $contractTypes = ContractType::all();
     $decisionTypes = DecisionType::all();
     return view('admin.dashboard.index', compact(
       'contractTypes',
-      'decisionTypes'
+      'decisionTypes',
+      'breadcrumb'
     ));
   }
 
@@ -104,7 +108,6 @@ class DashboardController extends Controller
     }
     return $count;
   }
-
 
   private function countWorkersLeavingByMonth($year)
   {

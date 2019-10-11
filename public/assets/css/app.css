@@ -39,6 +39,19 @@ ul.worker-info li {
   margin-bottom: 0 !important;
 }
 
+.form-group {
+  margin-bottom: 8px;
+}
+
+.form-group label {
+  font-weight: normal !important;
+  margin-bottom: 2px;
+}
+
+.form-group p {
+  margin-bottom: 5px;
+}
+
 .page {
   background-color: #fafafa;
   font-size: 13pt;
