@@ -20,25 +20,23 @@ class WorkerController extends Controller
     $staringFrom  = $request->staring_from ? formatDateToYmd($request->staring_from) : '1971-1-1';
     $staringTo    = $request->staring_to ? formatDateToYmd($request->staring_to) : now()->format('Y-m-d');
     $status       = $request->status;
-    $query = (new Worker)->newQuery()->get();
 
-    if ($request->filled('department_id') && $request->filled('status') && ($request->filled('staring_from') || $request->filled('staring_to'))) {
-      $workers = $query->where('department_id', $departmentId)->where('status', $status)->whereBetween('staring_date', [$staringFrom, $staringTo]);
-    } else if ($request->filled('department_id') && $request->filled('status')) {
-      $workers = $query->where('department_id', $departmentId)->where('status', $status);
-    } else if ($request->filled('status') && ($request->filled('staring_from') || $request->filled('staring_to'))) {
-      $workers = $query->where('status', $status)->whereBetween('staring_date', [$staringFrom, $staringTo]);
-    } else if ($request->filled('department_id') && ($request->filled('staring_from') || $request->filled('staring_to'))) {
-      $workers = $query->where('department_id', $departmentId)->whereBetween('staring_date', [$staringFrom, $staringTo])->where('status', '<>', -1);
-    } else if ($request->filled('staring_from') || $request->filled('staring_to')) {
-      $workers = $query->whereBetween('staring_date', [$staringFrom, $staringTo])->where('status', '<>', -1);
-    } else if ($request->filled('department_id')) {
-      $workers = $query->where('department_id', $departmentId)->where('status', '<>', -1);
-    } else if ($request->filled('status')) {
-      $workers = $query->where('status', $status);
-    }else {
-      $workers = $query->where('status', '<>', -1);
+    $workers = new Worker;
+
+    if ($request->filled('staring_from')) {
+      $workers = $workers->where('staring_date', '>=', $staringFrom);
     }
+    if ($request->filled('staring_to')) {
+      $workers = $workers->where('staring_date', '<=', $staringTo);
+    }
+    if ($request->filled('department_id')) {
+      $workers = $workers->where('department_id', $departmentId);
+    }
+    if ($request->filled('status')) {
+      $workers = $workers->where('status', $status);
+    }
+
+    $workers = $workers->get();
 
     return view('admin.workers.index', compact('workers', 'breadcrumb'));
   }
