@@ -75,19 +75,4 @@ class Worker extends Model
     ];
     return $input;
   }
-
-  public function filterStaring($staringFrom, $staringTo)
-  {
-    // return $this->whereBetween('staring_date', [$staringFrom, $staringTo]);
-  }
-
-  public function filterDepartment($departmentId)
-  {
-    // return $this->where('department_id', $departmentId);
-  }
-
-  public function filterStatus($status)
-  {
-    // return $this->where('status', $status);
-  }
 }
