@@ -53,3 +53,63 @@ ul.worker-info {
     margin-bottom: 5px;
   }
 }
+
+.avatar-wraper {
+  position: relative;
+  .avatar-label {
+    position: absolute;
+    top: 0px;
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+
+.profile-user-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.elevation-2 {
+  width: 2.1rem !important;
+  height: 2.1rem !important;
+  object-fit: cover;
+  object-position: center;
+}
+
+.user-table {
+  width: 1080 !important;
+  img.table-avatar {
+    border-radius: 50%;
+    width: 2.1rem !important;
+    height: 2.1rem !important;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.full-page {
+  background-image: url('../../public/assets/img/Fond-orange-HRM.jpg');
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-attachment: fixed;
+  .card {
+    padding: 10px;
+    background-color: transparent !important;
+    .card-body {
+      background-color: transparent !important;
+      .form-group {
+        margin-bottom: 14px;
+        input.form-control {
+          background-color: transparent !important;
+        }
+      }
+      label {
+        font-weight: normal;
+      }
+    }
+  }
+}
+
+

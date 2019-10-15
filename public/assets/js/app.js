@@ -925,6 +925,9 @@ $(document).ready(function () {
       url: url,
       data: data,
       dataType: "json",
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
+      },
       success: function success(response) {
         if (response.status === 'success') {
           toastr.success(response.flash_message);
@@ -950,6 +953,9 @@ $(document).ready(function () {
       url: url,
       data: data,
       dataType: "json",
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
+      },
       success: function success(response) {
         $('#update-password')[0].reset();
 
@@ -976,6 +982,43 @@ $(document).ready(function () {
       $('#update-profile input[name="' + key + '"]').after(message);
       $('#update-password input[name="' + key + '"]').next().remove();
       $('#update-password input[name="' + key + '"]').after(message);
+    });
+  }
+});
+$(document).ready(function () {
+  $('#avatar').on('change', function () {
+    if ($(this).val() !== '') {
+      uploadAvatar();
+    }
+  });
+
+  function uploadAvatar() {
+    var url = $('#avatar-form').attr('action');
+    var formData = new FormData($('#avatar-form')[0]);
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: formData,
+      dataType: "json",
+      contentType: false,
+      processData: false,
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
+      },
+      success: function success(response) {
+        console.log(response);
+
+        if (response.status === 'success') {
+          toastr.success(response.flash_message);
+          setTimeout(function () {
+            location.reload();
+          }, 1000);
+        } else if (response.status === 'error') {
+          var message = '<p class="message-error text-danger mt-1">' + response.errors.avatar + '</p>';
+          $('#avatar-form .message-error').remove();
+          $('#avatar-form input[name="avatar"]').after(message);
+        }
+      }
     });
   }
 });

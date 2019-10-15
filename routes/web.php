@@ -1,18 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-use App\Http\Controllers\DashboardController;
-
 Route::get('/', function () {
   return redirect()->route('login');
 });
@@ -24,6 +11,16 @@ Route::get('logout', 'LoginController@logout')->name('logout');
 Route::group(['prefix' => 'login'], function () {
   Route::get('/', 'LoginController@index')->name('login');
   Route::post('/', 'LoginController@authenticate')->name('authenticate');
+});
+
+// Auth::routes();
+
+// reset password
+Route::group(['prefix' => 'password', 'as' => 'password.'], function () {
+  Route::get('/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('request');
+  Route::post('/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('email');
+  Route::get('/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('reset');
+  Route::post('/reset', 'Auth\ResetPasswordController@reset')->name('update');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['guest', 'active-user']], function () {
@@ -106,5 +103,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest', 'active-user']], fu
     Route::get('/', 'ProfileController@index')->name('index');
     Route::put('/update-profile/{id}', 'ProfileController@updateProfile')->name('updateProfile');
     Route::put('/update-password/{id}', 'ProfileController@updatePassword')->name('updatePassword');
+    Route::post('/avatar/{id}', 'ProfileController@uploadAvatar')->name('uploadAvatar');
   });
 });

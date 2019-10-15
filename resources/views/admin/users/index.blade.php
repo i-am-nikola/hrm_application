@@ -13,10 +13,11 @@
           <h3 class="card-title">{{ t('user.list') }}</h3>
         </div>
         <div class="card-body">
-          <table class="table table-bordered table-striped data-table">
+          <table class="table table-bordered table-striped data-table user-table">
             <thead>
               <tr>
                 <th class="text-center">{{ t('th.index') }}</th>
+                <th class="text-center">{{ t('user.avatar') }}</th>
                 <th class="text-center">{{ t('user.name') }}</th>
                 <th class="text-center">{{ t('user.email') }}</th>
                 <th class="text-center">{{ t('user.role') }}</th>

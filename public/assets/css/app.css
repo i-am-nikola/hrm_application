@@ -52,6 +52,77 @@ ul.worker-info li {
   margin-bottom: 5px;
 }
 
+.avatar-wraper {
+  position: relative;
+}
+
+.avatar-wraper .avatar-label {
+  position: absolute;
+  top: 0px;
+  right: 50%;
+  transform: translateX(50%);
+}
+
+.profile-user-img {
+  width: 100px;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.elevation-2 {
+  width: 2.1rem !important;
+  height: 2.1rem !important;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.user-table {
+  width: 1080 !important;
+}
+
+.user-table img.table-avatar {
+  border-radius: 50%;
+  width: 2.1rem !important;
+  height: 2.1rem !important;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.full-page {
+  background-image: url(/images/Fond-orange-HRM.jpg?e1eb70a5de1b112556036e93a5462030);
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-attachment: fixed;
+}
+
+.full-page .card {
+  padding: 10px;
+  background-color: transparent !important;
+}
+
+.full-page .card .card-body {
+  background-color: transparent !important;
+}
+
+.full-page .card .card-body .form-group {
+  margin-bottom: 14px;
+}
+
+.full-page .card .card-body .form-group input.form-control {
+  background-color: transparent !important;
+}
+
+.full-page .card .card-body label {
+  font-weight: normal;
+}
+
 .page {
   background-color: #fafafa;
   font-size: 13pt;

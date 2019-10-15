@@ -32,7 +32,8 @@
     "login": "Đăng nhập",
     "logout": "Đăng xuất",
     "print": "In",
-    "filter": "Lọc"
+    "filter": "Lọc",
+    "reset_password": "Khôi phục mật khẩu"
   },
   "th": {
     "index": "STT",
@@ -58,7 +59,8 @@
     "exists": " đã tạm khóa. Liên hệ quản trị viên để biết thêm chi tiết",
     "confirm": "không khớp với mật khẩu mới",
     "different": "phải khác với mật khẩu hiện tại",
-    "incorrect_password": "Mật khẩu hiện tại không đúng"
+    "incorrect_password": "Mật khẩu hiện tại không đúng",
+    "image": "File upload không đúng định dạng hình ảnh (jpg, jpeg, png, gif, svg)"
   },
   "mail": {
     "hello": "Xin chào",
@@ -80,7 +82,10 @@
     "account": "Tài khoản",
     "message": {
       "info": "Cập nhật thông tin cá nhân thành công!",
-      "password": "Thay đổi mật khẩu thành công!"
+      "password": "Thay đổi mật khẩu thành công!",
+      "upload_avatar": "Thay đổi avatar thành công!",
+      "error_avatar": "File upload không đúng định dạng hình ảnh (jpg, jpeg, png, gif, svg)",
+      "delete_avatar": "Xóa avatar thành công!"
     }
   },
   "user": {
@@ -88,6 +93,7 @@
     "list": "Danh sách người dùng",
     "create": "Thêm mới người dùng",
     "update": "Cập nhật người dùng",
+    "avatar": "Avatar",
     "name": "Họ và tên",
     "email": "Địa chỉ email",
     "role": "Vai trò",
@@ -312,5 +318,9 @@
     "edit": "Chỉnh sửa",
     "show": "Chi tiết",
     "permission": "Phân quyền"
+  },
+  "password": {
+    "forgot": "Quên mật khẩu",
+    "content_forgot": "Bạn hãy nhập email mà bạn sử dụng trong hệ thống. Chúng tôi sẽ gửi một email xác nhận đến địa chỉ này"
   }
 }

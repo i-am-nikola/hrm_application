@@ -20,8 +20,14 @@ $role = $user->role->name ? $user->role->name : '';
             </div>
             <h3 class="profile-username text-center">{{ $name }}</h3>
             <p class="text-muted text-center">{{ $email }}</p>
-
-            <a href="#" class="btn btn-primary btn-block"><b>Đổi avatar</b></a>
+            {!! Form::open(['route' => ['profile.uploadAvatar', $user->id], 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'avatar-form']) !!}
+            <div class="form-group">
+              <div class="custom-file avatar-wraper">
+                {!! Form::file('avatar', ['class' => 'custom-file-input', 'id' => 'avatar']) !!}
+                {!! Form::label('avatar', 'Đổi avatar', ['class' => 'btn btn-primary avatar-label']) !!}
+              </div>
+            </div>
+            {!! Form::close() !!}
           </div>
         </div>
       </div>

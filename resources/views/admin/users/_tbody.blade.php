@@ -6,6 +6,9 @@ $class = $user->status ? 'success' : 'secondary';
 @endphp
 <tr>
   <td class="text-center">{{ $key + 1 }}</td>
+  <td class="text-center">
+    <img alt="Avatar" class="table-avatar" src={{ asset('assets/img/' . $user->avatar) }}>
+  </td>
   <td>{{ $user->name }}</td>
   <td>{{ $user->email }}</td>
   <td>{{ $user->role->name }}</td>

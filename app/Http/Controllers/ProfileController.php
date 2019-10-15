@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
 {
@@ -66,5 +67,43 @@ class ProfileController extends Controller
         }
       }
     }
+  }
+
+  public function uploadAvatar(Request $request, $id)
+  {
+    $validator = Validator::make(
+      $request->all(),
+      ['avatar' => 'image'],
+      ['avatar.image' => t('validate.image')]
+    );
+
+    if ($validator->fails()) {
+      return response()->json(['status' => 'error', 'errors' => $validator->errors()]);
+    } else {
+      $user = User::findOrFail($id);
+      if ($user->avatar !== 'avatar6.png') {
+        File::delete('assets/img/' . $user->avatar);
+      }
+
+      $filename = $this->moveAvatar($request->file('avatar'));
+      $user->avatar = $filename;
+      if ($user->save()) {
+        return response()->json([
+          'filename' => $filename,
+          'status' => 'success',
+          'flash_message' => t('profile.message.upload_avatar')
+        ]);
+      }
+    }
+  }
+
+  private function moveAvatar($image)
+  {
+    $extension = $image->getClientOriginalExtension();
+    $filename = uniqid() . '_' . time() . '.' . $extension;
+    if ($image) {
+      $image->move('assets/img/', $filename);
+    }
+    return $filename;
   }
 }
