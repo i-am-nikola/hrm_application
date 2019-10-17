@@ -11,7 +11,7 @@ class WorkersTableSeeder extends Seeder
       'user_id'           => 1,
       'department_id'     => 2,
       'education_id'      => 4,
-      'record_ids'         => '1,2,3,4,5,6',
+      'record_ids'        => '1,2,3,4,5,6',
       'code'              => 'KT0001',
       'name'              => 'Lê Thanh Hưng',
       'birthday'          => '1992-1-1',
@@ -26,8 +26,8 @@ class WorkersTableSeeder extends Seeder
       'graduate_school'   => 'Đại học bách khoa Đà Nẵng',
       'certificate'       => 'Bằng kỹ sư',
       'skill'             => 'Kỹ sư công nghệ thông tin',
-      'staring_date'        => '2018-1-1',
-      'leaving_date'          => null,
+      'staring_date'      => '2018-1-1',
+      'leaving_date'      => null,
       'status'            => 1
     ];
 
@@ -35,7 +35,7 @@ class WorkersTableSeeder extends Seeder
       'user_id'           => 2,
       'department_id'     => 1,
       'education_id'      => 3,
-      'record_ids'         => '1,3,4,6',
+      'record_ids'        => '1,3,4,6',
       'code'              => 'HCNS0001',
       'name'              => 'Trần Kim Ánh',
       'birthday'          => '1996-1-1',
@@ -50,8 +50,8 @@ class WorkersTableSeeder extends Seeder
       'graduate_school'   => 'Cao đẳng văn hóa du lịch Đà Nẵng',
       'certificate'       => 'Bằng cử nhân',
       'skill'             => 'Lễ tân',
-      'staring_date'        => '2019-1-1',
-      'leaving_date'          => null,
+      'staring_date'      => '2019-1-1',
+      'leaving_date'      => null,
       'status'            => 0
     ];
 
@@ -59,7 +59,7 @@ class WorkersTableSeeder extends Seeder
       'user_id'           => 2,
       'department_id'     => 4,
       'education_id'      => 4,
-      'record_ids'         => '1,4,6',
+      'record_ids'        => '1,4,6',
       'code'              => 'KD0001',
       'name'              => 'Lê Tự Bình',
       'birthday'          => '1994-1-1',
@@ -74,8 +74,8 @@ class WorkersTableSeeder extends Seeder
       'graduate_school'   => 'Đại học kinh tế',
       'certificate'       => 'Bằng cử nhân',
       'skill'             => 'Quản trị kinh doanh',
-      'staring_date'        => '2017-1-1',
-      'leaving_date'          => '2019-1-1',
+      'staring_date'      => '2017-1-1',
+      'leaving_date'      => '2019-1-1',
       'status'            => -1
     ];
 

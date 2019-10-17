@@ -21,6 +21,7 @@ Route::group(['prefix' => 'password', 'as' => 'password.'], function () {
   Route::post('/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('email');
   Route::get('/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('reset');
   Route::post('/reset', 'Auth\ResetPasswordController@reset')->name('update');
+  // Route::get('/reset/success', 'Auth\ResetPasswordController@resetSuccess')->name('resetSucccess');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['guest', 'active-user']], function () {

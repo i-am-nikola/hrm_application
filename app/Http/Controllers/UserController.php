@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Mail\UserMail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -39,10 +40,10 @@ class UserController extends Controller
   public function store(UserRequest $request)
   {
     $password = Str::random(8);
-    $user = new User;
-    $input = $user->getInputUser($request, $password);
+    $users = new User;
+    $input = $users->getInputUser($request, $password);
 
-    if ($user->create($input)) {
+    if ($users->create($input)) {
       $this->sendInfoLoginToEmail($request, $password);
       return redirect()->route('users.index')
         ->with(['flash_level' => 'success', 'flash_message' => t('user.message.create')]);
@@ -80,13 +81,14 @@ class UserController extends Controller
   public function update(Request $request, $id)
   {
     $userRequest = new UserRequest;
-    $this->validate(
-      $request,
+    Validator::make(
+      $request->all(),
       $userRequest->rules(true, $id),
       $userRequest->messages(),
       $userRequest->attributes()
-    );
+    )->validate();
     $user = User::find($id);
+
     if ($user->update($request->all())) {
       return redirect()->route('users.index')
         ->with(['flash_level' => 'success', 'flash_message' => t('user.message.update')]);

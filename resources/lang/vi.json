@@ -33,7 +33,9 @@
     "logout": "Đăng xuất",
     "print": "In",
     "filter": "Lọc",
-    "reset_password": "Khôi phục mật khẩu"
+    "reset_password": "Khôi phục mật khẩu",
+    "confirm": "Xác nhận",
+    "back_login": "Trở lại trang đăng nhập"
   },
   "th": {
     "index": "STT",
@@ -321,6 +323,15 @@
   },
   "password": {
     "forgot": "Quên mật khẩu",
-    "content_forgot": "Bạn hãy nhập email mà bạn sử dụng trong hệ thống. Chúng tôi sẽ gửi một email xác nhận đến địa chỉ này"
+    "content_forgot": "Bạn hãy nhập email mà bạn sử dụng trong hệ thống. Chúng tôi sẽ gửi một email xác nhận đến địa chỉ này",
+    "reset": "Cài đặt mật khẩu mới",
+    "new": "Mật khẩu mới",
+    "confirm": "Xác nhận mật khẩu",
+    "email": "Địa chỉ email",
+    "exists": "Địa chỉ email không tồn tại trong hệ thống, vui lòng nhập email khác!",
+    "incorrect": "Địa chỉ email không đúng, vui lòng nhập chính xác email bạn sử dụng trong hệ thống",
+    "email_success": "Gửi thành công, bạn vui lòng kiểm tra hộp thư điện tử và kích hoạt link khôi phục mật khẩu được đính kèm",
+    "reset_success": "Cài đặt mật khẩu thành công!",
+    "reset_success_content": "Mật khẩu của bạn đã được cài đặt thành công. Xin vui lòng sử dụng thông tin mới để đăng nhập."
   }
 }
