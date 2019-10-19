@@ -15,7 +15,7 @@ class CreateDecisionsTable extends Migration
       $table->unsignedInteger('user_id');
       $table->string('code', 50)->unique();
       $table->string('reason')->nullable();
-      $table->string('formality')->nullable();
+      $table->string('formality', 100)->nullable();
       $table->integer('old_department')->nullable();
       $table->integer('new_department')->nullable();
       $table->string('old_position', 100)->nullable();

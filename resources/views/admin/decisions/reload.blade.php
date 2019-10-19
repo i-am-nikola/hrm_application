@@ -1,5 +1,6 @@
 <div class="mb-2">
-  <button class=" btn btn-primary" data-toggle="modal" data-target="#modal-create-decision" data-url={{ route('decisions.create') }}>
+  <button class=" btn btn-primary" data-toggle="modal" data-target="#modal-create-decision"
+    data-url={{ route('decisions.create') }}>
     <i class="fa fa-plus"></i> {{ t('decision.create') }}
   </button>
 </div>
@@ -7,28 +8,26 @@
   @if ($decisions->isNotEmpty())
   @foreach ($decisions as $key => $decision)
   @php
-  $code = isset($decision->code) ? $decision->code : '';
-  $oldSalary = isset($decision->old_salary) ? $decision->old_salary : '';
-  $newSalary = isset($decision->new_salary) ? $decision->new_salary : '';
-  $oldPosition = isset($decision->old_position) ? $decision->old_position : '';
-  $newPosition = isset($decision->new_position) ? $decision->new_position : '';
-  $effectiveDate = (isset($decision->effective_date) && $decision->effective_date !== null) ?
-  $decision->effective_date->format('d/m/Y') : '';
-  $signedDate = (isset($decision->sign_date) && $decision->sign_date !== null) ? $decision->sign_date->format('d/m/Y') :
-  '';
-  $leavingDate = (isset($decision->leaving_date) && $decision->leaving_date !== null) ?
-  $decision->leaving_date->format('d/m/Y') : '';
+  $code = $decision->code ? $decision->code : '';
+  $oldSalary = $decision->old_salary ? $decision->old_salary : '';
+  $newSalary = $decision->new_salary ? $decision->new_salary : '';
+  $oldPosition = $decision->old_position ? $decision->old_position : '';
+  $newPosition = $decision->new_position ? $decision->new_position : '';
   $status = $decision->status ? t('decision.signed') : t('decision.not_signed');
   $class = $decision->status ? 'info' : 'secondary';
-  $reason = isset($decision->reason) ? $decision->reason : '';
-  $formality = isset($decision->formality) ? $decision->formality : '';
-  $oldDepartment = isset($decision->old_department) ? $decision->old_department : null;
-  $newDepartment = isset($decision->new_department) ? $decision->new_department : null;
+  $reason = $decision->reason ? $decision->reason : '';
+  $formality = $decision->formality ? $decision->formality : '';
+  $oldDepartment = $decision->old_department ? $decision->old_department : null;
+  $newDepartment = $decision->new_department ? $decision->new_department : null;
+  $effectiveDate = $decision->effective_date ? $decision->effective_date->format('d/m/Y'): '';
+  $signedDate = $decision->sign_date ? $decision->sign_date->format('d/m/Y') : '';
+  $leavingDate = $decision->leaving_date ? $decision->leaving_date->format('d/m/Y') : '';
   @endphp
   <div class="card card-{{ $class }}">
     <div class="card-header p-1">
       <h4 class="card-title">
-        <button class="btn text-white" data-toggle="collapse" data-target="#collapse-{{ $key }}" aria-expanded="true" aria-controls="collapse{{ $key }}">
+        <button class="btn text-white" data-toggle="collapse" data-target="#collapse-{{ $key }}" aria-expanded="true"
+          aria-controls="collapse{{ $key }}">
           V/v: {{ $decision->decisionType->name }} <span class="small">({{ $status }})</span>
         </button>
       </h4>
@@ -65,22 +64,22 @@
             <p class="text-muted">{{ t('decision.sign_date') . ': ' . $signedDate }}</p>
             @if ($effectiveDate)
             <p class="text-muted">{{ t('decision.effective_date') . ': ' . $effectiveDate }}</p>
-            @else
-            <p class="text-muted">{{ t('decision.effective_date') . ': ' . 'Kể từ ngày ký' }}</p>
             @endif
-
           </div>
         </div>
       </div>
 
       <div class="card-footer">
-        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-decision-document" data-url={{ route('decisions.document', $decision->id) }}>
+        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-decision-document"
+          data-url={{ route('decisions.document', $decision->id) }}>
           <i class="fas fa-print"></i>
         </button>
-        <button class="btn btn-warning btn-sm" id="js-contract-edit" data-toggle="modal" data-target="#modal-edit-decision" data-url={{ route('decisions.edit', $decision->id) }}>
+        <button class="btn btn-warning btn-sm" id="js-contract-edit" data-toggle="modal"
+          data-target="#modal-edit-decision" data-url={{ route('decisions.edit', $decision->id) }}>
           <i class="fas fa-pencil-alt"></i>
         </button>
-        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-confirm-delete" data-url={{ route('decisions.destroy', $decision->id) }} }}>
+        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-confirm-delete"
+          data-url={{ route('decisions.destroy', $decision->id) }} }}>
           <i class="fas fa-trash"></i>
         </button>
       </div>

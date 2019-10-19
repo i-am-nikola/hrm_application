@@ -3,7 +3,7 @@
 <div class="login-box">
   <div class="card">
     <div class="card-body login-card-body pt-4">
-      {!! Form::open(['route' => 'authenticate', 'method' => 'POST']) !!}
+      {!! Form::open(['route' => 'authenticate', 'method' => 'POST', 'id' => 'login-form']) !!}
       <div class="form-group">
         <div class="input-group">
           {!! Form::text('email', old('email'), ['class' => 'form-control', 'placeholder' => t('login.email')]) !!}

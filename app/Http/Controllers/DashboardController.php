@@ -12,13 +12,24 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+  protected $departments;
+  protected $decisionTypes;
+  protected $contractTypes;
+
+  public function __construct(Department $departments, DecisionType $decisionTypes, ContractType $contractTypes)
+  {
+    $this->departments   = $departments->all();
+    $this->decisionTypes = $decisionTypes->all();
+    $this->contractTypes = $contractTypes->all();
+  }
+
   public function index()
   {
     $breadcrumb = [
       'title' => t('breadcrumb.dashboard')
     ];
-    $contractTypes = ContractType::all();
-    $decisionTypes = DecisionType::all();
+    $contractTypes = $this->contractTypes;
+    $decisionTypes = $this->decisionTypes;
     return view('admin.dashboard.index', compact(
       'contractTypes',
       'decisionTypes',
@@ -34,7 +45,7 @@ class DashboardController extends Controller
     $countLeaving   = $this->countWorkersLeavingByMonth($year);
     $countContracts = $this->countContracts($month, $year);
     $countDecisions = $this->countDecisions($month, $year);
-    $departments = Department::all()->pluck('name');
+    $departments = $this->departments->pluck('name');
     $countWorkerStaringByDepartments = $this->countWorkerStaringByDepartment($month, $year);
     $countWorkerLeavingByDepartments = $this->countWorkerLeavingByDepartment($month, $year);
 
@@ -51,7 +62,7 @@ class DashboardController extends Controller
 
   private function countWorkerLeavingByDepartment($month, $year)
   {
-    $departments = Department::all();
+    $departments = $this->departments;
     foreach ($departments as $department) {
       if ($month) {
         $count[] = Worker::where('department_id', $department->id)
@@ -66,7 +77,7 @@ class DashboardController extends Controller
 
   private function countWorkerStaringByDepartment($month, $year)
   {
-    $departments = Department::all();
+    $departments = $this->departments;
     foreach ($departments as $department) {
       if ($month) {
         $count[] = Worker::where('department_id', $department->id)
@@ -81,7 +92,7 @@ class DashboardController extends Controller
 
   private function countDecisions($month, $year)
   {
-    $decisionTypes = DecisionType::all();
+    $decisionTypes = $this->decisionTypes;
     foreach ($decisionTypes as $decisionType) {
       if ($month) {
         $count[$decisionType->id] = Decision::where('decision_type_id', $decisionType->id)
@@ -96,7 +107,7 @@ class DashboardController extends Controller
 
   private function countContracts($month, $year)
   {
-    $contractTypes = ContractType::all();
+    $contractTypes = $this->contractTypes;
     foreach ($contractTypes as $contractType) {
       if ($month) {
         $count[$contractType->id] = Contract::where('contract_type_id', $contractType->id)

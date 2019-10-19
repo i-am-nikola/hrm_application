@@ -670,6 +670,7 @@ $(document).ready(function () {
       url: $('#decision').data('url'),
       dataType: "html",
       success: function success(response, status, xhr) {
+        console.log(response);
         var contentType = xhr.getResponseHeader("content-type") || "";
 
         if (contentType.indexOf('html') > -1) {

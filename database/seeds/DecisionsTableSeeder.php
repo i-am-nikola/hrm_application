@@ -80,7 +80,7 @@ class DecisionsTableSeeder extends Seeder
         'reason'            => '',
         'formality'         => '',
         'old_department'    => 4,
-        'new_department'    => 5,
+        'new_department'    => 3,
         'old_position'      => '',
         'new_position'      => '',
         'old_salary'        => '',
