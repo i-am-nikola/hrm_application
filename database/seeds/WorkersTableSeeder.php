@@ -8,6 +8,6 @@ class WorkersTableSeeder extends Seeder
 {
   public function run()
   {
-    factory(Worker::class, 100)->create();
+    factory(Worker::class, 10)->create();
   }
 }
