@@ -15,11 +15,10 @@ class CheckPermissions
   {
     // get role of user login
     $userLogin = User::findOrFail(Auth::user()->id);
-    $roleOfUserLogin = $userLogin->role->id;
+    $roleOfUserLogin = $userLogin->role;
 
     // get permissions of role
-    $role = Role::findOrFail($roleOfUserLogin);
-    $permissionsOfRole = $role->permissions->pluck('id')->unique();
+    $permissionsOfRole = $roleOfUserLogin->permissions->pluck('id')->unique();
 
     $checkPermission = Permission::where('slug', $permission)->value('id');
 

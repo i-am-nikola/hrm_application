@@ -123,6 +123,10 @@ ul.worker-info li {
   font-weight: normal;
 }
 
+.main-sidebar {
+  position: fixed !important;
+}
+
 .page {
   background-color: #fafafa;
   font-size: 13pt;

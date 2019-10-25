@@ -7,10 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Contract extends Model
 {
   protected $table    = 'contracts';
-  protected $dates    = ['effective_date', 'expiry_date', 'sign_date'];
+  protected $dates    = [
+    'effective_date',
+    'expiry_date',
+    'sign_date'
+  ];
   protected $fillable = [
-    'contract_type_id', 'worker_id', 'user_id', 'code', 'salary',
-    'effective_date', 'expiry_date', 'sign_date', 'status'
+    'contract_type_id',
+    'worker_id',
+    'user_id',
+    'code',
+    'salary',
+    'effective_date',
+    'expiry_date',
+    'sign_date',
+    'status'
   ];
 
   public function worker()

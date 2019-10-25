@@ -7,12 +7,35 @@ use Illuminate\Database\Eloquent\Model;
 class Worker extends Model
 {
   protected $table    = 'workers';
-  protected $dates    = ['birthday', 'issued_on', 'staring_date', 'leaving_date'];
+  protected $dates    = [
+    'birthday',
+    'issued_on',
+    'staring_date',
+    'leaving_date'
+  ];
   protected $fillable = [
-    'user_id', 'department_id', 'position', 'education_id', 'record_ids',
-    'code', 'name', 'birthday', 'gender', 'id_no', 'issued_on', 'issued_by',
-    'email', 'phone', 'permanent_address', 'temporary_address', 'graduate_school',
-    'certificate', 'skill', 'staring_date', 'leaving_date', 'status'
+    'user_id',
+    'department_id',
+    'position',
+    'education_id',
+    'record_ids',
+    'code',
+    'name',
+    'birthday',
+    'gender',
+    'id_no',
+    'issued_on',
+    'issued_by',
+    'email',
+    'phone',
+    'permanent_address',
+    'temporary_address',
+    'graduate_school',
+    'certificate',
+    'skill',
+    'staring_date',
+    'leaving_date',
+    'status'
   ];
 
   public function department()

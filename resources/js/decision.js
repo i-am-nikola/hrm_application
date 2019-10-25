@@ -13,8 +13,6 @@ $(document).ready(() => {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
       },
       success: function (response) {
-        console.log(response);
-
         if (response.status === 'success') {
           $('#modal-create-decision').modal('hide');
           toastr.success(response.flash_message);
@@ -139,6 +137,7 @@ $(document).ready(() => {
     $('#js-decision-create')[0].reset();
     $('#js-decision-update')[0].reset();
     $('.message-error').remove();
+    $('.decision-form select[name="decision_type_id"]').attr('style', '');
   })
 
   // onChange decision type
@@ -168,21 +167,25 @@ $(document).ready(() => {
       data: { id: worker_id },
       dataType: "json",
       success: function (response) {
-        decisionTypeIdElemt.on('change', e => {
-          let value = $(e.target).val();
-          if (value == 1 || value == 4 || value == 5) {
-            oldPositionElemt.val('');
-            oldDepartmentElemt.val(0)
-          }
-          if (value == 2) {
-            oldPositionElemt.val(response.position);
-            oldDepartmentElemt.val(response.department_id)
-          }
-          if (value == 3) {
-            oldPositionElemt.val(response.position);
-            oldDepartmentElemt.val(0);
-          }
-        })
+        if (response.status === 'fails') {
+          toastr.warning(response.flash_message);
+        } else {
+          decisionTypeIdElemt.on('change', e => {
+            let value = $(e.target).val();
+            if (value == 1 || value == 4 || value == 5) {
+              oldPositionElemt.val('');
+              oldDepartmentElemt.val(0)
+            }
+            if (value == 2) {
+              oldPositionElemt.val(response.position);
+              oldDepartmentElemt.val(response.department_id)
+            }
+            if (value == 3) {
+              oldPositionElemt.val(response.position);
+              oldDepartmentElemt.val(0);
+            }
+          })
+        }
       }
     });
   })
@@ -196,6 +199,9 @@ $(document).ready(() => {
       dataType: "json",
       success: response => {
         $('.decision-form select[name="decision_type_id"]').attr("style", "pointer-events: none;");
+        if (response.status === 'fails') {
+          toastr.warning(response.flash_message);
+        }
         displayElemtCondition(response.decision_type_id);
         $.each(response, (key, value) => {
           $('.decision-form input[name="' + key + '"]').val(value);

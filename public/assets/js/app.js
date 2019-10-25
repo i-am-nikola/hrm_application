@@ -264,8 +264,6 @@ $(document).ready(function () {
       url: url,
       dataType: "json",
       success: function success(response) {
-        console.log(response);
-
         if (response.status === 'fails') {
           toastr.warning(response.flash_message);
         }
@@ -402,6 +400,11 @@ $(document).ready(function () {
       url: url,
       dataType: "json",
       success: function success(response) {
+        if (response.status === 'fails') {
+          $('#modal-edit-contract').modal('hide');
+          toastr.warning(response.flash_message);
+        }
+
         $.each(response, function (key, value) {
           $('#js-contract-update input[name="' + key + '"]').val(value);
           $('#js-contract-update select[name="' + key + '"]').val(value);
@@ -594,8 +597,6 @@ $(document).ready(function () {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
       },
       success: function success(response) {
-        console.log(response);
-
         if (response.status === 'success') {
           $('#modal-create-decision').modal('hide');
           toastr.success(response.flash_message);
@@ -720,6 +721,7 @@ $(document).ready(function () {
     $('#js-decision-create')[0].reset();
     $('#js-decision-update')[0].reset();
     $('.message-error').remove();
+    $('.decision-form select[name="decision_type_id"]').attr('style', '');
   }); // onChange decision type
 
   $('.decision-form select[name="decision_type_id"]').on('change', function (e) {
@@ -749,24 +751,28 @@ $(document).ready(function () {
       },
       dataType: "json",
       success: function success(response) {
-        decisionTypeIdElemt.on('change', function (e) {
-          var value = $(e.target).val();
+        if (response.status === 'fails') {
+          toastr.warning(response.flash_message);
+        } else {
+          decisionTypeIdElemt.on('change', function (e) {
+            var value = $(e.target).val();
 
-          if (value == 1 || value == 4 || value == 5) {
-            oldPositionElemt.val('');
-            oldDepartmentElemt.val(0);
-          }
+            if (value == 1 || value == 4 || value == 5) {
+              oldPositionElemt.val('');
+              oldDepartmentElemt.val(0);
+            }
 
-          if (value == 2) {
-            oldPositionElemt.val(response.position);
-            oldDepartmentElemt.val(response.department_id);
-          }
+            if (value == 2) {
+              oldPositionElemt.val(response.position);
+              oldDepartmentElemt.val(response.department_id);
+            }
 
-          if (value == 3) {
-            oldPositionElemt.val(response.position);
-            oldDepartmentElemt.val(0);
-          }
-        });
+            if (value == 3) {
+              oldPositionElemt.val(response.position);
+              oldDepartmentElemt.val(0);
+            }
+          });
+        }
       }
     });
   }); // get data edit
@@ -779,6 +785,11 @@ $(document).ready(function () {
       dataType: "json",
       success: function success(response) {
         $('.decision-form select[name="decision_type_id"]').attr("style", "pointer-events: none;");
+
+        if (response.status === 'fails') {
+          toastr.warning(response.flash_message);
+        }
+
         displayElemtCondition(response.decision_type_id);
         $.each(response, function (key, value) {
           $('.decision-form input[name="' + key + '"]').val(value);

@@ -1,3 +1,6 @@
+@php
+$departments = getListDepartments(t('department.default'));
+@endphp
 <div class="modal-body">
   <div class="row">
     <div class="col-md-12">
@@ -14,7 +17,7 @@
             </div>
             <div class="form-group">
               {!! Form::label('effective_date', t('decision.effective_date')) !!}
-              {!! Form::text('effective_date', '', ['class' => 'form-control reservation']) !!}
+              {!! Form::text('effective_date', date('d/m/Y'), ['class' => 'form-control reservation']) !!}
             </div>
             <div class="form-group">
               {!! Form::label('sign_date', t('decision.sign_date')) !!}
@@ -44,11 +47,11 @@
             </div>
             <div class="form-group change-form">
               {!! Form::label('old_department', t('decision.old_department')) !!}
-              {!! Form::select('old_department', getListDepartments(t('department.default')), 0, ['class' => 'form-control']) !!}
+              {!! Form::select('old_department', $departments, 0, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group change-form">
               {!! Form::label('new_department', t('decision.new_department')) !!}
-              {!! Form::select('new_department', getListDepartments(t('department.default')), 0, ['class' =>
+              {!! Form::select('new_department', $departments, 0, ['class' =>
               'form-control']) !!}
             </div>
             <div class="form-group change-form">

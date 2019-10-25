@@ -21,7 +21,7 @@ class WorkerController extends Controller
     $staringTo    = $request->staring_to ? formatDateToYmd($request->staring_to) : now()->format('Y-m-d');
     $status       = $request->status;
 
-    $workers = new Worker;
+    $workers = Worker::orderBy('id', 'desc');
 
     if ($request->filled('staring_from')) {
       $workers = $workers->where('staring_date', '>=', $staringFrom);

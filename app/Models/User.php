@@ -8,7 +8,14 @@ use Illuminate\Contracts\Auth\CanResetPassword;
 class User extends Model
 {
   protected $table    = 'users';
-  protected $fillable = ['name', 'email', 'role_id', 'password', 'status', 'remember_token'];
+  protected $fillable = [
+    'name',
+    'email',
+    'role_id',
+    'password',
+    'status',
+    'remember_token'
+  ];
 
   public function role()
   {

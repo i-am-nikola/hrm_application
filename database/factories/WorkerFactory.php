@@ -11,7 +11,7 @@ use Faker\Generator as Faker;
 $factory->define(Worker::class, function (Faker $faker) {
     return [
       'department_id'     => Department::all()->random()->id,
-      'education_id'      => Education ::all()->random()->id,
+      'education_id'      => Education::all()->random()->id,
       'record_ids'        => $faker->randomElement(['1,2,3,4,5,6', '1,2,3,5', '2,4,6']),
       'code'              => $faker->unique()->postcode,
       'name'              => $faker->name,

@@ -37,7 +37,7 @@ $(document).ready(() => {
         departmentChart(response.departments, response.countWorkerStaringByDepartments, response.countWorkerLeavingByDepartments);
       }
     });
-    
+
     $('#js-time-chart').remove();
     $('#time-chart').append('<canvas id="js-time-chart" style="height:230px; min-height:230px"></canvas>');
     $('#js-department-chart').remove();

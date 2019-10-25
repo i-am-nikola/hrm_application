@@ -34,8 +34,7 @@ $(document).ready(() => {
       url: url,
       dataType: "json",
       success: function (response) {
-        console.log(response);
-        if(response.status === 'fails'){
+        if (response.status === 'fails') {
           toastr.warning(response.flash_message);
         }
       }
@@ -43,7 +42,7 @@ $(document).ready(() => {
 
   })
 
-// create contract
+  // create contract
   $(document).on('submit', '#js-contract-form', e => {
     let url = $(e.target).attr('action');
     let data = $(e.target).serialize();
@@ -173,6 +172,10 @@ $(document).ready(() => {
       url: url,
       dataType: "json",
       success: response => {
+        if (response.status === 'fails') {
+          $('#modal-edit-contract').modal('hide');
+          toastr.warning(response.flash_message);
+        }
         $.each(response, (key, value) => {
           $('#js-contract-update input[name="' + key + '"]').val(value);
           $('#js-contract-update select[name="' + key + '"]').val(value);

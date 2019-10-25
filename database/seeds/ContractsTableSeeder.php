@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Contract;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -15,42 +16,6 @@ class ContractsTableSeeder extends Seeder
     ];
     DB::table('contract_types')->insert($contractTypes);
 
-    // contracts seeder
-    $contracts = [
-      [
-        'contract_type_id'  => 3,
-        'worker_id'         => 1,
-        'user_id'           => 1,
-        'code'              => 'HĐLĐ001',
-        'salary'            => '10000000',
-        'effective_date'    => '2017-1-1',
-        'expiry_date'       => null,
-        'sign_date'         => '2017-1-1',
-        'status'            => 1
-      ],
-      [
-        'contract_type_id'  => 2,
-        'worker_id'         => 2,
-        'user_id'           => 1,
-        'code'              => 'HĐLĐ002',
-        'salary'            => '8000000',
-        'effective_date'    => '2019-1-1',
-        'expiry_date'       => '2020-1-1',
-        'sign_date'         => '2019-1-1',
-        'status'            => 0
-      ],
-      [
-        'contract_type_id'  => 1,
-        'worker_id'         => 3,
-        'user_id'           => 1,
-        'code'              => 'HĐLĐ003',
-        'salary'            => '6000000',
-        'effective_date'    => '2017-1-1',
-        'expiry_date'       => '2017-1-3',
-        'sign_date'         => '2017-1-1',
-        'status'            => 1
-      ]
-    ];
-    DB::table('contracts')->insert($contracts);
+    factory(Contract::class, 150)->create();
   }
 }
