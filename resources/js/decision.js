@@ -103,8 +103,6 @@ $(document).ready(() => {
       url: $('#decision').data('url'),
       dataType: "html",
       success: function (response, status, xhr) {
-        console.log(response);
-
         let contentType = xhr.getResponseHeader("content-type") || "";
         if (contentType.indexOf('html') > -1) {
           $('#decision').html(response);

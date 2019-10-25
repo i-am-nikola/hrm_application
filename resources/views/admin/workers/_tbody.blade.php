@@ -15,7 +15,7 @@ $class = $worker->status ? 'success' : 'warning';
   <td>{{ $worker->name }}</td>
   <td>{{ $worker->phone }}</td>
   <td>{{ $worker->staring_date !== null ? $worker->staring_date->format('d/m/Y') : '' }}</td>
-  <td>{{ $worker->department->name }}</td>
+  {{-- <td>{{ getDepartmentNameById($worker->department_id) }}</td> --}}
   <td>{{ $worker->position }}</td>
   <td class="text-center">
     <span class="badge badge-{{ $class }}">{{ $status }}</span>

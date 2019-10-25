@@ -1,7 +1,7 @@
 <div class="modal fade" id="modal-create-contract">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      {!! Form::open(['id' => 'js-contract-form', 'class' => 'contract-form']) !!}
+      {!! Form::open(['route' => 'contracts.store', 'id' => 'js-contract-form', 'class' => 'contract-form']) !!}
       {!! Form::hidden('user_id', (Auth::user()) ? Auth::user()->id : '') !!}
       {!! Form::hidden('worker_id', isset($worker) ? $worker->id : '') !!}
       <div class="modal-header">

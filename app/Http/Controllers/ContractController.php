@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Validator;
 
 class ContractController extends Controller
 {
+  public function create(Request $request) {
+    if($request->ajax()){
+      return response()->json(['status' => 'success']);
+    }
+  }
+
   public function store(Request $request)
   {
     $contractRequest = new ContractRequest;

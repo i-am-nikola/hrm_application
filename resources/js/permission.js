@@ -12,7 +12,11 @@ $(document).ready(() => {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
       },
       success: function (response) {
-        toastr.success(response.flash_message);
+        if(response.status === 'fails'){
+          toastr.warning(response.flash_message);
+        }else{
+          toastr.success(response.flash_message);
+        }
       }
     });
 

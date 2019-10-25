@@ -23,7 +23,7 @@
                 <th class="text-center">{{ t('worker.name') }}</th>
                 <th class="text-center">{{ t('worker.phone') }}</th>
                 <th class="text-center">{{ t('worker.staring_date') }}</th>
-                <th class="text-center">{{ t('worker.department') }}</th>
+                <!-- <th class="text-center">{{ t('worker.department') }}</th> -->
                 <th class="text-center">{{ t('worker.position') }}</th>
                 <th class="text-center">{{ t('th.status') }}</th>
                 <th class="text-center">{{ t('th.action') }}</th>

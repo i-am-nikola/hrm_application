@@ -14,7 +14,6 @@ $(document).ready(() => {
     $('.message-error').remove();
   })
 
-
   // Nếu người dùng chọn Hợp đồng không xác định thời hạn thì ẩn form Ngày hết hiệu lực
   $('.contract-form select[name="contract_type_id"]').on('change', function () {
     let value = $(this).children("option:selected").val();
@@ -26,40 +25,55 @@ $(document).ready(() => {
     }
   })
 
-  // create decision
+  // open form create contract
   $('#modal-create-contract').on('show.bs.modal', e => {
     $('#js-contract-form')[0].reset();
     let url = $(e.relatedTarget).data('url');
-    $(document).on('submit', '#js-contract-form', e => {
-      let data = $(e.target).serialize();
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      $.ajax({
-        type: "POST",
-        url: url,
-        data: data,
-        dataType: "json",
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
-        },
-        success: response => {
-          if (response.status === 'success') {
-            $('#modal-create-contract').modal('hide');
-            toastr.success(response.flash_message);
-            reloadData();
-          } else if (response.status === 'error') {
-            $('.message-error').remove();
-            showErrorMessage(response.errors);
-          } else {
-            $('#modal-create-contract').modal('hide');
-            toastr.warning(response.flash_message);
-          }
+    $.ajax({
+      type: "GET",
+      url: url,
+      dataType: "json",
+      success: function (response) {
+        console.log(response);
+        if(response.status === 'fails'){
+          toastr.warning(response.flash_message);
         }
-      });
-    })
+      }
+    });
+
   })
 
-  // update dicision
+// create contract
+  $(document).on('submit', '#js-contract-form', e => {
+    let url = $(e.target).attr('action');
+    let data = $(e.target).serialize();
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: data,
+      dataType: "json",
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
+      },
+      success: response => {
+        if (response.status === 'success') {
+          $('#modal-create-contract').modal('hide');
+          toastr.success(response.flash_message);
+          reloadData();
+        } else if (response.status === 'error') {
+          $('.message-error').remove();
+          showErrorMessage(response.errors);
+        } else {
+          $('#modal-create-contract').modal('hide');
+          toastr.warning(response.flash_message);
+        }
+      }
+    });
+  })
+
+  // update contract
   $('#js-contract-update').on('submit', e => {
     e.preventDefault();
     let url = $(event.target).attr('action');

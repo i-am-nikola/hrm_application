@@ -12,6 +12,8 @@ class DepartmentsTableSeeder extends Seeder
       ['name' => 'Phòng tài chính kế toán', 'slug' => 'phong-tai-chinh-ke-toan'],
       ['name' => 'Phòng kinh doanh', 'slug' => 'phong-kinh-doanh'],
       ['name' => 'Phòng kỹ thuật', 'slug' => 'phong-ky-thuat'],
+      ['name' => 'Phòng kế hoạch', 'slug' => 'phong-ke-hoach'],
+      ['name' => 'Phòng marketing', 'slug' => 'phong-marketing'],
     ];
     DB::table('departments')->insert($departments);
   }

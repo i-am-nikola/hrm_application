@@ -2,7 +2,7 @@
   <div class="col-12">
     <div class="mb-2">
       <button class=" btn btn-primary" data-toggle="modal" data-target="#modal-create-contract"
-        data-url={{ route('contracts.store') }}>
+        data-url={{ route('contracts.create') }}>
         <i class="fa fa-plus"></i> {{ t('contract.create') }}
       </button>
     </div>

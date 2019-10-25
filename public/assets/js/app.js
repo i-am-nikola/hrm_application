@@ -254,39 +254,53 @@ $(document).ready(function () {
     } else {
       $('.contract-form input[name="expiry_date"]').parent('.form-group').removeAttr('style');
     }
-  }); // create decision
+  }); // open form create contract
 
   $('#modal-create-contract').on('show.bs.modal', function (e) {
     $('#js-contract-form')[0].reset();
     var url = $(e.relatedTarget).data('url');
-    $(document).on('submit', '#js-contract-form', function (e) {
-      var data = $(e.target).serialize();
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      $.ajax({
-        type: "POST",
-        url: url,
-        data: data,
-        dataType: "json",
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
-        },
-        success: function success(response) {
-          if (response.status === 'success') {
-            $('#modal-create-contract').modal('hide');
-            toastr.success(response.flash_message);
-            reloadData();
-          } else if (response.status === 'error') {
-            $('.message-error').remove();
-            showErrorMessage(response.errors);
-          } else {
-            $('#modal-create-contract').modal('hide');
-            toastr.warning(response.flash_message);
-          }
+    $.ajax({
+      type: "GET",
+      url: url,
+      dataType: "json",
+      success: function success(response) {
+        console.log(response);
+
+        if (response.status === 'fails') {
+          toastr.warning(response.flash_message);
         }
-      });
+      }
     });
-  }); // update dicision
+  }); // create contract
+
+  $(document).on('submit', '#js-contract-form', function (e) {
+    var url = $(e.target).attr('action');
+    var data = $(e.target).serialize();
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: data,
+      dataType: "json",
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
+      },
+      success: function success(response) {
+        if (response.status === 'success') {
+          $('#modal-create-contract').modal('hide');
+          toastr.success(response.flash_message);
+          reloadData();
+        } else if (response.status === 'error') {
+          $('.message-error').remove();
+          showErrorMessage(response.errors);
+        } else {
+          $('#modal-create-contract').modal('hide');
+          toastr.warning(response.flash_message);
+        }
+      }
+    });
+  }); // update contract
 
   $('#js-contract-update').on('submit', function (e) {
     e.preventDefault();
@@ -670,7 +684,6 @@ $(document).ready(function () {
       url: $('#decision').data('url'),
       dataType: "html",
       success: function success(response, status, xhr) {
-        console.log(response);
         var contentType = xhr.getResponseHeader("content-type") || "";
 
         if (contentType.indexOf('html') > -1) {
@@ -900,7 +913,11 @@ $(document).ready(function () {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"').attr('content')
       },
       success: function success(response) {
-        toastr.success(response.flash_message);
+        if (response.status === 'fails') {
+          toastr.warning(response.flash_message);
+        } else {
+          toastr.success(response.flash_message);
+        }
       }
     });
   });

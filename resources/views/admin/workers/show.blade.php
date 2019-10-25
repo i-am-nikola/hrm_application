@@ -59,4 +59,5 @@
 @include('admin.decisions.edit')
 @include('admin.contracts.modal_document')
 @include('admin.decisions.modal_document')
+@include('admin.shared._notify')
 @endsection

@@ -80,6 +80,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest', 'active-user']], fu
 
   //contract
   Route::group(['prefix' => 'contracts', 'as' => 'contracts.'], function () {
+    Route::get('/create', 'ContractController@create')->middleware('permission:create-contract')->name('create');
     Route::post('/', 'ContractController@store')->middleware('permission:create-contract')->name('store');
     Route::get('/{id}/edit', 'ContractController@edit')->middleware('permission:update-contract')->name('edit');
     Route::put('/update', 'ContractController@update')->middleware('permission:update-contract')->name('update');
